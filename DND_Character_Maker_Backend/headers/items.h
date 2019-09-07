@@ -41,10 +41,10 @@ public:
 class WEAPON : ITEM_BASE
 {
 public:
-	WEAPON( string name, u_int cost, u_int weight, 
+	WEAPON( string name, u_int cost, u_int weight,
 			dmg::DAMAGE damage, dmg::DAMAGE vers_damage, WEAPON_TYPE type,
 			WEAPON_PROFICIENCY weap_prof, std::vector<WEAPON_PROPERTIES> properties,
-			u_int min_range, u_int max_range);
+			u_int min_range, u_int max_range );
 
 	void print_item() const override;
 
@@ -56,4 +56,20 @@ private:
 	std::vector<WEAPON_PROPERTIES> m_properties;
 	u_int m_min_range;
 	u_int m_max_range;
+};
+
+class ARMOR : ITEM_BASE
+{
+public:
+	ARMOR( string name, u_int cost, u_int weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, u_int ac, u_int strength_needed );
+
+	void print_item() const override;
+
+private:
+	ARMOR_CATEGORY m_armor_type{ ARMOR_CATEGORY::INVALID };
+	bool m_stealth_disadvantage{ false };
+	bool m_add_dexterity_modifier{ false };
+	bool m_dex_cap_at_2{ false };
+	u_int m_armor_class{ 0 };
+	u_int m_strength_needed{ 0 };
 };

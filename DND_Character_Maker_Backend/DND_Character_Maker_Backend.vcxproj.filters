@@ -69,6 +69,12 @@
     <ClInclude Include="headers\ui_functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\combat_and_item_enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\items.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -119,9 +125,13 @@
     <ClCompile Include="sources\ui_functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sources\items.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="csv\trait_spells.csv" />
     <None Include="csv\race_traits.csv" />
+    <None Include="csv\spell_list.csv" />
   </ItemGroup>
 </Project>

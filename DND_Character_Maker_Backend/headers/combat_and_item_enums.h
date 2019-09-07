@@ -54,5 +54,6 @@ enum class ARMOR_CATEGORY : char
 	LIGHT,
 	MEDIUM,
 	HEAVY,
+	SHIELD,
 	INVALID
 };

@@ -15,10 +15,11 @@ int main()
 	RACIAL_TRAITS_MANAGER trait_manager;
 
 	trait_manager.read_in_race_traits();
+	//trait_manager.print_all_races();
 
 	SPELLS_MANAGER spell_manager;
 	spell_manager.read_in_spells();
-	spell_manager.print_all_spells();
+	//spell_manager.print_all_spells();
 
 	john.set_player_name( "Isaac" );
 	john.set_character_name( "Hal Redwood" );
@@ -26,12 +27,12 @@ int main()
 	john.set_race( DND_RACE::DWARF );
 	john.set_alignment( DND_ALIGNMENT::NEUTRAL_GOOD );
 	john.set_hit_points( roll_dice( DND_DICE::D6, 0, 3 ) );
-	john.set_strength( roll_dice( DND_DICE::D6, 0, 3 ) );
-	john.set_dexterity( roll_dice( DND_DICE::D6, 0, 3 ) );
-	john.set_constitution( roll_dice( DND_DICE::D6, 0, 3 ) );
-	john.set_intelligence( roll_dice( DND_DICE::D6, 0, 3 ) );
-	john.set_wisdom( roll_dice( DND_DICE::D6, 0, 3 ) );
-	john.set_charisma( roll_dice( DND_DICE::D6, 0, 3 ) );
+	john.set_strength( 18 );
+	john.set_dexterity( 12 );
+	john.set_constitution( 20 );
+	john.set_intelligence( 8 );
+	john.set_wisdom( 9 );
+	john.set_charisma( 10 );
 	john.set_level( 2 );
 	john.set_armour_class( 16 );
 	john.set_saving_throws( SAVING_THROW_TYPES::CONSTITUTION, SAVING_THROW_TYPES::STRENGTH );
@@ -41,7 +42,7 @@ int main()
 	john.update_skills();
 	john.update_hit_dice( DND_DICE::D10, 2 );
 
-	john.print_character_info();
+	//john.print_character_info();
 
 
 

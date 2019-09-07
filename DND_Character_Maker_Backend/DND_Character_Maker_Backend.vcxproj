@@ -157,9 +157,11 @@
   <ItemGroup>
     <ClInclude Include="headers\ability_score_bonus.h" />
     <ClInclude Include="headers\character_enums.h" />
+    <ClInclude Include="headers\combat_and_item_enums.h" />
     <ClInclude Include="headers\dice_functions.h" />
     <ClInclude Include="headers\dnd_character.h" />
     <ClInclude Include="headers\dnd_character_utilities.h" />
+    <ClInclude Include="headers\items.h" />
     <ClInclude Include="headers\race_utilities.h" />
     <ClInclude Include="headers\racial_traits.h" />
     <ClInclude Include="headers\racial_traits_manager.h" />
@@ -196,6 +198,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="sources\dnd_character_utilities.cpp" />
+    <ClCompile Include="sources\items.cpp" />
     <ClCompile Include="sources\race_utilities.cpp" />
     <ClCompile Include="sources\racial_traits.cpp" />
     <ClCompile Include="sources\racial_traits_manager.cpp" />
@@ -209,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="csv\race_traits.csv" />
+    <None Include="csv\spell_list.csv" />
     <None Include="csv\trait_spells.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
