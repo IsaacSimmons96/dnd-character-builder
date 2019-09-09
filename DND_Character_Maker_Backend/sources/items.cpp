@@ -2,6 +2,7 @@
 #include "..\headers\typedefs.h"
 #include <vector>
 #include <iostream>
+#include "..\headers\item_utilities.h"
 
 ITEM_BASE::ITEM_BASE( string name, u_int cost, u_int weight )
 {
@@ -49,6 +50,7 @@ void WEAPON::print_item() const
 	std::cout << m_item_name << std::endl;
 	std::cout << "Cost: " << std::to_string( m_item_cost ) << std::endl;
 	std::cout << "Weight: " << std::to_string( m_weight ) << std::endl;
+	std::cout << "Damage: " << std::to_string( m_damage.m_number_of_dice ) << " " << get_string_from_DND_DICE( m_damage.m_dice ) << " " << ITEM_AND_COMBAT_UTILITIES::get_string_from_DAMAGE_TYPE( m_damage.m_damage_type ) << std::endl;
 }
 
 ARMOR::ARMOR( string name, u_int cost, u_int weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, u_int ac, u_int strength_needed )

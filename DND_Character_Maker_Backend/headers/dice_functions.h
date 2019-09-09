@@ -14,4 +14,4 @@ enum class DND_DICE : char
 
 u_int roll_dice( DND_DICE dice, u_int add_bonus_to_roll = 0, u_int number_of_rolls = 1 );
 
-string get_string_from_DND_DICE( DND_DICE dice );
+static string get_string_from_DND_DICE( DND_DICE dice );
