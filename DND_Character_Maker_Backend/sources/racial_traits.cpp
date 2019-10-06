@@ -1,4 +1,4 @@
-#include "C:\Users\Isaac\source\repos\DND_Character_Maker_Backend\DND_Character_Maker_Backend\headers\racial_traits.h"
+#include "..\headers\racial_traits.h"
 #include <iostream>
 #include "..\headers\dnd_character_utilities.h"
 

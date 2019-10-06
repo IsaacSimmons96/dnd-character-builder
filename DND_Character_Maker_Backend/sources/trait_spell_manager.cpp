@@ -1,5 +1,5 @@
-#include "C:\Users\Isaac\source\repos\DND_Character_Maker_Backend\DND_Character_Maker_Backend\headers\trait_spell_manager.h"
-#include "C:\Users\Isaac\source\repos\DND_Character_Maker_Backend\DND_Character_Maker_Backend\headers\typedefs.h"
+#include "..\headers\trait_spell_manager.h"
+#include "..\headers\typedefs.h"
 #include <fstream>
 #include <iostream>
 #include <map>

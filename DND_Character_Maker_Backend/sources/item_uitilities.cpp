@@ -1,4 +1,5 @@
 #include "..\headers\item_utilities.h"
+#include "..\headers\typedefs.h"
 
 string ITEM_AND_COMBAT_UTILITIES::get_string_from_DAMAGE_TYPE( DAMAGE_TYPE type_in )
 {
@@ -56,50 +57,61 @@ DAMAGE_TYPE ITEM_AND_COMBAT_UTILITIES::get_DAMAGE_TYPE_from_string( string strin
 {
 	DAMAGE_TYPE return_type;
 
-	switch ( string_in )
+	if ( string_in == "acid" )
 	{
-	case "acid":
 		return_type = DAMAGE_TYPE::ACID;
-		break;
-	case "bludgeoning":
+	}
+	else if ( string_in == "bludgeoning" )
+	{
 		return_type = DAMAGE_TYPE::BLUDGEONING;
-		break;
-	case "cold":
+	}
+	else if ( string_in == "cold" )
+	{
 		return_type = DAMAGE_TYPE::COLD;
-		break;
-	case "fire":
+	}
+	else if ( string_in == "fire" )
+	{
 		return_type = DAMAGE_TYPE::FIRE;
-		break;
-	case "force":
+	}
+	else if ( string_in == "force" )
+	{
 		return_type = DAMAGE_TYPE::FORCE;
-		break;
-	case "lightning":
+	}
+	else if ( string_in == "lightning" )
+	{
 		return_type = DAMAGE_TYPE::LIGHTNING;
-		break;
-	case "necrotic":
+	}
+	else if ( string_in == "necrotic" )
+	{
 		return_type = DAMAGE_TYPE::NECROTIC;
-		break;
-	case "piercing":
+	}
+	else if ( string_in == "piercing" )
+	{
 		return_type = DAMAGE_TYPE::PIERCING;
-		break;
-	case "poison":
+	}
+	else if ( string_in == "poison" )
+	{
 		return_type = DAMAGE_TYPE::POISON;
-		break;
-	case "psychic":
+	}
+	else if ( string_in == "psychic" )
+	{
 		return_type = DAMAGE_TYPE::PSYCHIC;
-		break;
-	case "radiant":
+	}
+	else if ( string_in == "radiant" )
+	{
 		return_type = DAMAGE_TYPE::RADIANT;
-		break;
-	case "slashing":
+	}
+	else if ( string_in == "slashing" )
+	{
 		return_type = DAMAGE_TYPE::SLASHING;
-		break;
-	case "thunder":
+	}
+	else if ( string_in == "thunder" )
+	{
 		return_type = DAMAGE_TYPE::THUNDER;
-		break;
-	default:
+	}
+	else
+	{
 		return_type = DAMAGE_TYPE::INVALID;
-		break;
 	}
 	return return_type;
 }
@@ -156,47 +168,57 @@ WEAPON_PROPERTIES ITEM_AND_COMBAT_UTILITIES::get_WEAPON_PROPERTIES_from_string( 
 {
 	WEAPON_PROPERTIES return_type;
 
-	switch ( string_in )
+	if ( string_in == "ammunition" )
 	{
-	case "ammunition":
 		return_type = WEAPON_PROPERTIES::AMMUNITION;
-		break;
-	case "finesse":
+	}
+	else if ( string_in == "finesse" )
+	{
 		return_type = WEAPON_PROPERTIES::FINESSE;
-		break;
-	case "heavy":
+	}
+	else if ( string_in == "heavy" )
+	{
 		return_type = WEAPON_PROPERTIES::HEAVY;
-		break;
-	case "improvised":
+	}
+	else if ( string_in == "improvised" )
+	{
 		return_type = WEAPON_PROPERTIES::IMPROVISED_WEAPON;
-		break;
-	case "light":
+	}
+	else if ( string_in == "light" )
+	{
 		return_type = WEAPON_PROPERTIES::LIGHT;
-		break;
-	case "loading":
+	}
+	else if ( string_in == "loading" )
+	{
 		return_type = WEAPON_PROPERTIES::LOADING;
-		break;
-	case "range":
+	}
+	else if ( string_in == "range" )
+	{
 		return_type = WEAPON_PROPERTIES::RANGE;
-		break;
-	case "reach":
+	}
+	else if ( string_in == "reach" )
+	{
 		return_type = WEAPON_PROPERTIES::REACH;
-		break;
-	case "special":
+	}
+	else if ( string_in == "special" )
+	{
 		return_type = WEAPON_PROPERTIES::SPECIAL;
-		break;
-	case "thrown":
+	}
+	else if ( string_in == "thrown" )
+	{
 		return_type = WEAPON_PROPERTIES::THROWN;
-		break;
-	case "two handed":
+	}
+	else if ( string_in == "two handed" )
+	{
 		return_type = WEAPON_PROPERTIES::TWO_HANDED;
-		break;
-	case "versatile":
+	}
+	else if ( string_in == "versatile" )
+	{
 		return_type = WEAPON_PROPERTIES::VERSATILE;
-		break;
-	default:
+	}
+	else
+	{
 		return_type = WEAPON_PROPERTIES::INVALID;
-		break;
 	}
 	return return_type;
 }
@@ -225,17 +247,17 @@ WEAPON_PROFICIENCY ITEM_AND_COMBAT_UTILITIES::get_WEAPON_PROFICIENCY_from_string
 {
 	WEAPON_PROFICIENCY return_prof;
 
-	switch ( string_in )
+	if ( string_in == "simple" )
 	{
-	case "simple":
 		return_prof = WEAPON_PROFICIENCY::SIMPLE;
-		break;
-	case "martial":
+	}
+	else if ( string_in == "martial" )
+	{
 		return_prof = WEAPON_PROFICIENCY::MARTIAL;
-		break;
-	default:
+	}
+	else
+	{
 		return_prof = WEAPON_PROFICIENCY::INVALID;
-		break;
 	}
 	return return_prof;
 }
@@ -244,23 +266,25 @@ ARMOR_CATEGORY ITEM_AND_COMBAT_UTILITIES::get_ARMOR_CATEGORY_from_string( string
 {
 	ARMOR_CATEGORY return_cat;
 
-	switch ( string_in )
+	if ( string_in == "heavy" )
 	{
-	case "heavy":
 		return_cat = ARMOR_CATEGORY::HEAVY;
-		break;
-	case "light":
+	}
+	else if ( string_in == "light" )
+	{
 		return_cat = ARMOR_CATEGORY::LIGHT;
-		break;
-	case "medium":
+	}
+	else if ( string_in == "medium" )
+	{
 		return_cat = ARMOR_CATEGORY::MEDIUM;
-		break;
-	case "shield":
+	}
+	else if ( string_in == "shield" )
+	{
 		return_cat = ARMOR_CATEGORY::SHIELD;
-		break;
-	default:
+	}
+	else
+	{
 		return_cat = ARMOR_CATEGORY::INVALID;
-		break;
 	}
 	return return_cat;
 }
@@ -293,18 +317,17 @@ string ITEM_AND_COMBAT_UTILITIES::get_string_from_ARMOR_CATEGORY( ARMOR_CATEGORY
 WEAPON_TYPE ITEM_AND_COMBAT_UTILITIES::get_WEAPON_TYPE_from_string( string string_in )
 {
 	WEAPON_TYPE weapon_type;
-
-	switch ( string_in )
+	if ( string_in == "melee" )
 	{
-	case "melee":
 		weapon_type = WEAPON_TYPE::MELEE;
-		break;
-	case "ranged":
+	}
+	else if ( string_in == "ranged" )
+	{
 		weapon_type = WEAPON_TYPE::RANGED;
-		break;
-	default:
+	}
+	else
+	{
 		weapon_type = WEAPON_TYPE::INVALID;
-		break;
 	}
 	return weapon_type;
 }

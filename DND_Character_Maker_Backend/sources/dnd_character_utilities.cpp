@@ -1,4 +1,4 @@
-#include "C:\Users\Isaac\source\repos\DND_Character_Maker_Backend\DND_Character_Maker_Backend\headers\dnd_character_utilities.h"
+#include "..\headers\dnd_character_utilities.h"
 
 
 std::string DND_CHARACTER_UTILITIES::get_string_from_DND_CLASS( DND_CLASS dnd_class )
@@ -73,43 +73,43 @@ std::string DND_CHARACTER_UTILITIES::get_string_from_DND_RACE( DND_RACE dnd_race
 	switch (dnd_race)
 	{
 	case DND_RACE::HUMAN:
-		string_out = "Human";
+		string_out = "human";
 		break;
 	case DND_RACE::HILL_DWARF:
-		string_out = "Hill dwarf";
+		string_out = "hill dwarf";
 		break;
 	case DND_RACE::DWARF:
-		string_out = "Dwarf";
+		string_out = "dwarf";
 		break;
 	case DND_RACE::MOUNTAIN_DWARF:
-		string_out = "Mountain dwarf";
+		string_out = "mountain dwarf";
 		break;
 	case DND_RACE::HIGH_ELF:
-		string_out = "High elf";
+		string_out = "high elf";
 		break;
 	case DND_RACE::WOOD_ELF:
-		string_out = "Wood elf";
+		string_out = "wood elf";
 		break;
 	case DND_RACE::DROW_ELF:
-		string_out = "Drow elf";
+		string_out = "drow elf";
 		break;
 	case DND_RACE::HALFLING:
-		string_out = "Halfling";
+		string_out = "halfling";
 		break;
 	case DND_RACE::DRAGONBORN:
-		string_out = "Dragonborn";
+		string_out = "dragonborn";
 		break;
 	case DND_RACE::GNOME:
-		string_out = "Gnome";
+		string_out = "gnome";
 		break;
 	case DND_RACE::HALF_ELF:
-		string_out = "Half elf";
+		string_out = "half elf";
 		break;
 	case DND_RACE::HALF_ORC:
-		string_out = "Half orc";
+		string_out = "half orc";
 		break;
 	case DND_RACE::TIEFLING:
-		string_out = "Tiefling";
+		string_out = "tiefling";
 		break;
 	case DND_RACE::INVALID:
 		string_out = "INVALID";
@@ -491,6 +491,49 @@ DND_RACE DND_CHARACTER_UTILITIES::get_DND_RACE_from_string( string race )
 		return  DND_RACE::INVALID;
 	}
 	return  DND_RACE::INVALID;
+}
+
+DND_ALIGNMENT DND_CHARACTER_UTILITIES::get_DND_ALIGNMENT_from_string( string dnd_alignment )
+{
+	DND_ALIGNMENT return_alignment = DND_ALIGNMENT::INVALID;
+
+	if ( dnd_alignment == "chaotic evil" )
+	{
+		return_alignment = DND_ALIGNMENT::CHAOTIC_EVIL;
+	}
+	else if ( dnd_alignment == "chaotic evil" )
+	{
+		return_alignment = DND_ALIGNMENT::CHAOTIC_GOOD;
+	}
+	else if ( dnd_alignment == "chaotic neutral" )
+	{
+		return_alignment = DND_ALIGNMENT::CHAOTIC_NEUTRAL;
+	}
+	else if ( dnd_alignment == "lawful evil" )
+	{
+		return_alignment = DND_ALIGNMENT::LAWFUL_EVIL;
+	}
+	else if ( dnd_alignment == "lawful good" )
+	{
+		return_alignment = DND_ALIGNMENT::LAWFUL_GOOD;
+	}
+	else if ( dnd_alignment == "lawful neutral" )
+	{
+		return_alignment = DND_ALIGNMENT::LAWFUL_NEUTRAL;
+	}
+	else if ( dnd_alignment == "neutral" )
+	{
+		return_alignment = DND_ALIGNMENT::NEUTRAL;
+	}
+	else if ( dnd_alignment == "neutral evil" )
+	{
+		return_alignment = DND_ALIGNMENT::NEUTRAL_EVIL;
+	}
+	else if ( dnd_alignment == "neutral good" )
+	{
+		return_alignment = DND_ALIGNMENT::NEUTRAL_GOOD;
+	}
+	return return_alignment;
 }
 
 DND_TOOL_PROFICIENCY DND_CHARACTER_UTILITIES::get_DND_TOOL_PROFICIENCY_from_string( string tool_prof )

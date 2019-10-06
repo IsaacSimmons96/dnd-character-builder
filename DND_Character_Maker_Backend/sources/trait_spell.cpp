@@ -1,4 +1,4 @@
-#include "C:\Users\Isaac\source\repos\DND_Character_Maker_Backend\DND_Character_Maker_Backend\headers\trait_spell.h"
+#include "..\headers\trait_spell.h"
 #include <iostream>
 
 

@@ -1,5 +1,5 @@
-#include "C:\Users\Isaac\source\repos\DND_Character_Maker_Backend\DND_Character_Maker_Backend\headers\dnd_character.h"
-#include "C:\Users\Isaac\source\repos\DND_Character_Maker_Backend\DND_Character_Maker_Backend\headers\dnd_character_utilities.h"
+#include "..\headers\dnd_character.h"
+#include "..\headers\dnd_character_utilities.h"
 #include <iostream>
 #include <assert.h>
 

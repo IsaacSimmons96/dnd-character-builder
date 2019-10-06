@@ -89,6 +89,7 @@ public:
 	u_int			get_level()							{ return m_level; };
 	u_int			get_exp()							{ return m_exp; };
 	u_int			get_initiative_modifier()			{ return m_initiative_modifier; };
+	u_int			get_hit_points()					{ return m_hit_points; };
 
 	// character stats getters
 	u_int get_strength()								{ return m_strength; };

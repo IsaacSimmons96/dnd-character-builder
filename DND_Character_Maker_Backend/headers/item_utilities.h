@@ -8,7 +8,7 @@ public:
 	static string get_string_from_DAMAGE_TYPE( DAMAGE_TYPE type_in );
 	static string get_string_from_WEAPON_PROPERTIES( WEAPON_PROPERTIES type_in );
 	static string get_string_from_WEAPON_PROFICIENCY( WEAPON_PROFICIENCY type_in );
-	static string get_string_from_WEAPON_TYPE( DAMAGE_TYPE type_in );
+	static string get_string_from_WEAPON_TYPE( WEAPON_TYPE type_in );
 	static string get_string_from_ARMOR_CATEGORY( ARMOR_CATEGORY type_in );
 
 	static DAMAGE_TYPE get_DAMAGE_TYPE_from_string( string string_in );

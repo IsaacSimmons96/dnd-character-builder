@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "..\headers\item_utilities.h"
+#include "..\headers\dice_functions.h"
 
 ITEM_BASE::ITEM_BASE( string name, u_int cost, u_int weight )
 {

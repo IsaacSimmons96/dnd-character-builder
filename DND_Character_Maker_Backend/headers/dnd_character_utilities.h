@@ -17,6 +17,7 @@ public:
 	static string get_string_from_DND_SKILL_TYPE( DND_SKILL_TYPE skill );
 
 	static DND_LANGUAGE get_DND_LANGUAGE_from_string( string lang );
+	static DND_ALIGNMENT get_DND_ALIGNMENT_from_string( string dnd_alignment );
 	static DND_RACE get_DND_RACE_from_string( string race );
 	static DND_TOOL_PROFICIENCY get_DND_TOOL_PROFICIENCY_from_string( string tool_prof );
 	static DND_SIZE get_DND_SIZE_from_string( string size_string );
