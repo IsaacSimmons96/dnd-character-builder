@@ -53,7 +53,6 @@ enum class DND_ALIGNMENT : char
 	NEUTRAL_EVIL,
 	CHAOTIC_EVIL,
 	INVALID
-
 };
 
 enum class DND_LANGUAGE : char
@@ -76,7 +75,6 @@ enum class DND_LANGUAGE : char
 	UNDERCOMMON,
 	INVALID
 };
-
 
 enum class SAVING_THROW_TYPES : char
 {
@@ -106,7 +104,6 @@ enum class DND_SIZE : char
 	LARGE,
 	INVALID
 };
-
 
 enum class DND_TOOL_PROFICIENCY : char
 {

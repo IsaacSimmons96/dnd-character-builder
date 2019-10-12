@@ -2,7 +2,7 @@
 #include <iostream>
 #include "..\headers\spell_utilities.h"
 
-MAGIC_SPELL::MAGIC_SPELL( string name, SCHOOL_OF_MAGIC school, string desc, string higher_desc, SPELL_CASTING_TIME casting_t, u_int range, 
+MAGIC_SPELL::MAGIC_SPELL( string name, SCHOOL_OF_MAGIC school, string desc, string higher_desc, SPELL_CASTING_TIME casting_t, u_int range,
 						  SPELL_COMPONENT components, string material_description, SPELL_DURATION duration, SPELL_DURATION_TIME spell_duration_time,
 						  u_int spell_level, std::vector<DND_CLASS> classes ) : SPELL( name, desc, higher_desc, spell_level, classes )
 {
@@ -23,7 +23,7 @@ void MAGIC_SPELL::print_spell() const
 	std::cout << "Range: " << std::to_string( m_spell_range ) << std::endl;
 	std::cout << "Components: " << SPELL_UTILITIES::get_string_from_SPELL_COMPONENT( m_spell_components ) << m_material_description << std::endl;
 	std::cout << "Duration: " << SPELL_UTILITIES::get_string_from_SPELL_DURATION( m_spell_duration )
-	<< SPELL_UTILITIES::get_string_from_SPELL_DURATION_TIME(m_spell_duration_time) << std::endl;
+		<< SPELL_UTILITIES::get_string_from_SPELL_DURATION_TIME( m_spell_duration_time ) << std::endl;
 	std::cout << m_spell_description << "\n" << std::endl;
 	std::cout << "At Higher Levels. " << m_higher_level_description << std::endl;
 }

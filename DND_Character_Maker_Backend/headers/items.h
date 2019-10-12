@@ -29,14 +29,12 @@ protected:
 	u_int m_weight;
 };
 
-
 class ITEM : ITEM_BASE
 {
 public:
 	ITEM( string name, u_int cost, u_int weight );
 	virtual void print_item() const override;
 };
-
 
 class WEAPON : ITEM_BASE
 {

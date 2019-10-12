@@ -3,15 +3,12 @@
 #include "trait_spell.h"
 #include <map>
 
-
 class TRAIT_SPELL_MANAGER
 {
 public:
 	static TRAIT_SPELL_MANAGER& get_instance() { static TRAIT_SPELL_MANAGER instance; return instance; }
 	TRAIT_SPELL_MANAGER( TRAIT_SPELL_MANAGER const& ) = delete;
 	void operator=( TRAIT_SPELL_MANAGER const& ) = delete;
-	
-
 
 	void print_all_trait_spells();
 	TRAIT_SPELL* get_trait_spell( string name );

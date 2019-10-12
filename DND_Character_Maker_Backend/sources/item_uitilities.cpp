@@ -332,7 +332,6 @@ WEAPON_TYPE ITEM_AND_COMBAT_UTILITIES::get_WEAPON_TYPE_from_string( string strin
 	return weapon_type;
 }
 
-
 string ITEM_AND_COMBAT_UTILITIES::get_string_from_WEAPON_TYPE( WEAPON_TYPE type_in )
 {
 	string return_string;
@@ -351,6 +350,3 @@ string ITEM_AND_COMBAT_UTILITIES::get_string_from_WEAPON_TYPE( WEAPON_TYPE type_
 	}
 	return return_string;
 }
-
-
-

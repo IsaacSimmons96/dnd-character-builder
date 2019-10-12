@@ -17,5 +17,3 @@ public:
 	static SPELL_DURATION_TIME get_duration_time_from_string( string string_in );
 	static SCHOOL_OF_MAGIC get_school_of_magic_from_string( string string_in );
 };
-
-

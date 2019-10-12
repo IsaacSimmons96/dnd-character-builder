@@ -48,7 +48,7 @@ void SPELLS_MANAGER::read_in_spells()
 			material_description += temp;
 			material_description += ")";
 		}
-		
+
 		getline( ss, temp, ';' );
 		const SPELL_DURATION duration_type = SPELL_UTILITIES::get_duration_from_string( temp );
 
@@ -95,4 +95,3 @@ void SPELLS_MANAGER::print_all_spells()
 		it->second->print_spell();
 	}
 }
-

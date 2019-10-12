@@ -12,7 +12,6 @@ ITEM_BASE::ITEM_BASE( string name, u_int cost, u_int weight )
 	m_weight = weight;
 }
 
-
 void ITEM_BASE::print_item() const
 {
 	std::cout << m_item_name << std::endl;

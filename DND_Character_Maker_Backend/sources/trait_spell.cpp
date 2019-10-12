@@ -1,9 +1,7 @@
 #include "..\headers\trait_spell.h"
 #include <iostream>
 
-
-
-TRAIT_SPELL::TRAIT_SPELL( string name, string desc)
+TRAIT_SPELL::TRAIT_SPELL( string name, string desc )
 {
 	m_spell_description = desc;
 	m_spell_name = name;
@@ -11,7 +9,6 @@ TRAIT_SPELL::TRAIT_SPELL( string name, string desc)
 
 TRAIT_SPELL::~TRAIT_SPELL()
 {
-
 }
 
 void TRAIT_SPELL::set_spell_description( string spell_description )

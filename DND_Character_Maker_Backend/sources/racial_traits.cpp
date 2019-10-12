@@ -30,7 +30,6 @@ RACIAL_TRAITS::RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string alig
 
 RACIAL_TRAITS::~RACIAL_TRAITS()
 {
-
 }
 
 void RACIAL_TRAITS::print_racial_traits()
@@ -56,7 +55,7 @@ void RACIAL_TRAITS::print_racial_traits()
 	for ( auto bonus : m_ability_score_bonuses )
 	{
 		std::cout << "Ability Score Bonus " << std::to_string( counter ) << " = " << DND_CHARACTER_UTILITIES::get_string_from_ABILITY_SCORE_TYPES( bonus->get_bonus_type() ) << ", Value = " << std::to_string( bonus->get_bonus_value() ) << std::endl;
-	
+
 		counter++;
 	}
 	counter = 1;
@@ -67,6 +66,4 @@ void RACIAL_TRAITS::print_racial_traits()
 		std::cout << "\n";
 		counter++;
 	}
-	
 }
-

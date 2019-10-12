@@ -75,7 +75,6 @@ void DND_CHARACTER::update_hit_dice( DND_DICE die, u_int number )
 	}
 }
 
-
 void DND_CHARACTER::update_skills()
 {
 	m_skills.clear();
@@ -151,7 +150,6 @@ void DND_CHARACTER::print_character_info()
 	std::cout << border << std::endl;
 }
 
-
 u_int DND_CHARACTER::get_ability_value_from_DND_ABILITY_SCORE_TYPES( ABILITY_SCORE_TYPES ability_type )
 {
 	u_int value;
@@ -187,7 +185,7 @@ std::vector< DND_SKILL_TYPE > DND_CHARACTER::get_skill_proficiencys()
 	return m_skills_proficient_in;
 }
 
-void DND_CHARACTER::SAVING_THROWS::set_saving_throws( SAVING_THROW_TYPES proficiency_bonus_1, SAVING_THROW_TYPES proficiency_bonus_2, DND_CHARACTER &character )
+void DND_CHARACTER::SAVING_THROWS::set_saving_throws( DND_CHARACTER &character )
 {
 	m_strength_throw = DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_strength() );
 	m_dexterity_throw = DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_dexterity() );
@@ -196,33 +194,52 @@ void DND_CHARACTER::SAVING_THROWS::set_saving_throws( SAVING_THROW_TYPES profici
 	m_wisdom_throw = DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_wisdom() );
 	m_charisma_throw = DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_charisma() );
 
-	auto set_saving_throw_profs = [&]( SAVING_THROW_TYPES prof )
+	switch ( character.get_character_class() )
 	{
-		switch ( prof )
-		{
-		case SAVING_THROW_TYPES::STRENGTH:
-			m_strength_throw += character.get_proficiency_bonus();
-			break;
-		case SAVING_THROW_TYPES::DEXTERITY:
-			m_dexterity_throw += character.get_proficiency_bonus();
-			break;
-		case SAVING_THROW_TYPES::CONSTITUTION:
-			m_constitution_throw += character.get_proficiency_bonus();
-			break;
-		case SAVING_THROW_TYPES::INTELLIGENCE:
-			m_intelligence_throw += character.get_proficiency_bonus();
-			break;
-		case SAVING_THROW_TYPES::WISDOM:
-			m_wisdom_throw += character.get_proficiency_bonus();
-			break;
-		case SAVING_THROW_TYPES::CHARISMA:
-			m_charisma_throw += character.get_proficiency_bonus();
-			break;
-		}
-	};
+	case DND_CLASS::BARBARIAN:
+	case DND_CLASS::FIGHTER:
+		m_strength_throw += character.get_proficiency_bonus();
+		m_constitution_throw += character.get_proficiency_bonus();
+		break;
 
-	set_saving_throw_profs( proficiency_bonus_1 );
-	set_saving_throw_profs( proficiency_bonus_2 );
+	case DND_CLASS::BARD:
+		m_dexterity_throw += character.get_proficiency_bonus();
+		m_charisma_throw += character.get_proficiency_bonus();
+		break;
+
+	case DND_CLASS::CLERIC:
+	case DND_CLASS::PALADIN:
+	case DND_CLASS::WARLOCK:
+		m_wisdom_throw += character.get_proficiency_bonus();
+		m_charisma_throw += character.get_proficiency_bonus();
+		break;
+
+	case DND_CLASS::DRUID:
+	case DND_CLASS::WIZARD:
+		m_intelligence_throw += character.get_proficiency_bonus();
+		m_wisdom_throw += character.get_proficiency_bonus();
+		break;
+
+	case DND_CLASS::MONK:
+	case DND_CLASS::RANGER:
+		m_strength_throw += character.get_proficiency_bonus();
+		m_dexterity_throw += character.get_proficiency_bonus();
+		break;
+
+	case DND_CLASS::ROGUE:
+		m_dexterity_throw += character.get_proficiency_bonus();
+		m_intelligence_throw += character.get_proficiency_bonus();
+		break;
+
+	case DND_CLASS::SORCERER:
+		m_constitution_throw += character.get_proficiency_bonus();
+		m_charisma_throw += character.get_proficiency_bonus();
+		break;
+
+	case DND_CLASS::INVALID:
+	default:
+		break;
+	}
 }
 
 void DND_CHARACTER::SAVING_THROWS::print_saving_throws()

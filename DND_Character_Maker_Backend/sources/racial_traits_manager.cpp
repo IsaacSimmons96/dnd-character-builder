@@ -23,7 +23,6 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 	std::stringstream ss;
 	u_int uint_temp;
 
-
 	auto convert_string_to_int = [&]()
 	{
 		std::stringstream num_stringstream( temp );
@@ -107,4 +106,3 @@ RACIAL_TRAITS* RACIAL_TRAITS_MANAGER::get_race_traits( DND_RACE race )
 	}
 	return nullptr;
 }
-

@@ -49,11 +49,8 @@ SPELL_DURATION_TIME SPELL_UTILITIES::get_duration_time_from_string( string strin
 	}
 }
 
-
-
 SPELL_COMPONENT SPELL_UTILITIES::get_spell_component_from_string( string string_in )
 {
-
 	if ( string_in == "V" || string_in == "v" )
 	{
 		return SPELL_COMPONENT::VERBAL;

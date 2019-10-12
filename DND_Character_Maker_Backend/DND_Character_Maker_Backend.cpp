@@ -9,7 +9,6 @@
 #include <iostream>
 #include "headers/spells_manager.h"
 
-
 void lower_string( string& str )
 {
 	for ( int i = 0; str[i] != '\0'; i++ )
@@ -79,23 +78,34 @@ int main()
 	ask_for_input( character_name_prefix + "'s Charisma: ", temp_int );
 	character.set_charisma( temp_int );
 
-	std::cout << "Setting hit points based on 1 " + get_string_from_DND_DICE( get_hit_dice_from_DND_CLASS( character.get_character_class() ) ) + " plus " + character.get_name() + "'s Constitution modifier (" + std::to_string( DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_constitution() )) + ") \n" ;
-	character.set_hit_points( get_max_roll_for_dice( get_hit_dice_from_DND_CLASS( character.get_character_class() ) ) + DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_constitution() ) );
+	bool entered_all_skill_profs = false;
+
+	while ( !entered_all_skill_profs )
+	{
+		ask_for_input( character_name_prefix + "'s Skill Proficiency: ", temp );
+		character.add_skill_proficiency( DND_CHARACTER_UTILITIES::get_DND_SKILL_from_string( temp ) );
+
+		ask_for_input( "Finished Adding Skill Proficiencys? (yes/no):", temp );
+		if ( temp == "yes" || temp == "y" )
+		{
+			entered_all_skill_profs = true;
+		}
+	}
+	character.update_skills();
+
+	const auto char_class = character.get_character_class();
+	std::cout << "Setting hit points based on 1 " + get_string_from_DND_DICE( get_hit_dice_from_DND_CLASS( char_class ) ) + " plus " + character.get_name() + "'s Constitution modifier (" + std::to_string( DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_constitution() ) ) + ") \n";
+	character.set_hit_points( get_max_roll_for_dice( get_hit_dice_from_DND_CLASS( char_class ) ) + DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_constitution() ) );
 	std::cout << "Hit point maximum is: " + std::to_string( character.get_hit_points() ) + "\n";
 
 	ask_for_input( character_name_prefix + "'s Armor Class: ", temp_int );
 	character.set_armour_class( temp_int );
 
-	character.set_saving_throws( SAVING_THROW_TYPES::CONSTITUTION, SAVING_THROW_TYPES::STRENGTH );
-	character.add_skill_proficiency( HISTORY );
-	character.add_skill_proficiency( PERCEPTION );
-	character.add_skill_proficiency( NATURE );
-	character.update_skills();
-	character.update_hit_dice( DND_DICE::D10, 2 );
+	std::cout << "Setting Saving Throws.";
+	character.set_saving_throws();
+
+	std::cout << "Setting Hit Dice.";
+	character.update_hit_dice( get_hit_dice_from_DND_CLASS( char_class ), character.get_level() );
 
 	character.print_character_info();
-
-
-
-
 }

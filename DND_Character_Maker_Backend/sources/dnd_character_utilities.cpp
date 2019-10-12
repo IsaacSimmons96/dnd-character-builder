@@ -1,11 +1,10 @@
 #include "..\headers\dnd_character_utilities.h"
 
-
 std::string DND_CHARACTER_UTILITIES::get_string_from_DND_CLASS( DND_CLASS dnd_class )
 {
 	std::string string_out;
 
-	switch (dnd_class)
+	switch ( dnd_class )
 	{
 	case DND_CLASS::BARBARIAN:
 		string_out = "BARBARIAN";
@@ -54,7 +53,7 @@ std::string DND_CHARACTER_UTILITIES::get_string_from_DND_BACKGROUND( DND_BACKGRO
 {
 	std::string string_out;
 
-	switch (dnd_background)
+	switch ( dnd_background )
 	{
 	case DND_BACKGROUND::PLACEHOLDER:
 		string_out = "PLACEHOLDER";
@@ -70,7 +69,7 @@ std::string DND_CHARACTER_UTILITIES::get_string_from_DND_RACE( DND_RACE dnd_race
 {
 	std::string string_out;
 
-	switch (dnd_race)
+	switch ( dnd_race )
 	{
 	case DND_RACE::HUMAN:
 		string_out = "human";
@@ -122,7 +121,7 @@ std::string DND_CHARACTER_UTILITIES::get_string_from_DND_ALIGNMENT( DND_ALIGNMEN
 {
 	std::string string_out;
 
-	switch (dnd_alignment)
+	switch ( dnd_alignment )
 	{
 	case DND_ALIGNMENT::LAWFUL_GOOD:
 		string_out = "LAWFUL_GOOD";
@@ -162,7 +161,7 @@ std::string DND_CHARACTER_UTILITIES::get_string_from_DND_LANGUAGE( DND_LANGUAGE 
 {
 	std::string string_out;
 
-	switch (dnd_lang)
+	switch ( dnd_lang )
 	{
 	case DND_LANGUAGE::COMMON:
 		string_out = "Common";
@@ -568,6 +567,26 @@ DND_SIZE DND_CHARACTER_UTILITIES::get_DND_SIZE_from_string( string size_string )
 		return  DND_SIZE::LARGE;
 	}
 	return  DND_SIZE::INVALID;
+}
+
+DND_SKILL_TYPE DND_CHARACTER_UTILITIES::get_DND_SKILL_from_string( string skill_string )
+{
+	for ( char i = 0; i < DND_SKILL_TYPE::INVALID; i++ )
+	{
+		const auto type = static_cast<DND_SKILL_TYPE>(i);
+		string skill = get_string_from_DND_SKILL_TYPE( type );
+		for ( int i = 0; skill[i] != '\0'; i++ )
+		{
+			if ( skill[i] >= 'A' && skill[i] <= 'Z' )    //checking for uppercase characters
+				skill[i] = skill[i] + 32;         //converting uppercase to lowercase
+		}
+
+		if ( skill_string == skill )
+		{
+			return type;
+		}
+	}
+	return DND_SKILL_TYPE::INVALID;
 }
 
 DND_CLASS DND_CHARACTER_UTILITIES::get_DND_CLASS_from_string( string class_string )

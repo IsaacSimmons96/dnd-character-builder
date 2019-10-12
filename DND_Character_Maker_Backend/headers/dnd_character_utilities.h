@@ -2,7 +2,6 @@
 #include "character_enums.h"
 #include "typedefs.h"
 
-
 class DND_CHARACTER_UTILITIES
 {
 public:
@@ -23,6 +22,7 @@ public:
 	static DND_SIZE get_DND_SIZE_from_string( string size_string );
 	static DND_CLASS get_DND_CLASS_from_string( string class_string );
 	static ABILITY_SCORE_TYPES get_ABILITY_SCORE_TYPE_from_string( string ability );
+	static DND_SKILL_TYPE get_DND_SKILL_from_string( string skill_string );
 
 	static ABILITY_SCORE_TYPES get_ABILITY_SORE_TYPE_from_DND_SKILL_TYPE( DND_SKILL_TYPE skill );
 

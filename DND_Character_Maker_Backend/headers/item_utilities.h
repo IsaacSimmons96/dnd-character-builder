@@ -17,4 +17,3 @@ public:
 	static WEAPON_TYPE get_WEAPON_TYPE_from_string( string string_in );
 	static ARMOR_CATEGORY get_ARMOR_CATEGORY_from_string( string string_in );
 };
-

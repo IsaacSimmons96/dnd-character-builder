@@ -25,7 +25,6 @@ void TRAIT_SPELL_MANAGER::read_in_trait_spells()
 		ss << value;
 		string name;
 		string desc;
-		
 
 		getline( ss, name, ';' );
 		getline( ss, desc, ';' );
@@ -56,4 +55,3 @@ TRAIT_SPELL* TRAIT_SPELL_MANAGER::get_trait_spell( string name )
 	}
 	return nullptr;
 }
-

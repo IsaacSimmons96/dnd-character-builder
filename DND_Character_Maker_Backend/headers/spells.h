@@ -30,7 +30,7 @@ class MAGIC_SPELL : public SPELL
 {
 public:
 	MAGIC_SPELL( string name, SCHOOL_OF_MAGIC school, string desc, string higher_desc, SPELL_CASTING_TIME casting_t, u_int range,
-				 SPELL_COMPONENT components, string material_description ,SPELL_DURATION duration, SPELL_DURATION_TIME spell_duration_time,
+				 SPELL_COMPONENT components, string material_description, SPELL_DURATION duration, SPELL_DURATION_TIME spell_duration_time,
 				 u_int spell_level, std::vector<DND_CLASS> classes );
 	void print_spell() const override;
 
