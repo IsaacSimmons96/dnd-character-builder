@@ -82,7 +82,7 @@ int main()
 
 	while ( !entered_all_skill_profs )
 	{
-		ask_for_input( character_name_prefix + "'s Skill Proficiency: ", temp );
+		ask_for_input( "Add a Skill Proficiency: ", temp );
 		character.add_skill_proficiency( DND_CHARACTER_UTILITIES::get_DND_SKILL_from_string( temp ) );
 
 		ask_for_input( "Finished Adding Skill Proficiencys? (yes/no):", temp );

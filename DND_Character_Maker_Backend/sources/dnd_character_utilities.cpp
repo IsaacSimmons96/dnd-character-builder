@@ -500,7 +500,7 @@ DND_ALIGNMENT DND_CHARACTER_UTILITIES::get_DND_ALIGNMENT_from_string( string dnd
 	{
 		return_alignment = DND_ALIGNMENT::CHAOTIC_EVIL;
 	}
-	else if ( dnd_alignment == "chaotic evil" )
+	else if ( dnd_alignment == "chaotic good" )
 	{
 		return_alignment = DND_ALIGNMENT::CHAOTIC_GOOD;
 	}
