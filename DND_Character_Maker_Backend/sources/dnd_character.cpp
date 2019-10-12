@@ -1,15 +1,17 @@
 #include "..\headers\dnd_character.h"
 #include "..\headers\dnd_character_utilities.h"
-#include <iostream>
+#include "..\headers\generic_utilities.h"
 #include <assert.h>
+#include <iostream>
+
+DND_CHARACTER::~DND_CHARACTER()
+{
+}
 
 DND_CHARACTER::DND_CHARACTER()
 {
 }
 
-DND_CHARACTER::~DND_CHARACTER()
-{
-}
 
 DND_CHARACTER::DND_CHARACTER( DND_CHARACTER const &character_in )
 {
@@ -18,6 +20,89 @@ DND_CHARACTER::DND_CHARACTER( DND_CHARACTER const &character_in )
 	m_background = character_in.m_background;
 	m_race = character_in.m_race;
 	m_alignment = character_in.m_alignment;
+}
+
+void DND_CHARACTER::set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm ) 
+{
+	m_race = race_in;
+
+	const auto race_traits = rtm.get_race_traits( m_race );
+
+	m_speed = race_traits->get_speed();
+	m_size = race_traits->get_size();
+
+	for ( auto lang : race_traits->get_languages() )
+	{
+		add_language( lang );
+	}
+
+	for ( auto ab_bonus : race_traits->get_ability_score_bonuses() )
+	{
+		const auto ability_type = ab_bonus->get_bonus_type();
+		switch ( ability_type )
+		{
+		case ABILITY_SCORE_TYPES::STRENGTH:
+			m_strength += ab_bonus->get_bonus_value();
+			break;
+		case ABILITY_SCORE_TYPES::DEXTERITY:
+			m_dexterity += ab_bonus->get_bonus_value();
+			break;
+		case ABILITY_SCORE_TYPES::CONSTITUTION:
+			m_constitution += ab_bonus->get_bonus_value();
+			break;
+		case ABILITY_SCORE_TYPES::INTELLIGENCE:
+			m_intelligence += ab_bonus->get_bonus_value();
+			break;
+		case ABILITY_SCORE_TYPES::WISDOM:
+			m_wisdom += ab_bonus->get_bonus_value();
+			break;
+		case ABILITY_SCORE_TYPES::CHARISMA:
+			m_charisma += ab_bonus->get_bonus_value();
+			break;
+		case ABILITY_SCORE_TYPES::INVALID:
+		default:
+			break;
+		}
+	}
+
+	const auto tool_profs = race_traits->get_tool_proficiencys();
+	if ( tool_profs.size() > 0 )
+	{
+		// Dwarves and the subrace dwarves get to pick 1 of 3 tool profs. See PHB page 20.
+		if ( race_traits->get_race() == DND_RACE::DWARF || race_traits->get_race() == DND_RACE::HILL_DWARF || race_traits->get_race() == DND_RACE::MOUNTAIN_DWARF )
+		{
+			bool chosen_tool = false;
+			while ( !chosen_tool )
+			{
+				std::cout << "Race Chosen can select 1 of these tools to be proficient in." << std::endl;
+
+				for ( auto tool : tool_profs )
+				{
+					std::cout << DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL( tool ) << std::endl;
+				}
+
+				string temp;
+				ask_for_input( "Please enter one of these. (Type b, m, or s):", temp );
+				const auto tool = DND_CHARACTER_UTILITIES::get_DND_TOOL_from_string( temp );
+
+				if ( tool != DND_TOOL::INAVLID )
+				{
+					chosen_tool = true;
+				}
+			}
+		}
+		else if ( race_traits->get_race() != DND_RACE::INVALID )
+		{
+			for ( auto tool : tool_profs )
+			{
+				add_tool_proficiency( tool );
+			}
+		}
+		else
+		{
+			std::cout << "Somethings gone wrong here.";
+		}
+	}
 }
 
 void DND_CHARACTER::set_passive_perception()
@@ -59,6 +144,11 @@ void DND_CHARACTER::add_skill_proficiency( DND_SKILL_TYPE skill )
 void DND_CHARACTER::add_language( DND_LANGUAGE lang )
 {
 	m_languages.push_back( lang );
+}
+
+void DND_CHARACTER::add_tool_proficiency( DND_TOOL tool )
+{
+	m_tool_profs.push_back( tool );
 }
 
 void DND_CHARACTER::update_hit_dice( DND_DICE die, u_int number )

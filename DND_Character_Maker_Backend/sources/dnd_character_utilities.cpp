@@ -1,4 +1,5 @@
 #include "..\headers\dnd_character_utilities.h"
+#include "..\headers\generic_utilities.h"
 
 std::string DND_CHARACTER_UTILITIES::get_string_from_DND_CLASS( DND_CLASS dnd_class )
 {
@@ -241,22 +242,22 @@ string DND_CHARACTER_UTILITIES::get_string_from_DND_SIZE( DND_SIZE dnd_size )
 	return string_out;
 }
 
-string DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL_PROFICIENCY( DND_TOOL_PROFICIENCY dnd_tool )
+string DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL( DND_TOOL dnd_tool )
 {
 	std::string string_out;
 
 	switch ( dnd_tool )
 	{
-	case DND_TOOL_PROFICIENCY::BREWERS_SUPPLIES:
+	case DND_TOOL::BREWERS_SUPPLIES:
 		string_out = "Brewer's Supplies";
 		break;
-	case DND_TOOL_PROFICIENCY::MASONS_TOOLS:
+	case DND_TOOL::MASONS_TOOLS:
 		string_out = "Mason's Tools";
 		break;
-	case DND_TOOL_PROFICIENCY::SMITHS_TOOLS:
+	case DND_TOOL::SMITHS_TOOLS:
 		string_out = "Smith's Tools";
 		break;
-	case DND_TOOL_PROFICIENCY::INAVLID:
+	case DND_TOOL::INAVLID:
 		string_out = "INVALID";
 		break;
 	}
@@ -535,21 +536,21 @@ DND_ALIGNMENT DND_CHARACTER_UTILITIES::get_DND_ALIGNMENT_from_string( string dnd
 	return return_alignment;
 }
 
-DND_TOOL_PROFICIENCY DND_CHARACTER_UTILITIES::get_DND_TOOL_PROFICIENCY_from_string( string tool_prof )
+DND_TOOL DND_CHARACTER_UTILITIES::get_DND_TOOL_from_string( string tool_prof )
 {
-	if ( tool_prof == "Brewer's supplies" )
+	if ( tool_prof == "brewer's supplies" || tool_prof == "b")
 	{
-		return  DND_TOOL_PROFICIENCY::BREWERS_SUPPLIES;
+		return  DND_TOOL::BREWERS_SUPPLIES;
 	}
-	else if ( tool_prof == "Mason's tools" )
+	else if ( tool_prof == "mason's tools" || tool_prof == "m" )
 	{
-		return  DND_TOOL_PROFICIENCY::MASONS_TOOLS;
+		return  DND_TOOL::MASONS_TOOLS;
 	}
-	else if ( tool_prof == "Smith's tools" )
+	else if ( tool_prof == "smith's tools" || tool_prof == "s" )
 	{
-		return  DND_TOOL_PROFICIENCY::SMITHS_TOOLS;
+		return  DND_TOOL::SMITHS_TOOLS;
 	}
-	return  DND_TOOL_PROFICIENCY::INAVLID;
+	return  DND_TOOL::INAVLID;
 }
 
 DND_SIZE DND_CHARACTER_UTILITIES::get_DND_SIZE_from_string( string size_string )
@@ -575,11 +576,7 @@ DND_SKILL_TYPE DND_CHARACTER_UTILITIES::get_DND_SKILL_from_string( string skill_
 	{
 		const auto type = static_cast<DND_SKILL_TYPE>(i);
 		string skill = get_string_from_DND_SKILL_TYPE( type );
-		for ( int i = 0; skill[i] != '\0'; i++ )
-		{
-			if ( skill[i] >= 'A' && skill[i] <= 'Z' )    //checking for uppercase characters
-				skill[i] = skill[i] + 32;         //converting uppercase to lowercase
-		}
+		lower_string( skill );
 
 		if ( skill_string == skill )
 		{

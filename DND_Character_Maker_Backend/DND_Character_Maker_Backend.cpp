@@ -3,53 +3,31 @@
 
 #include "headers/dice_functions.h"
 #include "headers/dnd_character.h"
-#include "headers/racial_traits_manager.h"
-#include "headers/trait_spell_manager.h"
 #include "headers/dnd_character_utilities.h"
-#include <iostream>
+#include "headers/generic_utilities.h"
+#include "headers/racial_traits_manager.h"
 #include "headers/spells_manager.h"
-
-void lower_string( string& str )
-{
-	for ( int i = 0; str[i] != '\0'; i++ )
-	{
-		if ( str[i] >= 'A' && str[i] <= 'Z' )    //checking for uppercase characters
-			str[i] = str[i] + 32;         //converting uppercase to lowercase
-	}
-}
-
-void ask_for_input( string question, string& value )
-{
-	std::cout << question;
-	getline( std::cin, value );
-	lower_string( value );
-}
-
-void ask_for_input( string question, int& value )
-{
-	std::cout << question;
-	string temp;
-	getline( std::cin, temp );
-	value = stoi( temp );
-}
+#include "headers/trait_spell_manager.h"
+#include <iostream>
 
 int main()
 {
 	DND_CHARACTER character;
-	RACIAL_TRAITS_MANAGER trait_manager;
-
-	trait_manager.read_in_race_traits();
+	TRAIT_SPELL_MANAGER tsm;
+	RACIAL_TRAITS_MANAGER trait_manager( tsm );
 	//trait_manager.print_all_races();
 
-	SPELLS_MANAGER spell_manager;
-	spell_manager.read_in_spells();
+	/*SPELLS_MANAGER spell_manager;
+	spell_manager.read_in_spells();*/
 	//spell_manager.print_all_spells();
+
+	// ISAAC ADD SUPPORT FOR SUB RACES WHEN SELECTING A RACE !!!!!!!!!!!!
 
 	string temp;
 	int temp_int;
-	ask_for_input( "Enter player name: ", temp );
+	ask_for_input_no_lowercasing( "Enter player name: ", temp );
 	character.set_player_name( temp );
-	ask_for_input( "Enter character name: ", temp );
+	ask_for_input_no_lowercasing( "Enter character name: ", temp );
 	character.set_character_name( temp );
 
 	const string character_name_prefix = "Enter " + character.get_name();
@@ -57,7 +35,7 @@ int main()
 	character.set_character_class( DND_CHARACTER_UTILITIES::get_DND_CLASS_from_string( temp ) );
 
 	ask_for_input( character_name_prefix + "'s Race: ", temp );
-	character.set_race( DND_CHARACTER_UTILITIES::get_DND_RACE_from_string( temp ) );
+	character.set_race( DND_CHARACTER_UTILITIES::get_DND_RACE_from_string( temp ), trait_manager );
 
 	ask_for_input( character_name_prefix + "'s Level: ", temp_int );
 	character.set_level( temp_int );

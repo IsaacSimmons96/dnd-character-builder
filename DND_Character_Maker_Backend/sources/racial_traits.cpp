@@ -2,7 +2,7 @@
 #include <iostream>
 #include "..\headers\dnd_character_utilities.h"
 
-RACIAL_TRAITS::RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string align_desc, DND_SIZE size, std::vector<DND_LANGUAGE> langs, std::vector<DND_TOOL_PROFICIENCY> tool_profs,
+RACIAL_TRAITS::RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string align_desc, DND_SIZE size, std::vector<DND_LANGUAGE> langs, std::vector<DND_TOOL> tool_profs,
 							  std::vector<TRAIT_SPELL*> trait_spells, std::vector<ABILITY_SCORE_BONUS*> ability_bonuses )
 {
 	m_race = race;
@@ -48,7 +48,7 @@ void RACIAL_TRAITS::print_racial_traits()
 	counter = 1;
 	for ( auto tool : m_tool_proficiency )
 	{
-		std::cout << "Tool Proficiency Choice " << std::to_string( counter ) << " = " << DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL_PROFICIENCY( tool ) << std::endl;
+		std::cout << "Tool Proficiency Choice " << std::to_string( counter ) << " = " << DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL( tool ) << std::endl;
 		counter++;
 	}
 	counter = 1;

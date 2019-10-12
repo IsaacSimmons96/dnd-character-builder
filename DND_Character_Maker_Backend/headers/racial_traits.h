@@ -9,7 +9,7 @@
 class RACIAL_TRAITS
 {
 public:
-	RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string align_desc, DND_SIZE size, std::vector<DND_LANGUAGE> langs, std::vector<DND_TOOL_PROFICIENCY> tool_profs,
+	RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string align_desc, DND_SIZE size, std::vector<DND_LANGUAGE> langs, std::vector<DND_TOOL> tool_profs,
 				   std::vector<TRAIT_SPELL*> trait_spells, std::vector<ABILITY_SCORE_BONUS*> ability_bonuses );
 
 	~RACIAL_TRAITS();
@@ -20,7 +20,7 @@ public:
 	string								get_alignment_desc() { return m_alignment_description; };
 	DND_SIZE							get_size() { return m_race_size; };
 	std::vector<DND_LANGUAGE>			get_languages() { return m_race_languages; };
-	std::vector<DND_TOOL_PROFICIENCY >	get_tool_proficiencys() { return m_tool_proficiency; };
+	std::vector<DND_TOOL>				get_tool_proficiencys() { return m_tool_proficiency; };
 	std::vector<TRAIT_SPELL*>			get_trait_spells() { return m_trait_spells; };
 	std::vector<ABILITY_SCORE_BONUS*>	get_ability_score_bonuses() { return m_ability_score_bonuses; };
 
@@ -38,6 +38,6 @@ private:
 
 	std::vector<ABILITY_SCORE_BONUS*>	m_ability_score_bonuses;
 	std::vector<DND_LANGUAGE>			m_race_languages;
-	std::vector<DND_TOOL_PROFICIENCY>	m_tool_proficiency;
+	std::vector<DND_TOOL>	m_tool_proficiency;
 	std::vector<TRAIT_SPELL*>			m_trait_spells;
 };

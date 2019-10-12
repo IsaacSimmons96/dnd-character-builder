@@ -44,7 +44,7 @@ public:
 	// main information setters
 	void set_character_class( DND_CLASS class_in )		{ m_class = class_in; };
 	void set_background( DND_BACKGROUND background_in ) { m_background = background_in; };
-	void set_race( DND_RACE race_in )					{ m_race = race_in; };
+	void set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm );
 	void set_alignment( DND_ALIGNMENT alignment_in )	{ m_alignment = alignment_in; };
 	void set_level( u_int number_in )					{ m_level = number_in; set_proficiency_bonus_from_level( m_level ); };
 	void set_exp( u_int number_in )						{ m_exp = number_in; };
@@ -62,15 +62,16 @@ public:
 	void update_skills();
 
 	// character stats setters
-	void set_strength( u_int number_in )				{ m_strength = number_in; };
-	void set_dexterity( u_int number_in )				{ m_dexterity = number_in; };
-	void set_constitution( u_int number_in )			{ m_constitution = number_in; };
-	void set_intelligence( u_int number_in )			{ m_intelligence = number_in; };
-	void set_wisdom( u_int number_in )					{ m_wisdom = number_in; set_passive_perception(); };
-	void set_charisma( u_int number_in )				{ m_charisma = number_in; };
+	void set_strength( u_int number_in )				{ m_strength += number_in; };
+	void set_dexterity( u_int number_in )				{ m_dexterity += number_in; };
+	void set_constitution( u_int number_in )			{ m_constitution += number_in; };
+	void set_intelligence( u_int number_in )			{ m_intelligence += number_in; };
+	void set_wisdom( u_int number_in )					{ m_wisdom += number_in; set_passive_perception(); };
+	void set_charisma( u_int number_in )				{ m_charisma += number_in; };
 
 	void add_skill_proficiency( DND_SKILL_TYPE skill );
 	void add_language( DND_LANGUAGE lang );
+	void add_tool_proficiency( DND_TOOL tool );
 	void update_hit_dice( DND_DICE die, u_int number );
 
 	// main information getters
@@ -131,6 +132,7 @@ private:
 	std::vector< DND_SKILL_TYPE > m_skills_proficient_in;
 	std::vector<DND_LANGUAGE> m_languages;
 	std::vector<TRAIT_SPELL*> m_trait_spells;
+	std::vector<DND_TOOL> m_tool_profs;
 
 	// character stats
 	u_int			m_strength{ 0 };

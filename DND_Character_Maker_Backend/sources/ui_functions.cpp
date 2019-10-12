@@ -57,6 +57,6 @@ void UI_FUNCTION::select_character_skill_proficiency( const DND_CHARACTER& chara
 {
 }
 
-void UI_FUNCTION::select_character_tool_proficiency( const DND_CHARACTER& character, DND_TOOL_PROFICIENCY tool )
+void UI_FUNCTION::select_character_tool_proficiency( const DND_CHARACTER& character, DND_TOOL tool )
 {
 }

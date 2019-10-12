@@ -8,12 +8,14 @@
 #include <iosfwd>
 #include <sstream>
 
-RACIAL_TRAITS_MANAGER::RACIAL_TRAITS_MANAGER()
-{
-}
-
 RACIAL_TRAITS_MANAGER::~RACIAL_TRAITS_MANAGER()
 {
+	m_race_traits.clear();
+}
+
+RACIAL_TRAITS_MANAGER::RACIAL_TRAITS_MANAGER( TRAIT_SPELL_MANAGER& tsm )
+{
+	m_tsm = &tsm;
 }
 
 void RACIAL_TRAITS_MANAGER::read_in_race_traits()
@@ -72,7 +74,7 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 		std::vector<TRAIT_SPELL*> spells;
 		while ( getline( ss, temp, ';' ) )
 		{
-			TRAIT_SPELL* spell = TRAIT_SPELL_MANAGER::get_instance().get_trait_spell( temp );
+			TRAIT_SPELL* spell = m_tsm->get_trait_spell( temp );
 			if ( spell )
 			{
 				spells.push_back( spell );
@@ -89,14 +91,30 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 
 void RACIAL_TRAITS_MANAGER::print_all_races()
 {
+	if ( m_race_traits.size() <= 0 )
+	{
+		read_in_race_traits();
+	}
+
 	for ( auto it = m_race_traits.begin(); it != m_race_traits.end(); ++it )
 	{
 		it->second->print_racial_traits();
 	}
 }
 
+void RACIAL_TRAITS_MANAGER::refresh_races()
+{
+	m_race_traits.clear();
+	read_in_race_traits();
+}
+
 RACIAL_TRAITS* RACIAL_TRAITS_MANAGER::get_race_traits( DND_RACE race )
 {
+	if ( m_race_traits.size() <= 0 )
+	{
+		read_in_race_traits();
+	}
+
 	for ( auto it = m_race_traits.begin(); it != m_race_traits.end(); ++it )
 	{
 		if ( it->first == race )

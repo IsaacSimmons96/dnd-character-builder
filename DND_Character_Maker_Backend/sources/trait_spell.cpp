@@ -1,10 +1,11 @@
 #include "..\headers\trait_spell.h"
 #include <iostream>
 
-TRAIT_SPELL::TRAIT_SPELL( string name, string desc )
+TRAIT_SPELL::TRAIT_SPELL( string name, string desc, bool read_only )
 {
 	m_spell_description = desc;
 	m_spell_name = name;
+	m_read_only = read_only;
 }
 
 TRAIT_SPELL::~TRAIT_SPELL()

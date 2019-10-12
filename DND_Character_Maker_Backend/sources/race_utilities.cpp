@@ -53,55 +53,26 @@ std::vector<DND_LANGUAGE> RACE_UTILITIES::get_languages_from_race( DND_RACE race
 	return langs_out;
 }
 
-std::vector<DND_TOOL_PROFICIENCY> RACE_UTILITIES::get_tool_profs_from_race( DND_RACE race )
+std::vector<DND_TOOL> RACE_UTILITIES::get_tool_profs_from_race( DND_RACE race )
 {
-	std::vector<DND_TOOL_PROFICIENCY> profs_out;
+	std::vector<DND_TOOL> profs_out;
 
 	switch ( race )
 	{
-	case DND_RACE::HUMAN:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
-		break;
-	case DND_RACE::HILL_DWARF:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
-		break;
-	case DND_RACE::DWARF:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::BREWERS_SUPPLIES );
-		profs_out.push_back( DND_TOOL_PROFICIENCY::MASONS_TOOLS );
-		profs_out.push_back( DND_TOOL_PROFICIENCY::SMITHS_TOOLS );
-		break;
 	case DND_RACE::MOUNTAIN_DWARF:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
+	case DND_RACE::HILL_DWARF:
+	case DND_RACE::DWARF:
+		profs_out.push_back( DND_TOOL::BREWERS_SUPPLIES );
+		profs_out.push_back( DND_TOOL::MASONS_TOOLS );
+		profs_out.push_back( DND_TOOL::SMITHS_TOOLS );
 		break;
-	case DND_RACE::HIGH_ELF:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
+
+	case DND_RACE::ROCK_GNOME:
+		profs_out.push_back( DND_TOOL::TINKERS_TOOLS );
 		break;
-	case DND_RACE::WOOD_ELF:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
-		break;
-	case DND_RACE::DROW_ELF:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
-		break;
-	case DND_RACE::HALFLING:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
-		break;
-	case DND_RACE::DRAGONBORN:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
-		break;
-	case DND_RACE::GNOME:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
-		break;
-	case DND_RACE::HALF_ELF:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
-		break;
-	case DND_RACE::HALF_ORC:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
-		break;
-	case DND_RACE::TIEFLING:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
-		break;
-	case DND_RACE::INVALID:
-		profs_out.push_back( DND_TOOL_PROFICIENCY::INAVLID );
+
+	default:
+		profs_out.push_back( DND_TOOL::INAVLID );
 		break;
 	}
 	return profs_out;
