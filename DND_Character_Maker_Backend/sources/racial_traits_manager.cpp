@@ -18,6 +18,19 @@ RACIAL_TRAITS_MANAGER::RACIAL_TRAITS_MANAGER( TRAIT_SPELL_MANAGER& tsm )
 	m_tsm = &tsm;
 }
 
+std::vector< DND_RACE > RACIAL_TRAITS_MANAGER::get_subraces( DND_RACE race )
+{
+	std::vector< DND_RACE > subraces;
+	for ( auto it = m_race_traits.begin(); it != m_race_traits.end(); ++it )
+	{
+		if ( it->second->get_main_race() == race )
+		{
+			subraces.push_back( it->first );
+		}
+	}
+	return subraces;
+}
+
 void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 {
 	std::ifstream file( filename );
@@ -37,6 +50,14 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 
 		getline( ss, temp, ';' );
 		const DND_RACE race = DND_CHARACTER_UTILITIES::get_DND_RACE_from_string( temp );
+		getline( ss, temp, ';' );
+		const DND_RACE main_race = DND_CHARACTER_UTILITIES::get_DND_RACE_from_string( temp );
+		getline( ss, temp, ';' );
+		bool need_to_pick_subrace = false;
+		if ( temp == "true" )
+		{
+			need_to_pick_subrace = true;
+		}
 		getline( ss, temp, ';' );
 		convert_string_to_int();
 		const u_int age = uint_temp;
@@ -81,7 +102,7 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 			}
 		}
 
-		RACIAL_TRAITS* race_traits = new RACIAL_TRAITS( race, age, speed, description, size, RACE_UTILITIES::get_languages_from_race( race ), RACE_UTILITIES::get_tool_profs_from_race( race ), spells, bonuses );
+		RACIAL_TRAITS* race_traits = new RACIAL_TRAITS( race, age, speed, description, size, RACE_UTILITIES::get_languages_from_race( race ), RACE_UTILITIES::get_tool_profs_from_race( race ), spells, bonuses, need_to_pick_subrace, main_race );
 
 		m_race_traits.insert( std::make_pair( race_traits->get_race(), race_traits ) );
 

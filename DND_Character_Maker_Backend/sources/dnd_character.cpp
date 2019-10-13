@@ -12,7 +12,6 @@ DND_CHARACTER::DND_CHARACTER()
 {
 }
 
-
 DND_CHARACTER::DND_CHARACTER( DND_CHARACTER const &character_in )
 {
 	m_character_name = character_in.m_character_name;
@@ -22,11 +21,9 @@ DND_CHARACTER::DND_CHARACTER( DND_CHARACTER const &character_in )
 	m_alignment = character_in.m_alignment;
 }
 
-void DND_CHARACTER::set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm ) 
+void DND_CHARACTER::apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& rtm, bool has_applied_race )
 {
-	m_race = race_in;
-
-	const auto race_traits = rtm.get_race_traits( m_race );
+	const auto race_traits = rtm.get_race_traits( race );
 
 	m_speed = race_traits->get_speed();
 	m_size = race_traits->get_size();
@@ -68,8 +65,8 @@ void DND_CHARACTER::set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm )
 	const auto tool_profs = race_traits->get_tool_proficiencys();
 	if ( tool_profs.size() > 0 )
 	{
-		// Dwarves and the subrace dwarves get to pick 1 of 3 tool profs. See PHB page 20.
-		if ( race_traits->get_race() == DND_RACE::DWARF || race_traits->get_race() == DND_RACE::HILL_DWARF || race_traits->get_race() == DND_RACE::MOUNTAIN_DWARF )
+		//the subrace dwarves get to pick 1 of 3 tool profs. See PHB page 20.
+		if ( race_traits->get_race() == DND_RACE::DWARF )
 		{
 			bool chosen_tool = false;
 			while ( !chosen_tool )
@@ -88,6 +85,7 @@ void DND_CHARACTER::set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm )
 				if ( tool != DND_TOOL::INAVLID )
 				{
 					chosen_tool = true;
+					add_tool_proficiency( tool );
 				}
 			}
 		}
@@ -103,6 +101,53 @@ void DND_CHARACTER::set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm )
 			std::cout << "Somethings gone wrong here.";
 		}
 	}
+
+	if ( !has_applied_race )
+	{
+		if ( race_traits->is_subrace() )
+		{
+			apply_racial_traits( race_traits->get_main_race(), rtm, true );
+		}
+
+		if ( race_traits->must_pick_subrace() )
+		{
+			bool unchosen = true;
+			while ( unchosen )
+			{
+				std::cout << "You'll need to pick a subrace for this race. Please choose from these." << std::endl;
+
+				const std::vector< DND_RACE > sub_races = rtm.get_subraces( race_traits->get_race() );
+				for ( auto race : sub_races )
+				{
+					std::cout << DND_CHARACTER_UTILITIES::get_string_from_DND_RACE( race ) << std::endl;
+				}
+
+				string input;
+				ask_for_input( "Please enter subrace: ", input );
+
+				const auto sub_race = DND_CHARACTER_UTILITIES::get_DND_RACE_from_string( input );
+				if ( sub_race != DND_RACE::INVALID )
+				{
+					unchosen = false;
+				}
+
+				if ( !unchosen )
+				{
+					apply_racial_traits( sub_race, rtm, true );
+				}
+				else
+				{
+					std::cout << "It seems youve entered wrongly." << std::endl;
+				}
+			}
+		}
+	}
+}
+
+void DND_CHARACTER::set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm )
+{
+	m_race = race_in;
+	apply_racial_traits( m_race, rtm, false );
 }
 
 void DND_CHARACTER::set_passive_perception()

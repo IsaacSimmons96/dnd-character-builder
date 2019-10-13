@@ -538,7 +538,7 @@ DND_ALIGNMENT DND_CHARACTER_UTILITIES::get_DND_ALIGNMENT_from_string( string dnd
 
 DND_TOOL DND_CHARACTER_UTILITIES::get_DND_TOOL_from_string( string tool_prof )
 {
-	if ( tool_prof == "brewer's supplies" || tool_prof == "b")
+	if ( tool_prof == "brewer's supplies" || tool_prof == "b" )
 	{
 		return  DND_TOOL::BREWERS_SUPPLIES;
 	}

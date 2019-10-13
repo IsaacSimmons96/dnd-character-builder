@@ -104,6 +104,7 @@ public:
 	void print_hit_dice();
 
 private:
+	void apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& rtm, bool has_applied_race );
 
 	// names
 	std::string		m_character_name{ "INVALID" };

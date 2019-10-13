@@ -21,8 +21,6 @@ int main()
 	spell_manager.read_in_spells();*/
 	//spell_manager.print_all_spells();
 
-	// ISAAC ADD SUPPORT FOR SUB RACES WHEN SELECTING A RACE !!!!!!!!!!!!
-
 	string temp;
 	int temp_int;
 	ask_for_input_no_lowercasing( "Enter player name: ", temp );

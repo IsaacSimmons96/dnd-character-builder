@@ -16,10 +16,13 @@ public:
 	void print_all_races();
 	void refresh_races();
 	RACIAL_TRAITS* get_race_traits( DND_RACE race );
+	std::vector< DND_RACE > get_subraces( DND_RACE race );
 
 private:
 	std::map< DND_RACE, RACIAL_TRAITS*> m_race_traits;
+
 	const char filename[95]{ "C:/Users/Isaac/Documents/dnd-character-builder/DND_Character_Maker_Backend/csv/race_traits.csv" };
 	TRAIT_SPELL_MANAGER* m_tsm{ nullptr };
+
 	void read_in_race_traits();
 };

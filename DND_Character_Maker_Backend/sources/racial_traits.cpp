@@ -3,7 +3,7 @@
 #include "..\headers\dnd_character_utilities.h"
 
 RACIAL_TRAITS::RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string align_desc, DND_SIZE size, std::vector<DND_LANGUAGE> langs, std::vector<DND_TOOL> tool_profs,
-							  std::vector<TRAIT_SPELL*> trait_spells, std::vector<ABILITY_SCORE_BONUS*> ability_bonuses )
+							  std::vector<TRAIT_SPELL*> trait_spells, std::vector<ABILITY_SCORE_BONUS*> ability_bonuses, bool need_to_pick_subrace, DND_RACE main_race /*= DND_RACE::INVALID*/ )
 {
 	m_race = race;
 	m_typical_age = age;
@@ -26,6 +26,10 @@ RACIAL_TRAITS::RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string alig
 	{
 		m_ability_score_bonuses.push_back( bonus );
 	}
+
+	m_must_pick_subrace = need_to_pick_subrace;
+
+	m_main_race = main_race;
 }
 
 RACIAL_TRAITS::~RACIAL_TRAITS()

@@ -124,7 +124,6 @@ DND_DICE get_hit_dice_from_DND_CLASS( DND_CLASS dnd_class )
 	case DND_CLASS::MONK:
 	case DND_CLASS::ROGUE:
 	case DND_CLASS::WARLOCK:
-		raise( SIGINT );
 		return DND_DICE::D8;
 		break;
 
