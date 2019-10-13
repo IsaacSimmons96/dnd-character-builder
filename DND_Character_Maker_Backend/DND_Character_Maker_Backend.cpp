@@ -9,6 +9,7 @@
 #include "headers/spells_manager.h"
 #include "headers/trait_spell_manager.h"
 #include <iostream>
+#include <cassert>
 
 int main()
 {
@@ -25,9 +26,9 @@ int main()
 	int temp_int;
 	ask_for_input_no_lowercasing( "Enter player name: ", temp );
 	character.set_player_name( temp );
+	assert( temp != "X" );
 	ask_for_input_no_lowercasing( "Enter character name: ", temp );
 	character.set_character_name( temp );
-
 	const string character_name_prefix = "Enter " + character.get_name();
 	ask_for_input( character_name_prefix + "'s Class: ", temp );
 	character.set_character_class( DND_CHARACTER_UTILITIES::get_DND_CLASS_from_string( temp ) );
