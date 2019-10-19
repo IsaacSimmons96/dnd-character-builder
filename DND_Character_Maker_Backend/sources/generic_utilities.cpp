@@ -31,3 +31,28 @@ void ask_for_input( string question, int& value )
 	getline( std::cin, temp );
 	value = stoi( temp );
 }
+
+void print()
+{
+	std::cout << "\n" << std::endl;
+}
+
+void print( string input )
+{
+	std::cout << input << std::endl;
+}
+
+void print( int input )
+{
+	std::cout << std::to_string( input ) << std::endl;
+}
+
+void print( string input, string input2 )
+{
+	std::cout << input << input2 << std::endl;
+}
+
+void print( string input, int input2 )
+{
+	std::cout << input << std::to_string(input2) << std::endl;
+}

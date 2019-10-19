@@ -102,6 +102,7 @@ public:
 	void print_character_info();
 	void print_skills();
 	void print_hit_dice();
+	void print_languages();
 
 private:
 	void apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& rtm, bool has_applied_race );

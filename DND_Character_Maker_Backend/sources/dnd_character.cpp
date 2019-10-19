@@ -191,6 +191,14 @@ void DND_CHARACTER::add_language( DND_LANGUAGE lang )
 	m_languages.push_back( lang );
 }
 
+void DND_CHARACTER::print_languages()
+{
+	for ( auto lang : m_languages )
+	{
+		print( DND_CHARACTER_UTILITIES::get_string_from_DND_LANGUAGE( lang ) );
+	}
+}
+
 void DND_CHARACTER::add_tool_proficiency( DND_TOOL tool )
 {
 	m_tool_profs.push_back( tool );
@@ -255,34 +263,36 @@ void DND_CHARACTER::print_hit_dice()
 void DND_CHARACTER::print_character_info()
 {
 	const std::string border = "************************************************************************************";
-	const std::string spacer = "\n";
-	std::cout << border << std::endl;
-	std::cout << border << std::endl;
-	std::cout << "Player Name = " << m_player_name << std::endl;
-	std::cout << "Character Name = " << m_character_name << std::endl;
-	std::cout << "Character Level = " << std::to_string( m_level ) << std::endl;
-	std::cout << "Character Class = " << DND_CHARACTER_UTILITIES::get_string_from_DND_CLASS( m_class ) << std::endl;
-	std::cout << "Character Background = " << DND_CHARACTER_UTILITIES::get_string_from_DND_BACKGROUND( m_background ) << std::endl;
-	std::cout << "Character Race = " << DND_CHARACTER_UTILITIES::get_string_from_DND_RACE( m_race ) << std::endl;
-	std::cout << "Character Alignment = " << DND_CHARACTER_UTILITIES::get_string_from_DND_ALIGNMENT( m_alignment ) << std::endl;
-	std::cout << "Character Hit Points = " << std::to_string( m_hit_points ) << std::endl;
-	std::cout << "Character Prof Bonus = " << std::to_string( m_proficiency_bonus ) << std::endl;
-	std::cout << "Character Armour Class = " << std::to_string( m_armour_class ) << std::endl;
-	std::cout << "Character Passive Perception = " << std::to_string( m_passive_perception ) << std::endl;
-	std::cout << spacer << std::endl;
-	std::cout << "Character Strength = " << std::to_string( m_strength ) << std::endl;
-	std::cout << "Character Dexterity = " << std::to_string( m_dexterity ) << std::endl;
-	std::cout << "Character Constitution = " << std::to_string( m_constitution ) << std::endl;
-	std::cout << "Character Intelligence = " << std::to_string( m_intelligence ) << std::endl;
-	std::cout << "Character Wisdom = " << std::to_string( m_wisdom ) << std::endl;
-	std::cout << "Character Charisma = " << std::to_string( m_charisma ) << std::endl;
+	print( border );
+	print( border );
+	print( "Player Name = ", m_player_name );
+	print( "Character Name = ", m_character_name );
+	print( "Character Level = ", m_level );
+	print( "Character Class = ", DND_CHARACTER_UTILITIES::get_string_from_DND_CLASS( m_class ) );
+	print( "Character Background = ", DND_CHARACTER_UTILITIES::get_string_from_DND_BACKGROUND( m_background ) );
+	print( "Character Race = ", DND_CHARACTER_UTILITIES::get_string_from_DND_RACE( m_race ) );
+	print( "Character Alignment = ", DND_CHARACTER_UTILITIES::get_string_from_DND_ALIGNMENT( m_alignment ) );
+	print( "Character Hit Points = ", m_hit_points );
+	print( "Character Prof Bonus = ", m_proficiency_bonus );
+	print( "Character Armour Class = ", m_armour_class );
+	print( "Character Passive Perception = ", m_passive_perception );
+	print();
+	print( "Character Strength = ", m_strength );
+	print( "Character Dexterity = ", m_dexterity );
+	print( "Character Constitution = ", m_constitution );
+	print( "Character Intelligence = ", m_intelligence );
+	print( "Character Wisdom = ", m_wisdom );
+	print( "Character Charisma = ", m_charisma );
 	print_saving_throws();
-	std::cout << spacer << std::endl;
+	print();
 	print_skills();
 	print_hit_dice();
-	std::cout << spacer << std::endl;
-	std::cout << border << std::endl;
-	std::cout << border << std::endl;
+	print();
+	print( "Other Proficiencies & Languages" );
+	print_languages();
+
+	print( border );
+	print( border );
 }
 
 u_int DND_CHARACTER::get_ability_value_from_DND_ABILITY_SCORE_TYPES( ABILITY_SCORE_TYPES ability_type )
