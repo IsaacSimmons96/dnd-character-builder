@@ -151,7 +151,7 @@ enum class DND_TOOL : char
 	INAVLID
 };
 
-enum DND_SKILL_TYPE : char
+enum DND_SKILL : char
 {
 	ACROBATICS,
 	ANIMAL_HANDLING,

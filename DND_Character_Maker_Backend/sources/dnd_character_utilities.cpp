@@ -244,21 +244,131 @@ string DND_CHARACTER_UTILITIES::get_string_from_DND_SIZE( DND_SIZE dnd_size )
 
 string DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL( DND_TOOL dnd_tool )
 {
-	std::string string_out;
+	string string_out;
 
 	switch ( dnd_tool )
 	{
+	case DND_TOOL::ALCHEMISTS_SUPPLIES:
+		string_out = "Alchemist's Supplies";
+		break;
+	case DND_TOOL::BAGPIPES:
+		string_out = "Bagpipes";
+		break;
 	case DND_TOOL::BREWERS_SUPPLIES:
 		string_out = "Brewer's Supplies";
+		break;
+	case DND_TOOL::CALLIGRAPHERS_SUPPLIES:
+		string_out = "Calligrapher's Supplies";
+		break;
+	case DND_TOOL::CARPENTERS_TOOLS:
+		string_out = "Carpenter's Tools";
+		break;
+	case DND_TOOL::CARTOGRAPHERS_TOOLS:
+		string_out = "Cratographer's Tools";
+		break;
+	case DND_TOOL::COBBLERS_TOOLS:
+		string_out = "Cobbler's Supplies";
+		break;
+	case DND_TOOL::COOKS_UTENSILS:
+		string_out = "Cooks's Supplies";
+		break;
+	case DND_TOOL::DICE:
+		string_out = "Dice";
+		break;
+	case DND_TOOL::DISGUISE_KIT:
+		string_out = "Disguise Kit";
+		break;
+	case DND_TOOL::DRAGONCHESS:
+		string_out = "Dragonchess";
+		break;
+	case DND_TOOL::DRUM:
+		string_out = "Drum";
+		break;
+	case DND_TOOL::DULCIMER:
+		string_out = "Dulcimer";
+		break;
+	case DND_TOOL::FLUTE:
+		string_out = "Flute";
+		break;
+	case DND_TOOL::FORGERY_KIT:
+		string_out = "Forgery Kit";
+		break;
+	case DND_TOOL::GLASSBLOWERS_TOOLS:
+		string_out = "Glassblower's Tools";
+		break;
+	case DND_TOOL::HERBALISM_KIT:
+		string_out = "Herbalism Kit";
+		break;
+	case DND_TOOL::HORN:
+		string_out = "Horn";
+		break;
+	case DND_TOOL::JEWELERS_TOOLS:
+		string_out = "Jewler's Tools";
+		break;
+	case DND_TOOL::LAND_VEHICLE:
+		string_out = "Land Vehicles";
+		break;
+	case DND_TOOL::LEATHERWORKERS_TOOLS:
+		string_out = "Leatherworker's Tools";
+		break;
+	case DND_TOOL::LUTE:
+		string_out = "Lute";
+		break;
+	case DND_TOOL::LYRE:
+		string_out = "Lyre";
 		break;
 	case DND_TOOL::MASONS_TOOLS:
 		string_out = "Mason's Tools";
 		break;
+	case DND_TOOL::NAVIGATORS_TOOLS:
+		string_out = "Navigator's Tools";
+		break;
+	case DND_TOOL::PAINTERS_TOOLS:
+		string_out = "Painter's Tools";
+		break;
+	case DND_TOOL::PAN_FLUTE:
+		string_out = "Pan Flute";
+		break;
+	case DND_TOOL::PLAYING_CARDS:
+		string_out = "Playing Cards";
+		break;
+	case DND_TOOL::POISONERS_KIT:
+		string_out = "Poisoner's Kit";
+		break;
+	case DND_TOOL::POTTERS_TOOLS:
+		string_out = "Potter's Tools";
+		break;
+	case DND_TOOL::SHAWM:
+		string_out = "Shawm";
+		break;
 	case DND_TOOL::SMITHS_TOOLS:
 		string_out = "Smith's Tools";
 		break;
+	case DND_TOOL::THIEVES_TOOLS:
+		string_out = "Thieve's Tools";
+		break;
+	case DND_TOOL::THREE_DRAGON_ANTE:
+		string_out = "Three Dragon Ante";
+		break;
+	case DND_TOOL::TINKERS_TOOLS:
+		string_out = "Tinker's Tools";
+		break;
+	case DND_TOOL::VIOL:
+		string_out = "Viol";
+		break;
+	case DND_TOOL::WATER_VEHICLE:
+		string_out = "Water Vehicles";
+		break;
+	case DND_TOOL::WEAVERS_TOOLS:
+		string_out = "Weaver's Tools";
+		break;
+	case DND_TOOL::WOODCARVERS_TOOLS:
+		string_out = "Woodcarver's Tools";
+		break;
 	case DND_TOOL::INAVLID:
 		string_out = "INVALID";
+		break;
+	default:
 		break;
 	}
 
@@ -297,7 +407,7 @@ string DND_CHARACTER_UTILITIES::get_string_from_ABILITY_SCORE_TYPES( ABILITY_SCO
 	return string_out;
 }
 
-string DND_CHARACTER_UTILITIES::get_string_from_DND_SKILL_TYPE( DND_SKILL_TYPE skill )
+string DND_CHARACTER_UTILITIES::get_string_from_DND_SKILL( DND_SKILL skill )
 {
 	std::string string_out;
 	switch ( skill )
@@ -570,12 +680,12 @@ DND_SIZE DND_CHARACTER_UTILITIES::get_DND_SIZE_from_string( string size_string )
 	return  DND_SIZE::INVALID;
 }
 
-DND_SKILL_TYPE DND_CHARACTER_UTILITIES::get_DND_SKILL_from_string( string skill_string )
+DND_SKILL DND_CHARACTER_UTILITIES::get_DND_SKILL_from_string( string skill_string )
 {
-	for ( char i = 0; i < DND_SKILL_TYPE::INVALID; i++ )
+	for ( char i = 0; i < DND_SKILL::INVALID; i++ )
 	{
-		const auto type = static_cast<DND_SKILL_TYPE>(i);
-		string skill = get_string_from_DND_SKILL_TYPE( type );
+		const auto type = static_cast<DND_SKILL>(i);
+		string skill = get_string_from_DND_SKILL( type );
 		lower_string( skill );
 
 		if ( skill_string == skill )
@@ -583,7 +693,7 @@ DND_SKILL_TYPE DND_CHARACTER_UTILITIES::get_DND_SKILL_from_string( string skill_
 			return type;
 		}
 	}
-	return DND_SKILL_TYPE::INVALID;
+	return DND_SKILL::INVALID;
 }
 
 DND_CLASS DND_CHARACTER_UTILITIES::get_DND_CLASS_from_string( string class_string )
@@ -668,7 +778,7 @@ ABILITY_SCORE_TYPES DND_CHARACTER_UTILITIES::get_ABILITY_SCORE_TYPE_from_string(
 	return  ABILITY_SCORE_TYPES::INVALID;
 }
 
-ABILITY_SCORE_TYPES DND_CHARACTER_UTILITIES::get_ABILITY_SORE_TYPE_from_DND_SKILL_TYPE( DND_SKILL_TYPE skill )
+ABILITY_SCORE_TYPES DND_CHARACTER_UTILITIES::get_ABILITY_SORE_TYPE_from_DND_SKILL( DND_SKILL skill )
 {
 	ABILITY_SCORE_TYPES ability = ABILITY_SCORE_TYPES::INVALID;
 	switch ( skill )

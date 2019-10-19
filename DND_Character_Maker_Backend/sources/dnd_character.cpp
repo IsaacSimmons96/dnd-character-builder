@@ -66,30 +66,34 @@ void DND_CHARACTER::apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& r
 	if ( tool_profs.size() > 0 )
 	{
 		//the subrace dwarves get to pick 1 of 3 tool profs. See PHB page 20.
-		if ( race_traits->get_race() == DND_RACE::DWARF )
+		const auto race = race_traits->get_race();
+		if ( race == DND_RACE::DWARF || race == DND_RACE::HILL_DWARF || race == DND_RACE::MOUNTAIN_DWARF )
 		{
-			bool chosen_tool = false;
-			while ( !chosen_tool )
+			if ( !has_applied_race )
 			{
-				std::cout << "Race Chosen can select 1 of these tools to be proficient in." << std::endl;
-
-				for ( auto tool : tool_profs )
+				bool chosen_tool = false;
+				while ( !chosen_tool )
 				{
-					std::cout << DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL( tool ) << std::endl;
-				}
+					std::cout << "Race Chosen can select 1 of these tools to be proficient in." << std::endl;
 
-				string temp;
-				ask_for_input( "Please enter one of these. (Type b, m, or s):", temp );
-				const auto tool = DND_CHARACTER_UTILITIES::get_DND_TOOL_from_string( temp );
+					for ( auto tool : tool_profs )
+					{
+						std::cout << DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL( tool ) << std::endl;
+					}
 
-				if ( tool != DND_TOOL::INAVLID )
-				{
-					chosen_tool = true;
-					add_tool_proficiency( tool );
+					string temp;
+					ask_for_input( "Please enter one of these. (Type b, m, or s):", temp );
+					const auto tool = DND_CHARACTER_UTILITIES::get_DND_TOOL_from_string( temp );
+
+					if ( tool != DND_TOOL::INAVLID )
+					{
+						chosen_tool = true;
+						add_tool_proficiency( tool );
+					}
 				}
 			}
 		}
-		else if ( race_traits->get_race() != DND_RACE::INVALID )
+		else if ( race != DND_RACE::INVALID )
 		{
 			for ( auto tool : tool_profs )
 			{
@@ -116,7 +120,7 @@ void DND_CHARACTER::apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& r
 			{
 				std::cout << "You'll need to pick a subrace for this race. Please choose from these." << std::endl;
 
-				const std::vector< DND_RACE > sub_races = rtm.get_subraces( race_traits->get_race() );
+				const std::vector< DND_RACE > sub_races = rtm.get_subraces( race );
 				for ( auto race : sub_races )
 				{
 					std::cout << DND_CHARACTER_UTILITIES::get_string_from_DND_RACE( race ) << std::endl;
@@ -181,14 +185,38 @@ void DND_CHARACTER::set_proficiency_bonus_from_level( u_int level )
 	set_proficiency_bonus( prof_bonus );
 }
 
-void DND_CHARACTER::add_skill_proficiency( DND_SKILL_TYPE skill )
+void DND_CHARACTER::add_skill_proficiency( DND_SKILL skill )
 {
-	m_skills_proficient_in.push_back( skill );
+	bool add = true;
+	for ( auto proficiency : m_skills_proficient_in )
+	{
+		if ( proficiency == skill )
+		{
+			add = false;
+		}
+	}
+
+	if ( add )
+	{
+		m_skills_proficient_in.push_back( skill );
+	}
 }
 
 void DND_CHARACTER::add_language( DND_LANGUAGE lang )
 {
-	m_languages.push_back( lang );
+	bool add_lang = true;
+	for ( auto language : m_languages )
+	{
+		if ( language == lang )
+		{
+			add_lang = false;
+		}
+	}
+
+	if ( add_lang )
+	{
+		m_languages.push_back( lang );
+	}
 }
 
 void DND_CHARACTER::print_languages()
@@ -196,6 +224,14 @@ void DND_CHARACTER::print_languages()
 	for ( auto lang : m_languages )
 	{
 		print( DND_CHARACTER_UTILITIES::get_string_from_DND_LANGUAGE( lang ) );
+	}
+}
+
+void DND_CHARACTER::print_tool_proficiencies()
+{
+	for ( auto tool : m_tool_profs )
+	{
+		print( DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL( tool ) );
 	}
 }
 
@@ -231,8 +267,8 @@ void DND_CHARACTER::update_skills()
 				is_proficient = true;
 			}
 		}
-		auto skill = (DND_SKILL_TYPE)skill_index;
-		auto new_character_skill = new CHARACTER_SKILL( skill, DND_CHARACTER_UTILITIES::get_ABILITY_SORE_TYPE_from_DND_SKILL_TYPE( skill ), is_proficient, *this );
+		auto skill = (DND_SKILL)skill_index;
+		auto new_character_skill = new CHARACTER_SKILL( skill, DND_CHARACTER_UTILITIES::get_ABILITY_SORE_TYPE_from_DND_SKILL( skill ), is_proficient, *this );
 
 		m_skills.insert( std::make_pair( skill, new_character_skill ) );
 	}
@@ -241,12 +277,18 @@ void DND_CHARACTER::update_skills()
 void DND_CHARACTER::print_skills()
 {
 	const std::string border = "*****************";
-
 	std::cout << "Character Skills " << std::endl;
 	std::cout << border << std::endl;
 	for ( auto it = m_skills.begin(); it != m_skills.end(); ++it )
 	{
-		std::cout << DND_CHARACTER_UTILITIES::get_string_from_DND_SKILL_TYPE( it->first ) << " = " << std::to_string( it->second->m_skill_value ) << std::endl;
+		if ( it->second->m_is_proficient )
+		{
+			print( DND_CHARACTER_UTILITIES::get_string_from_DND_SKILL( it->first ), " = ", it->second->m_skill_value, " *p" );
+		}
+		else
+		{
+			print( DND_CHARACTER_UTILITIES::get_string_from_DND_SKILL( it->first ), " = ", it->second->m_skill_value );
+		}
 	}
 	std::cout << border << std::endl;
 }
@@ -276,7 +318,6 @@ void DND_CHARACTER::print_character_info()
 	print( "Character Prof Bonus = ", m_proficiency_bonus );
 	print( "Character Armour Class = ", m_armour_class );
 	print( "Character Passive Perception = ", m_passive_perception );
-	print();
 	print( "Character Strength = ", m_strength );
 	print( "Character Dexterity = ", m_dexterity );
 	print( "Character Constitution = ", m_constitution );
@@ -284,13 +325,12 @@ void DND_CHARACTER::print_character_info()
 	print( "Character Wisdom = ", m_wisdom );
 	print( "Character Charisma = ", m_charisma );
 	print_saving_throws();
-	print();
 	print_skills();
 	print_hit_dice();
-	print();
+	print( "*****************" );
 	print( "Other Proficiencies & Languages" );
 	print_languages();
-
+	print_tool_proficiencies();
 	print( border );
 	print( border );
 }
@@ -325,7 +365,7 @@ u_int DND_CHARACTER::get_ability_value_from_DND_ABILITY_SCORE_TYPES( ABILITY_SCO
 	return value;
 }
 
-std::vector< DND_SKILL_TYPE > DND_CHARACTER::get_skill_proficiencys()
+std::vector< DND_SKILL > DND_CHARACTER::get_skill_proficiencys()
 {
 	return m_skills_proficient_in;
 }
@@ -397,7 +437,7 @@ void DND_CHARACTER::SAVING_THROWS::print_saving_throws()
 	std::cout << "Charisma throw = " << std::to_string( m_charisma_throw ) << std::endl;
 }
 
-DND_CHARACTER::CHARACTER_SKILL::CHARACTER_SKILL( DND_SKILL_TYPE skill_type, ABILITY_SCORE_TYPES ability_base, bool is_prof, DND_CHARACTER &character )
+DND_CHARACTER::CHARACTER_SKILL::CHARACTER_SKILL( DND_SKILL skill_type, ABILITY_SCORE_TYPES ability_base, bool is_prof, DND_CHARACTER &character )
 {
 	m_skill_name = skill_type;
 	m_ability_dependant_on = ability_base;

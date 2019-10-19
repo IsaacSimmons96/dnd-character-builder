@@ -17,7 +17,6 @@ void ask_for_input( string question, string& value )
 	lower_string( value );
 }
 
-
 void ask_for_input_no_lowercasing( string question, string& value )
 {
 	std::cout << question;
@@ -54,5 +53,25 @@ void print( string input, string input2 )
 
 void print( string input, int input2 )
 {
-	std::cout << input << std::to_string(input2) << std::endl;
+	std::cout << input << std::to_string( input2 ) << std::endl;
+}
+
+void print( string input, string input2, int input3 )
+{
+	std::cout << input << input2 << std::to_string( input3 ) << std::endl;
+}
+
+void print( string input, string input2, string input3 )
+{
+	std::cout << input << input2 << input3 << std::endl;
+}
+
+void print( string input, string input2, string input3, string input4 )
+{
+	std::cout << input << input2 << input3 << input4 << std::endl;
+}
+
+void print( string input, string input2, int input3, string input4 )
+{
+	std::cout << input << input2 << std::to_string( input3 ) << input4 << std::endl;
 }

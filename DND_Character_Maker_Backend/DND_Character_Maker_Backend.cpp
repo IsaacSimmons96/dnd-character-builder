@@ -59,8 +59,26 @@ int main()
 
 	while ( !entered_all_skill_profs )
 	{
+		print( "type 'info' for list of skills." );
 		ask_for_input( "Add a Skill Proficiency: ", temp );
-		character.add_skill_proficiency( DND_CHARACTER_UTILITIES::get_DND_SKILL_from_string( temp ) );
+		if ( temp == "info" )
+		{
+			for ( char i = 0; i < DND_SKILL::INVALID; i++ )
+			{
+				print( DND_CHARACTER_UTILITIES::get_string_from_DND_SKILL( (DND_SKILL)i ) );
+			}
+			continue;
+		}
+
+		if ( DND_CHARACTER_UTILITIES::get_DND_SKILL_from_string( temp ) != DND_SKILL::INVALID )
+		{
+			character.add_skill_proficiency( DND_CHARACTER_UTILITIES::get_DND_SKILL_from_string( temp ) );
+		}
+		else
+		{
+			print( "Invalid skill entered please try again." );
+			continue;
+		}
 
 		ask_for_input( "Finished Adding Skill Proficiencys? (yes/no):", temp );
 		if ( temp == "yes" || temp == "y" )

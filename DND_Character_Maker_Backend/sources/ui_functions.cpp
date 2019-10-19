@@ -53,7 +53,7 @@ void UI_FUNCTION::select_character_race( const DND_CHARACTER& character, DND_RAC
 	//}
 }
 
-void UI_FUNCTION::select_character_skill_proficiency( const DND_CHARACTER& character, DND_SKILL_TYPE skill )
+void UI_FUNCTION::select_character_skill_proficiency( const DND_CHARACTER& character, DND_SKILL skill )
 {
 }
 

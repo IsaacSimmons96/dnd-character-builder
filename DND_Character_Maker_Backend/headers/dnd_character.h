@@ -12,9 +12,9 @@ class DND_CHARACTER
 
 	struct CHARACTER_SKILL
 	{
-		CHARACTER_SKILL( DND_SKILL_TYPE skill_type, ABILITY_SCORE_TYPES ability_base, bool is_prof, DND_CHARACTER &character );
+		CHARACTER_SKILL( DND_SKILL skill_type, ABILITY_SCORE_TYPES ability_base, bool is_prof, DND_CHARACTER &character );
 		ABILITY_SCORE_TYPES m_ability_dependant_on{ ABILITY_SCORE_TYPES::INVALID };
-		DND_SKILL_TYPE m_skill_name{ DND_SKILL_TYPE::INVALID };
+		DND_SKILL m_skill_name{ DND_SKILL::INVALID };
 		short int m_skill_value{ 0 };
 		bool m_is_proficient{ false };
 	};
@@ -69,7 +69,7 @@ public:
 	void set_wisdom( u_int number_in )					{ m_wisdom += number_in; set_passive_perception(); };
 	void set_charisma( u_int number_in )				{ m_charisma += number_in; };
 
-	void add_skill_proficiency( DND_SKILL_TYPE skill );
+	void add_skill_proficiency( DND_SKILL skill );
 	void add_language( DND_LANGUAGE lang );
 	void add_tool_proficiency( DND_TOOL tool );
 	void update_hit_dice( DND_DICE die, u_int number );
@@ -95,7 +95,7 @@ public:
 	u_int get_wisdom()									{ return m_wisdom; };
 	u_int get_charisma()								{ return m_charisma; };
 	u_int get_ability_value_from_DND_ABILITY_SCORE_TYPES( ABILITY_SCORE_TYPES ability_type );
-	std::vector< DND_SKILL_TYPE > get_skill_proficiencys();
+	std::vector< DND_SKILL > get_skill_proficiencys();
 
 	//prints
 	void print_saving_throws() { m_saving_throws.print_saving_throws(); };
@@ -103,6 +103,7 @@ public:
 	void print_skills();
 	void print_hit_dice();
 	void print_languages();
+	void print_tool_proficiencies();
 
 private:
 	void apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& rtm, bool has_applied_race );
@@ -129,9 +130,9 @@ private:
 	DND_SIZE		m_size{ DND_SIZE::INVALID };
 
 	SAVING_THROWS	m_saving_throws;
-	std::map< DND_SKILL_TYPE, CHARACTER_SKILL* > m_skills;
+	std::map< DND_SKILL, CHARACTER_SKILL* > m_skills;
 	std::map< DND_DICE, u_int > m_hit_dice;
-	std::vector< DND_SKILL_TYPE > m_skills_proficient_in;
+	std::vector< DND_SKILL > m_skills_proficient_in;
 	std::vector<DND_LANGUAGE> m_languages;
 	std::vector<TRAIT_SPELL*> m_trait_spells;
 	std::vector<DND_TOOL> m_tool_profs;

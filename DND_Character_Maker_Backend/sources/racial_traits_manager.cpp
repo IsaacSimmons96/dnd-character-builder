@@ -136,12 +136,7 @@ RACIAL_TRAITS* RACIAL_TRAITS_MANAGER::get_race_traits( DND_RACE race )
 		read_in_race_traits();
 	}
 
-	for ( auto it = m_race_traits.begin(); it != m_race_traits.end(); ++it )
-	{
-		if ( it->first == race )
-		{
-			return it->second;
-		}
-	}
-	return nullptr;
+	RACIAL_TRAITS* racial_traits = nullptr;
+	racial_traits = m_race_traits.find( race )->second;
+	return racial_traits;
 }
