@@ -6,10 +6,10 @@
 #include "dice_functions.h"
 #include "racial_traits_manager.h"
 
+class TRAIT;
+
 class DND_CHARACTER
 {
-	class TRAIT_SPELL;
-
 	struct CHARACTER_SKILL
 	{
 		CHARACTER_SKILL( DND_SKILL skill_type, ABILITY_SCORE_TYPES ability_base, bool is_prof, DND_CHARACTER &character );
@@ -48,7 +48,7 @@ public:
 	void set_alignment( DND_ALIGNMENT alignment_in )	{ m_alignment = alignment_in; };
 	void set_level( u_int number_in )					{ m_level = number_in; set_proficiency_bonus_from_level( m_level ); };
 	void set_exp( u_int number_in )						{ m_exp = number_in; };
-	void set_initiative_modifier( u_int number_in )		{ m_initiative_modifier = number_in; };
+	void set_initiative_modifier();
 
 	// other stats setters
 	void set_hit_points( u_int number_in )				{ m_hit_points = number_in; };
@@ -63,7 +63,7 @@ public:
 
 	// character stats setters
 	void set_strength( u_int number_in )				{ m_strength += number_in; };
-	void set_dexterity( u_int number_in )				{ m_dexterity += number_in; };
+	void set_dexterity( u_int number_in )				{ m_dexterity += number_in; set_initiative_modifier(); };
 	void set_constitution( u_int number_in )			{ m_constitution += number_in; };
 	void set_intelligence( u_int number_in )			{ m_intelligence += number_in; };
 	void set_wisdom( u_int number_in )					{ m_wisdom += number_in; set_passive_perception(); };
@@ -72,6 +72,7 @@ public:
 	void add_skill_proficiency( DND_SKILL skill );
 	void add_language( DND_LANGUAGE lang );
 	void add_tool_proficiency( DND_TOOL tool );
+	void add_trait( TRAIT* trait );
 	void update_hit_dice( DND_DICE die, u_int number );
 
 	// main information getters
@@ -104,6 +105,7 @@ public:
 	void print_hit_dice();
 	void print_languages();
 	void print_tool_proficiencies();
+	void print_traits();
 
 private:
 	void apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& rtm, bool has_applied_race );
@@ -134,7 +136,7 @@ private:
 	std::map< DND_DICE, u_int > m_hit_dice;
 	std::vector< DND_SKILL > m_skills_proficient_in;
 	std::vector<DND_LANGUAGE> m_languages;
-	std::vector<TRAIT_SPELL*> m_trait_spells;
+	std::vector<TRAIT*> m_traits;
 	std::vector<DND_TOOL> m_tool_profs;
 
 	// character stats

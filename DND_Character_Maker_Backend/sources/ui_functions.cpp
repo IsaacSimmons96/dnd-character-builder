@@ -46,10 +46,10 @@ void UI_FUNCTION::select_character_race( const DND_CHARACTER& character, DND_RAC
 
 	//m_speed = traits->get_speed();
 
-	//auto trait_spells = traits->get_trait_spells();
-	//for ( TRAIT_SPELL* t_spell : trait_spells )
+	//auto traits = traits->get_traits();
+	//for ( TRAIT* t_spell : traits )
 	//{
-	//	m_trait_spells.push_back( t_spell );
+	//	m_traits.push_back( t_spell );
 	//}
 }
 

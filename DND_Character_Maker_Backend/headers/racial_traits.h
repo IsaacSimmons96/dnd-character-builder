@@ -10,7 +10,7 @@ class RACIAL_TRAITS
 {
 public:
 	RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string align_desc, DND_SIZE size, std::vector<DND_LANGUAGE> langs, std::vector<DND_TOOL> tool_profs,
-				   std::vector<TRAIT_SPELL*> trait_spells, std::vector<ABILITY_SCORE_BONUS*> ability_bonuses, bool need_to_pick_subrace, DND_RACE main_race = DND_RACE::INVALID );
+				   std::vector<TRAIT*> traits, std::vector<ABILITY_SCORE_BONUS*> ability_bonuses, bool need_to_pick_subrace, DND_RACE main_race = DND_RACE::INVALID );
 
 	~RACIAL_TRAITS();
 
@@ -22,7 +22,8 @@ public:
 	DND_SIZE							get_size() { return m_race_size; };
 	std::vector<DND_LANGUAGE>			get_languages() { return m_race_languages; };
 	std::vector<DND_TOOL>				get_tool_proficiencys() { return m_tool_proficiency; };
-	std::vector<TRAIT_SPELL*>			get_trait_spells() { return m_trait_spells; };
+	std::vector<TRAIT*>					get_traits() { return m_traits; };
+	std::vector<TRAIT*>					get_sheet_traits() { return m_sheet_traits; };
 	std::vector<ABILITY_SCORE_BONUS*>	get_ability_score_bonuses() { return m_ability_score_bonuses; };
 	bool								is_subrace() { return m_main_race != DND_RACE::INVALID ? true : false; }
 	bool								must_pick_subrace() { return m_must_pick_subrace; }
@@ -43,6 +44,7 @@ private:
 
 	std::vector<ABILITY_SCORE_BONUS*>	m_ability_score_bonuses;
 	std::vector<DND_LANGUAGE>			m_race_languages;
-	std::vector<DND_TOOL>	m_tool_proficiency;
-	std::vector<TRAIT_SPELL*>			m_trait_spells;
+	std::vector<DND_TOOL>				m_tool_proficiency;
+	std::vector<TRAIT*>					m_traits;
+	std::vector<TRAIT*>					m_sheet_traits; // traits a person would actually write on their sheet
 };

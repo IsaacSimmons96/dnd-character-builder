@@ -1,9 +1,9 @@
+#include "..\headers\dnd_character_utilities.h"
 #include "..\headers\racial_traits.h"
 #include <iostream>
-#include "..\headers\dnd_character_utilities.h"
 
 RACIAL_TRAITS::RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string align_desc, DND_SIZE size, std::vector<DND_LANGUAGE> langs, std::vector<DND_TOOL> tool_profs,
-							  std::vector<TRAIT_SPELL*> trait_spells, std::vector<ABILITY_SCORE_BONUS*> ability_bonuses, bool need_to_pick_subrace, DND_RACE main_race /*= DND_RACE::INVALID*/ )
+							  std::vector<TRAIT*> traits, std::vector<ABILITY_SCORE_BONUS*> ability_bonuses, bool need_to_pick_subrace, DND_RACE main_race /*= DND_RACE::INVALID*/ )
 {
 	m_race = race;
 	m_typical_age = age;
@@ -18,9 +18,13 @@ RACIAL_TRAITS::RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string alig
 	{
 		m_tool_proficiency.push_back( prof );
 	}
-	for ( auto spell : trait_spells )
+	for ( auto trait : traits )
 	{
-		m_trait_spells.push_back( spell );
+		m_traits.push_back( trait );
+		if ( !trait->is_read_only() )
+		{
+			m_sheet_traits.push_back( trait );
+		}
 	}
 	for ( auto bonus : ability_bonuses )
 	{
@@ -28,7 +32,6 @@ RACIAL_TRAITS::RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string alig
 	}
 
 	m_must_pick_subrace = need_to_pick_subrace;
-
 	m_main_race = main_race;
 }
 
@@ -63,7 +66,7 @@ void RACIAL_TRAITS::print_racial_traits()
 		counter++;
 	}
 	counter = 1;
-	for ( auto spell : m_trait_spells )
+	for ( auto spell : m_traits )
 	{
 		std::cout << "Race Trait " << std::to_string( counter ) << " = " << spell->get_spell_name() << std::endl;
 		std::cout << spell->get_spell_description() << std::endl;

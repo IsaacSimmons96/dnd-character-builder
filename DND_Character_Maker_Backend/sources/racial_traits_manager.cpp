@@ -13,7 +13,7 @@ RACIAL_TRAITS_MANAGER::~RACIAL_TRAITS_MANAGER()
 	m_race_traits.clear();
 }
 
-RACIAL_TRAITS_MANAGER::RACIAL_TRAITS_MANAGER( TRAIT_SPELL_MANAGER& tsm )
+RACIAL_TRAITS_MANAGER::RACIAL_TRAITS_MANAGER( TRAIT_MANAGER& tsm )
 {
 	m_tsm = &tsm;
 }
@@ -92,10 +92,10 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 			bonuses.push_back( bonus );
 		}
 
-		std::vector<TRAIT_SPELL*> spells;
+		std::vector<TRAIT*> spells;
 		while ( getline( ss, temp, ';' ) )
 		{
-			TRAIT_SPELL* spell = m_tsm->get_trait_spell( temp );
+			TRAIT* spell = m_tsm->get_trait_spell( temp );
 			if ( spell )
 			{
 				spells.push_back( spell );

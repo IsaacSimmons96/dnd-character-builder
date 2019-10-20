@@ -1,7 +1,9 @@
 #include "..\headers\dnd_character.h"
 #include "..\headers\dnd_character_utilities.h"
 #include "..\headers\generic_utilities.h"
+#include "..\headers\trait_spell.h"
 #include <assert.h>
+#include <cassert>
 #include <iostream>
 
 DND_CHARACTER::~DND_CHARACTER()
@@ -60,6 +62,12 @@ void DND_CHARACTER::apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& r
 		default:
 			break;
 		}
+	}
+
+	const auto racial_traits = race_traits->get_traits();
+	for ( auto trait : racial_traits )
+	{
+		add_trait( trait );
 	}
 
 	const auto tool_profs = race_traits->get_tool_proficiencys();
@@ -150,8 +158,20 @@ void DND_CHARACTER::apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& r
 
 void DND_CHARACTER::set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm )
 {
-	m_race = race_in;
-	apply_racial_traits( m_race, rtm, false );
+	if ( race_in != DND_RACE::INVALID )
+	{
+		m_race = race_in;
+		apply_racial_traits( m_race, rtm, false );
+	}
+	else
+	{
+		assert( race_in != race_in );
+	}
+}
+
+void DND_CHARACTER::set_initiative_modifier()
+{
+	m_initiative_modifier = DND_CHARACTER_UTILITIES::get_ability_score_modifier( m_dexterity );
 }
 
 void DND_CHARACTER::set_passive_perception()
@@ -235,9 +255,33 @@ void DND_CHARACTER::print_tool_proficiencies()
 	}
 }
 
+void DND_CHARACTER::print_traits()
+{
+	for ( auto trait : m_traits )
+	{
+		print( trait->get_spell_name() );
+	}
+}
+
 void DND_CHARACTER::add_tool_proficiency( DND_TOOL tool )
 {
 	m_tool_profs.push_back( tool );
+}
+
+void DND_CHARACTER::add_trait( TRAIT * trait )
+{
+	bool should_add = true;
+	for ( auto character_trait : m_traits )
+	{
+		if ( character_trait == trait )
+		{
+			should_add = false;
+		}
+	}
+	if ( should_add )
+	{
+		m_traits.push_back( trait );
+	}
 }
 
 void DND_CHARACTER::update_hit_dice( DND_DICE die, u_int number )
@@ -314,9 +358,13 @@ void DND_CHARACTER::print_character_info()
 	print( "Character Background = ", DND_CHARACTER_UTILITIES::get_string_from_DND_BACKGROUND( m_background ) );
 	print( "Character Race = ", DND_CHARACTER_UTILITIES::get_string_from_DND_RACE( m_race ) );
 	print( "Character Alignment = ", DND_CHARACTER_UTILITIES::get_string_from_DND_ALIGNMENT( m_alignment ) );
-	print( "Character Hit Points = ", m_hit_points );
 	print( "Character Prof Bonus = ", m_proficiency_bonus );
+	print( "Character Hit Points = ", m_hit_points );
+	print_hit_dice();
+	print( "Character Speed = ", m_speed );
+	print( "Character Size = ", DND_CHARACTER_UTILITIES::get_string_from_DND_SIZE( m_size ) );
 	print( "Character Armour Class = ", m_armour_class );
+	print( "Character Initiative Bonus = ", m_initiative_modifier );
 	print( "Character Passive Perception = ", m_passive_perception );
 	print( "Character Strength = ", m_strength );
 	print( "Character Dexterity = ", m_dexterity );
@@ -326,11 +374,13 @@ void DND_CHARACTER::print_character_info()
 	print( "Character Charisma = ", m_charisma );
 	print_saving_throws();
 	print_skills();
-	print_hit_dice();
 	print( "*****************" );
 	print( "Other Proficiencies & Languages" );
 	print_languages();
 	print_tool_proficiencies();
+	print( "*****************" );
+	print( "Features & Traits" );
+	print_traits();
 	print( border );
 	print( border );
 }

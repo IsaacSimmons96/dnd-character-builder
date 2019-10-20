@@ -5,16 +5,16 @@
 #include <map>
 #include <sstream>
 
-TRAIT_SPELL_MANAGER::~TRAIT_SPELL_MANAGER()
+TRAIT_MANAGER::~TRAIT_MANAGER()
 {
-	for ( auto it = m_trait_spells.begin(); it != m_trait_spells.end(); ++it )
+	for ( auto it = m_traits.begin(); it != m_traits.end(); ++it )
 	{
 		delete it->second;
 	}
-	m_trait_spells.clear();
+	m_traits.clear();
 }
 
-void TRAIT_SPELL_MANAGER::read_in_trait_spells()
+void TRAIT_MANAGER::read_in_traits()
 {
 	std::ifstream file( filename );
 	string value;
@@ -35,32 +35,32 @@ void TRAIT_SPELL_MANAGER::read_in_trait_spells()
 			read_only = true;
 		}
 
-		TRAIT_SPELL* spell = read_only == true ? new TRAIT_SPELL( name, desc, read_only ) : new TRAIT_SPELL( name, desc, false );
-		m_trait_spells.insert( std::make_pair( spell->get_spell_name(), spell ) );
+		TRAIT* spell = read_only == true ? new TRAIT( name, desc, read_only ) : new TRAIT( name, desc, false );
+		m_traits.insert( std::make_pair( spell->get_spell_name(), spell ) );
 		ss.clear();
 	}
 }
 
-void TRAIT_SPELL_MANAGER::print_all_trait_spells()
+void TRAIT_MANAGER::print_all_traits()
 {
-	if ( m_trait_spells.size() <= 0 )
+	if ( m_traits.size() <= 0 )
 	{
-		read_in_trait_spells();
+		read_in_traits();
 	}
-	for ( auto it = m_trait_spells.begin(); it != m_trait_spells.end(); ++it )
+	for ( auto it = m_traits.begin(); it != m_traits.end(); ++it )
 	{
 		std::cout << it->second->get_spell_name() << std::endl;
 		std::cout << it->second->get_spell_description() << "\n" << std::endl;
 	}
 }
 
-TRAIT_SPELL* TRAIT_SPELL_MANAGER::get_trait_spell( string name )
+TRAIT* TRAIT_MANAGER::get_trait_spell( string name )
 {
-	if ( m_trait_spells.size() <= 0 )
+	if ( m_traits.size() <= 0 )
 	{
-		read_in_trait_spells();
+		read_in_traits();
 	}
-	for ( auto it = m_trait_spells.begin(); it != m_trait_spells.end(); ++it )
+	for ( auto it = m_traits.begin(); it != m_traits.end(); ++it )
 	{
 		if ( it->first == name )
 		{
