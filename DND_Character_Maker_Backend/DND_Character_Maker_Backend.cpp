@@ -49,14 +49,14 @@ int main()
 #endif //SUPER_DEBUG
 
 #if defined(DEBUG) || defined(SUPER_DEBUG)
-	character.set_alignment(DND_ALIGNMENT::CHAOTIC_NEUTRAL );
+	character.set_alignment( DND_ALIGNMENT::CHAOTIC_NEUTRAL );
 #else
 	ask_for_input( character_name_prefix + "'s Alignment:", temp );
 	character.set_alignment( DND_CHARACTER_UTILITIES::get_DND_ALIGNMENT_from_string( temp ) );
 #endif// DEBUG || SUPER_DEBUG
 
 #if defined(DEBUG) || defined(SUPER_DEBUG)
-	character.set_strength( roll_dice( DND_DICE::D20) );
+	character.set_strength( roll_dice( DND_DICE::D20 ) );
 	character.set_dexterity( roll_dice( DND_DICE::D20 ) );
 	character.set_constitution( roll_dice( DND_DICE::D20 ) );
 	character.set_intelligence( roll_dice( DND_DICE::D20 ) );
