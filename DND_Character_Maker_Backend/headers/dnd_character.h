@@ -1,12 +1,14 @@
 #pragma once
 #include "character_enums.h"
+#include "combat_and_item_enums.h"
+#include "dice_functions.h"
+#include "racial_traits_manager.h"
 #include "typedefs.h"
 #include <map>
 #include <vector>
-#include "dice_functions.h"
-#include "racial_traits_manager.h"
 
 class TRAIT;
+class WEAPON;
 
 class DND_CHARACTER
 {
@@ -42,7 +44,7 @@ public:
 	void set_player_name( std::string name_in )			{ m_player_name = name_in; };
 
 	// main information setters
-	void set_character_class( DND_CLASS class_in )		{ m_class = class_in; };
+	void set_character_class( DND_CLASS class_in );
 	void set_background( DND_BACKGROUND background_in ) { m_background = background_in; };
 	void set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm );
 	void set_alignment( DND_ALIGNMENT alignment_in )	{ m_alignment = alignment_in; };
@@ -70,6 +72,9 @@ public:
 	void set_charisma( u_int number_in )				{ m_charisma += number_in; };
 
 	void add_skill_proficiency( DND_SKILL skill );
+	void add_general_weapon_proficiency( WEAPON_PROFICIENCY weapon );
+	void add_specific_weapon_proficiency( WEAPON* weapon );
+	void add_armor_proficiency( ARMOR_CATEGORY cat );
 	void add_language( DND_LANGUAGE lang );
 	void add_tool_proficiency( DND_TOOL tool );
 	void add_trait( TRAIT* trait );
@@ -105,6 +110,7 @@ public:
 	void print_hit_dice();
 	void print_languages();
 	void print_tool_proficiencies();
+	void print_weapon_and_armor_proficiencies();
 	void print_traits();
 
 private:
@@ -138,6 +144,9 @@ private:
 	std::vector<DND_LANGUAGE> m_languages;
 	std::vector<TRAIT*> m_traits;
 	std::vector<DND_TOOL> m_tool_profs;
+	std::vector<WEAPON*> m_weapon_profs;
+	std::vector<ARMOR_CATEGORY> m_armor_profs;
+	std::vector<WEAPON_PROFICIENCY> m_general_weapon_profs;
 
 	// character stats
 	u_int			m_strength{ 0 };

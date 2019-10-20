@@ -1,6 +1,8 @@
 #include "..\headers\dnd_character.h"
 #include "..\headers\dnd_character_utilities.h"
 #include "..\headers\generic_utilities.h"
+#include "..\headers\item_utilities.h"
+#include "..\headers\items.h"
 #include "..\headers\trait_spell.h"
 #include <assert.h>
 #include <cassert>
@@ -156,6 +158,13 @@ void DND_CHARACTER::apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& r
 	}
 }
 
+void DND_CHARACTER::set_character_class( DND_CLASS class_in )
+{
+	m_class = class_in;
+	m_general_weapon_profs = ITEM_AND_COMBAT_UTILITIES::get_general_weapon_profs_from_class( m_class );
+	m_armor_profs = ITEM_AND_COMBAT_UTILITIES::get_armor_profs_from_class( m_class );
+}
+
 void DND_CHARACTER::set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm )
 {
 	if ( race_in != DND_RACE::INVALID )
@@ -222,6 +231,57 @@ void DND_CHARACTER::add_skill_proficiency( DND_SKILL skill )
 	}
 }
 
+void DND_CHARACTER::add_specific_weapon_proficiency( WEAPON* weapon )
+{
+	bool add_weapon = true;
+	for ( auto weap : m_weapon_profs )
+	{
+		if ( weap == weapon )
+		{
+			add_weapon = false;
+		}
+	}
+
+	if ( add_weapon )
+	{
+		m_weapon_profs.push_back( weapon );
+	}
+}
+
+void DND_CHARACTER::add_armor_proficiency( ARMOR_CATEGORY cat )
+{
+	bool add_armor = true;
+	for ( auto armor : m_armor_profs )
+	{
+		if ( armor == cat )
+		{
+			add_armor = false;
+		}
+	}
+
+	if ( add_armor )
+	{
+		m_armor_profs.push_back( cat );
+	}
+}
+
+void DND_CHARACTER::add_general_weapon_proficiency( WEAPON_PROFICIENCY weapon )
+{
+	bool add_weapon = true;
+	for ( auto weap : m_general_weapon_profs )
+	{
+		if ( weap == weapon )
+		{
+			add_weapon = false;
+		}
+	}
+
+	if ( add_weapon )
+	{
+		m_general_weapon_profs.push_back( weapon );
+	}
+}
+
 void DND_CHARACTER::add_language( DND_LANGUAGE lang )
 {
 	bool add_lang = true;
@@ -252,6 +312,22 @@ void DND_CHARACTER::print_tool_proficiencies()
 	for ( auto tool : m_tool_profs )
 	{
 		print( DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL( tool ) );
+	}
+}
+
+void DND_CHARACTER::print_weapon_and_armor_proficiencies()
+{
+	for ( auto armor_prof : m_armor_profs )
+	{
+		print( ITEM_AND_COMBAT_UTILITIES::get_string_from_ARMOR_CATEGORY( armor_prof ) );
+	}
+	for ( auto general_weap_prof : m_general_weapon_profs )
+	{
+		print( ITEM_AND_COMBAT_UTILITIES::get_string_from_WEAPON_PROFICIENCY( general_weap_prof ) );
+	}
+	for ( auto weapon : m_weapon_profs )
+	{
+		print( weapon->get_name() );
 	}
 }
 
@@ -320,9 +396,9 @@ void DND_CHARACTER::update_skills()
 
 void DND_CHARACTER::print_skills()
 {
-	const std::string border = "*****************";
-	std::cout << "Character Skills " << std::endl;
-	std::cout << border << std::endl;
+	print( "*****************" );
+	print( "CHARACTER SKILLS" );
+	print( "*****************" );
 	for ( auto it = m_skills.begin(); it != m_skills.end(); ++it )
 	{
 		if ( it->second->m_is_proficient )
@@ -334,7 +410,6 @@ void DND_CHARACTER::print_skills()
 			print( DND_CHARACTER_UTILITIES::get_string_from_DND_SKILL( it->first ), " = ", it->second->m_skill_value );
 		}
 	}
-	std::cout << border << std::endl;
 }
 
 void DND_CHARACTER::print_hit_dice()
@@ -366,6 +441,9 @@ void DND_CHARACTER::print_character_info()
 	print( "Character Armour Class = ", m_armour_class );
 	print( "Character Initiative Bonus = ", m_initiative_modifier );
 	print( "Character Passive Perception = ", m_passive_perception );
+	print( "*****************" );
+	print( "STATS & SAVING THROWS" );
+	print( "*****************" );
 	print( "Character Strength = ", m_strength );
 	print( "Character Dexterity = ", m_dexterity );
 	print( "Character Constitution = ", m_constitution );
@@ -375,11 +453,14 @@ void DND_CHARACTER::print_character_info()
 	print_saving_throws();
 	print_skills();
 	print( "*****************" );
-	print( "Other Proficiencies & Languages" );
+	print( "OTHER PROFICIENCIES & LANGUAGES" );
+	print( "*****************" );
 	print_languages();
 	print_tool_proficiencies();
+	print_weapon_and_armor_proficiencies();
 	print( "*****************" );
-	print( "Features & Traits" );
+	print( "FEATURES & TRAITS" );
+	print( "*****************" );
 	print_traits();
 	print( border );
 	print( border );

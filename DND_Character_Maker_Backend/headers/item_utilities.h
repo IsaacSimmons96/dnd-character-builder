@@ -1,6 +1,8 @@
 #pragma once
-#include "typedefs.h"
+#include "character_enums.h"
 #include "combat_and_item_enums.h"
+#include "typedefs.h"
+#include <vector>
 
 class ITEM_AND_COMBAT_UTILITIES
 {
@@ -16,4 +18,7 @@ public:
 	static WEAPON_PROFICIENCY get_WEAPON_PROFICIENCY_from_string( string string_in );
 	static WEAPON_TYPE get_WEAPON_TYPE_from_string( string string_in );
 	static ARMOR_CATEGORY get_ARMOR_CATEGORY_from_string( string string_in );
+
+	static std::vector<WEAPON_PROFICIENCY> get_general_weapon_profs_from_class( DND_CLASS dnd_class );
+	static std::vector<ARMOR_CATEGORY> get_armor_profs_from_class( DND_CLASS dnd_class );
 };

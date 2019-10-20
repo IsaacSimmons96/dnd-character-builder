@@ -18,7 +18,9 @@ class ITEM_BASE
 {
 public:
 	ITEM_BASE( string name, u_int cost, u_int weight );
+
 	virtual void print_item() const = 0;
+	string get_name() const { return m_item_name; };
 
 protected:
 
@@ -34,6 +36,7 @@ class ITEM : ITEM_BASE
 public:
 	ITEM( string name, u_int cost, u_int weight );
 	virtual void print_item() const override;
+	string get_name() const { return m_item_name; };
 };
 
 class WEAPON : ITEM_BASE
@@ -45,6 +48,7 @@ public:
 			u_int min_range, u_int max_range );
 
 	void print_item() const override;
+	string get_name() const { return m_item_name; };
 
 private:
 	dmg::DAMAGE m_damage;
@@ -62,6 +66,7 @@ public:
 	ARMOR( string name, u_int cost, u_int weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, u_int ac, u_int strength_needed );
 
 	void print_item() const override;
+	string get_name() const { return m_item_name; };
 
 private:
 	ARMOR_CATEGORY m_armor_type{ ARMOR_CATEGORY::INVALID };

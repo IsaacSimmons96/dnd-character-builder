@@ -230,10 +230,10 @@ string ITEM_AND_COMBAT_UTILITIES::get_string_from_WEAPON_PROFICIENCY( WEAPON_PRO
 	switch ( type_in )
 	{
 	case WEAPON_PROFICIENCY::SIMPLE:
-		return_string = "Simple";
+		return_string = "Simple Weapons";
 		break;
 	case WEAPON_PROFICIENCY::MARTIAL:
-		return_string = "Martial";
+		return_string = "Martial Weapons";
 		break;
 	default:
 		return_string = "INVALID";
@@ -289,6 +289,56 @@ ARMOR_CATEGORY ITEM_AND_COMBAT_UTILITIES::get_ARMOR_CATEGORY_from_string( string
 	return return_cat;
 }
 
+std::vector<WEAPON_PROFICIENCY> ITEM_AND_COMBAT_UTILITIES::get_general_weapon_profs_from_class( DND_CLASS dnd_class )
+{
+	std::vector<WEAPON_PROFICIENCY> return_vector;
+	switch ( dnd_class )
+	{
+	case DND_CLASS::BARBARIAN:
+	case DND_CLASS::FIGHTER:
+	case DND_CLASS::PALADIN:
+	case DND_CLASS::RANGER:
+		return_vector = std::vector<WEAPON_PROFICIENCY>{ WEAPON_PROFICIENCY::SIMPLE, WEAPON_PROFICIENCY::MARTIAL };
+		break;
+	case DND_CLASS::BARD:
+	case DND_CLASS::CLERIC:
+	case DND_CLASS::MONK:
+	case DND_CLASS::ROGUE:
+	case DND_CLASS::WARLOCK:
+		return_vector = std::vector<WEAPON_PROFICIENCY>{ WEAPON_PROFICIENCY::SIMPLE };
+		break;
+	default:
+		break;
+	}
+	return return_vector;
+}
+
+std::vector<ARMOR_CATEGORY> ITEM_AND_COMBAT_UTILITIES::get_armor_profs_from_class( DND_CLASS dnd_class )
+{
+	std::vector<ARMOR_CATEGORY> return_vector;
+	switch ( dnd_class )
+	{
+	case DND_CLASS::BARBARIAN:
+	case DND_CLASS::CLERIC:
+	case DND_CLASS::DRUID:
+	case DND_CLASS::RANGER:
+		return_vector = std::vector<ARMOR_CATEGORY>{ ARMOR_CATEGORY::LIGHT, ARMOR_CATEGORY::MEDIUM, ARMOR_CATEGORY::SHIELD };
+		break;
+	case DND_CLASS::BARD:
+	case DND_CLASS::ROGUE:
+	case DND_CLASS::WARLOCK:
+		return_vector = std::vector<ARMOR_CATEGORY>{ ARMOR_CATEGORY::LIGHT };
+		break;
+	case DND_CLASS::FIGHTER:
+	case DND_CLASS::PALADIN:
+		return_vector = std::vector<ARMOR_CATEGORY>{ ARMOR_CATEGORY::LIGHT, ARMOR_CATEGORY::MEDIUM, ARMOR_CATEGORY::HEAVY, ARMOR_CATEGORY::SHIELD };
+		break;
+	default:
+		break;
+	}
+	return return_vector;
+}
+
 string ITEM_AND_COMBAT_UTILITIES::get_string_from_ARMOR_CATEGORY( ARMOR_CATEGORY type_in )
 {
 	string return_string;
@@ -296,16 +346,16 @@ string ITEM_AND_COMBAT_UTILITIES::get_string_from_ARMOR_CATEGORY( ARMOR_CATEGORY
 	switch ( type_in )
 	{
 	case ARMOR_CATEGORY::LIGHT:
-		return_string = "Light";
+		return_string = "Light Armor";
 		break;
 	case ARMOR_CATEGORY::MEDIUM:
-		return_string = "Medium";
+		return_string = "Medium Armor";
 		break;
 	case ARMOR_CATEGORY::HEAVY:
-		return_string = "Heavy";
+		return_string = "Heavy Armor";
 		break;
 	case ARMOR_CATEGORY::SHIELD:
-		return_string = "Shield";
+		return_string = "Shields";
 		break;
 	default:
 		return_string = "INVALID";

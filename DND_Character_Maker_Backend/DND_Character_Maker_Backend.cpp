@@ -23,7 +23,7 @@ int main()
 #if defined(DEBUG) || defined(SUPER_DEBUG)
 	character.set_player_name( "Testman" );
 	character.set_character_name( "Jonbar Ironhammer" );
-	character.set_character_class( DND_CLASS::BARD );
+	character.set_character_class( DND_CLASS::PALADIN );
 	const string character_name_prefix = "Enter " + character.get_name();
 #else
 	string temp;
@@ -82,6 +82,7 @@ int main()
 	character.add_skill_proficiency( DND_SKILL::ARCANA );
 	character.add_skill_proficiency( DND_SKILL::NATURE );
 	character.add_skill_proficiency( DND_SKILL::INTIMIDATION );
+	character.update_skills();
 #else
 	bool entered_all_skill_profs = false;
 
