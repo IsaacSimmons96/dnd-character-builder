@@ -52,12 +52,12 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 		const DND_RACE race = DND_CHARACTER_UTILITIES::get_DND_RACE_from_string( temp );
 		getline( ss, temp, ';' );
 		const DND_RACE main_race = DND_CHARACTER_UTILITIES::get_DND_RACE_from_string( temp );
-		getline( ss, temp, ';' );
-		bool need_to_pick_subrace = false;
-		if ( temp == "true" )
+		//getline( ss, temp, ';' );
+		bool need_to_pick_subrace = main_race == DND_RACE::INVALID;
+		/*if ( temp == "true" )
 		{
 			need_to_pick_subrace = true;
-		}
+		}*/
 		getline( ss, temp, ';' );
 		convert_string_to_int();
 		const u_int age = uint_temp;

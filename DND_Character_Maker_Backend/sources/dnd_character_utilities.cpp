@@ -84,6 +84,9 @@ std::string DND_CHARACTER_UTILITIES::get_string_from_DND_RACE( DND_RACE dnd_race
 	case DND_RACE::MOUNTAIN_DWARF:
 		string_out = "mountain dwarf";
 		break;
+	case DND_RACE::ELF:
+		string_out = "elf";
+		break;
 	case DND_RACE::HIGH_ELF:
 		string_out = "high elf";
 		break;
@@ -95,6 +98,12 @@ std::string DND_CHARACTER_UTILITIES::get_string_from_DND_RACE( DND_RACE dnd_race
 		break;
 	case DND_RACE::HALFLING:
 		string_out = "halfling";
+		break;
+	case DND_RACE::STOUT:
+		string_out = "stout halfling";
+		break;
+	case DND_RACE::LIGHTFOOT:
+		string_out = "lightfoot halfling";
 		break;
 	case DND_RACE::DRAGONBORN:
 		string_out = "dragonborn";
@@ -365,7 +374,7 @@ string DND_CHARACTER_UTILITIES::get_string_from_DND_TOOL( DND_TOOL dnd_tool )
 	case DND_TOOL::WOODCARVERS_TOOLS:
 		string_out = "Woodcarver's Tools";
 		break;
-	case DND_TOOL::INAVLID:
+	case DND_TOOL::INVALID:
 		string_out = "INVALID";
 		break;
 	default:
@@ -576,6 +585,18 @@ DND_RACE DND_CHARACTER_UTILITIES::get_DND_RACE_from_string( string race )
 	{
 		return  DND_RACE::HALFLING;
 	}
+	else if ( race == get_string_from_DND_RACE( DND_RACE::STOUT ) )
+	{
+		return  DND_RACE::STOUT;
+	}
+	else if ( race == get_string_from_DND_RACE( DND_RACE::LIGHTFOOT ) )
+	{
+		return  DND_RACE::LIGHTFOOT;
+	}
+	else if ( race == get_string_from_DND_RACE( DND_RACE::ELF ) )
+	{
+		return  DND_RACE::ELF;
+	}
 	else if ( race == get_string_from_DND_RACE( DND_RACE::HIGH_ELF ) )
 	{
 		return  DND_RACE::HIGH_ELF;
@@ -660,7 +681,7 @@ DND_TOOL DND_CHARACTER_UTILITIES::get_DND_TOOL_from_string( string tool_prof )
 	{
 		return  DND_TOOL::SMITHS_TOOLS;
 	}
-	return  DND_TOOL::INAVLID;
+	return  DND_TOOL::INVALID;
 }
 
 DND_SIZE DND_CHARACTER_UTILITIES::get_DND_SIZE_from_string( string size_string )

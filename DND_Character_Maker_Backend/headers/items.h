@@ -31,15 +31,14 @@ protected:
 	u_int m_weight;
 };
 
-class ITEM : ITEM_BASE
+class ITEM : public ITEM_BASE
 {
 public:
 	ITEM( string name, u_int cost, u_int weight );
 	virtual void print_item() const override;
-	string get_name() const { return m_item_name; };
 };
 
-class WEAPON : ITEM_BASE
+class WEAPON : public ITEM_BASE
 {
 public:
 	WEAPON( string name, u_int cost, u_int weight,
@@ -48,7 +47,6 @@ public:
 			u_int min_range, u_int max_range );
 
 	void print_item() const override;
-	string get_name() const { return m_item_name; };
 
 private:
 	dmg::DAMAGE m_damage;
@@ -60,13 +58,12 @@ private:
 	u_int m_max_range;
 };
 
-class ARMOR : ITEM_BASE
+class ARMOUR : public ITEM_BASE
 {
 public:
-	ARMOR( string name, u_int cost, u_int weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, u_int ac, u_int strength_needed );
+	ARMOUR( string name, u_int cost, u_int weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, u_int ac, u_int strength_needed );
 
 	void print_item() const override;
-	string get_name() const { return m_item_name; };
 
 private:
 	ARMOR_CATEGORY m_armor_type{ ARMOR_CATEGORY::INVALID };

@@ -29,13 +29,8 @@ void TRAIT_MANAGER::read_in_traits()
 		getline( ss, desc, ';' );
 		getline( ss, read_only_str, ';' );
 
-		bool read_only = false;
-		if ( read_only_str == "TRUE" )
-		{
-			read_only = true;
-		}
-
-		TRAIT* spell = read_only == true ? new TRAIT( name, desc, read_only ) : new TRAIT( name, desc, false );
+		const bool read_only = read_only_str == "TRUE";
+		TRAIT* spell = new TRAIT( name, desc, read_only );
 		m_traits.insert( std::make_pair( spell->get_spell_name(), spell ) );
 		ss.clear();
 	}

@@ -81,6 +81,9 @@
     <ClInclude Include="headers\generic_utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\item_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -138,6 +141,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\generic_utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\item_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

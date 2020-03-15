@@ -47,28 +47,14 @@ u_int roll_dice( DND_DICE dice, u_int add_bonus_to_roll /*= 0*/, u_int number_of
 		}
 	}
 
-	if ( number_of_rolls > 1 )
+	for ( int i = 0; i != number_of_rolls; ++i )
 	{
-		for ( int i = 0; i != number_of_rolls; ++i )
-		{
-			srand( (unsigned int)time( NULL ) );
-			u_int8 temp = rand() % maximum_roll + minimum_roll;
-			if ( dice == DND_DICE::PERCENTILE )
-			{
-				temp = temp * 10;
-			}
-			total_roll_result += temp;
-		}
-	}
-	else
-	{
-		srand( (unsigned int)time( NULL ) );
 		u_int8 temp = rand() % maximum_roll + minimum_roll;
 		if ( dice == DND_DICE::PERCENTILE )
 		{
 			temp = temp * 10;
 		}
-		total_roll_result = temp;   // in the range minimum_roll to maximum_roll
+		total_roll_result += temp;
 	}
 
 	if ( add_bonus_to_roll != 0 )
@@ -109,6 +95,39 @@ string get_string_from_DND_DICE( DND_DICE dice )
 		break;
 	}
 	return string_out;
+}
+
+DND_DICE get_DND_DICE_from_string( string dice_string )
+{
+	if ( dice_string == "D4" )
+	{
+		return DND_DICE::D4;
+	}
+	else if ( dice_string == "D6" )
+	{
+		return DND_DICE::D6;
+	}
+	else if ( dice_string == "D8" )
+	{
+		return DND_DICE::D8;
+	}
+	else if ( dice_string == "D10" )
+	{
+		return DND_DICE::D10;
+	}
+	else if ( dice_string == "D12" )
+	{
+		return DND_DICE::D12;
+	}
+	else if ( dice_string == "D20" )
+	{
+		return DND_DICE::D20;
+	}
+	else if ( dice_string == "PERCENTILE" )
+	{
+		return DND_DICE::PERCENTILE;
+	}
+	return DND_DICE::INVALID;
 }
 
 DND_DICE get_hit_dice_from_DND_CLASS( DND_CLASS dnd_class )

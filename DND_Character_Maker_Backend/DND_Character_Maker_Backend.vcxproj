@@ -163,6 +163,7 @@
     <ClInclude Include="headers\dnd_character_utilities.h" />
     <ClInclude Include="headers\generic_utilities.h" />
     <ClInclude Include="headers\items.h" />
+    <ClInclude Include="headers\item_manager.h" />
     <ClInclude Include="headers\item_utilities.h" />
     <ClInclude Include="headers\race_utilities.h" />
     <ClInclude Include="headers\racial_traits.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="sources\dnd_character_utilities.cpp" />
     <ClCompile Include="sources\generic_utilities.cpp" />
     <ClCompile Include="sources\items.cpp" />
+    <ClCompile Include="sources\item_manager.cpp" />
     <ClCompile Include="sources\item_uitilities.cpp" />
     <ClCompile Include="sources\race_utilities.cpp" />
     <ClCompile Include="sources\racial_traits.cpp" />

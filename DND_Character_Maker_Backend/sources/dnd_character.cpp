@@ -95,7 +95,7 @@ void DND_CHARACTER::apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& r
 					ask_for_input( "Please enter one of these. (Type b, m, or s):", temp );
 					const auto tool = DND_CHARACTER_UTILITIES::get_DND_TOOL_from_string( temp );
 
-					if ( tool != DND_TOOL::INAVLID )
+					if ( tool != DND_TOOL::INVALID )
 					{
 						chosen_tool = true;
 						add_tool_proficiency( tool );
@@ -233,33 +233,20 @@ void DND_CHARACTER::add_skill_proficiency( DND_SKILL skill )
 
 void DND_CHARACTER::add_specific_weapon_proficiency( WEAPON* weapon )
 {
-	bool add_weapon = true;
-	for ( auto weap : m_weapon_profs )
+	if ( weapon )
 	{
-		if ( weap == weapon )
+		const auto weapon_finder = std::find( m_weapon_profs.begin(), m_weapon_profs.end(), weapon );
+		if ( weapon_finder == m_weapon_profs.end() )
 		{
-			add_weapon = false;
+			m_weapon_profs.push_back( weapon );
 		}
-	}
-
-	if ( add_weapon )
-	{
-		m_weapon_profs.push_back( weapon );
 	}
 }
 
 void DND_CHARACTER::add_armor_proficiency( ARMOR_CATEGORY cat )
 {
-	bool add_armor = true;
-	for ( auto armor : m_armor_profs )
-	{
-		if ( armor == cat )
-		{
-			add_armor = false;
-		}
-	}
-
-	if ( add_armor )
+	const auto armor_finder = std::find( m_armor_profs.begin(), m_armor_profs.end(), cat );
+	if ( armor_finder == m_armor_profs.end() && cat != ARMOR_CATEGORY::INVALID )
 	{
 		m_armor_profs.push_back( cat );
 	}
@@ -267,16 +254,8 @@ void DND_CHARACTER::add_armor_proficiency( ARMOR_CATEGORY cat )
 
 void DND_CHARACTER::add_general_weapon_proficiency( WEAPON_PROFICIENCY weapon )
 {
-	bool add_weapon = true;
-	for ( auto weap : m_general_weapon_profs )
-	{
-		if ( weap == weapon )
-		{
-			add_weapon = false;
-		}
-	}
-
-	if ( add_weapon )
+	const auto weapon_finder = std::find( m_general_weapon_profs.begin(), m_general_weapon_profs.end(), weapon );
+	if ( weapon_finder == m_general_weapon_profs.end() && weapon != WEAPON_PROFICIENCY::INVALID )
 	{
 		m_general_weapon_profs.push_back( weapon );
 	}
@@ -284,16 +263,8 @@ void DND_CHARACTER::add_general_weapon_proficiency( WEAPON_PROFICIENCY weapon )
 
 void DND_CHARACTER::add_language( DND_LANGUAGE lang )
 {
-	bool add_lang = true;
-	for ( auto language : m_languages )
-	{
-		if ( language == lang )
-		{
-			add_lang = false;
-		}
-	}
-
-	if ( add_lang )
+	const auto language_finder = std::find( m_languages.begin(), m_languages.end(), lang );
+	if ( language_finder == m_languages.end() && lang != DND_LANGUAGE::INVALID )
 	{
 		m_languages.push_back( lang );
 	}
@@ -341,22 +312,22 @@ void DND_CHARACTER::print_traits()
 
 void DND_CHARACTER::add_tool_proficiency( DND_TOOL tool )
 {
-	m_tool_profs.push_back( tool );
+	const auto tool_finder = std::find( m_tool_profs.begin(), m_tool_profs.end(), tool );
+	if ( tool_finder == m_tool_profs.end() && tool != DND_TOOL::INVALID )
+	{
+		m_tool_profs.push_back( tool );
+	}
 }
 
 void DND_CHARACTER::add_trait( TRAIT * trait )
 {
-	bool should_add = true;
-	for ( auto character_trait : m_traits )
+	if ( trait )
 	{
-		if ( character_trait == trait )
+		const auto trait_finder = std::find( m_traits.begin(), m_traits.end(), trait );
+		if ( trait_finder == m_traits.end() )
 		{
-			should_add = false;
+			m_traits.push_back( trait );
 		}
-	}
-	if ( should_add )
-	{
-		m_traits.push_back( trait );
 	}
 }
 
@@ -466,7 +437,7 @@ void DND_CHARACTER::print_character_info()
 	print( border );
 }
 
-u_int DND_CHARACTER::get_ability_value_from_DND_ABILITY_SCORE_TYPES( ABILITY_SCORE_TYPES ability_type )
+u_int DND_CHARACTER::get_ability_value( ABILITY_SCORE_TYPES ability_type )
 {
 	u_int value;
 	switch ( ability_type )
@@ -573,7 +544,7 @@ DND_CHARACTER::CHARACTER_SKILL::CHARACTER_SKILL( DND_SKILL skill_type, ABILITY_S
 	m_skill_name = skill_type;
 	m_ability_dependant_on = ability_base;
 	m_is_proficient = is_prof;
-	m_skill_value = DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_ability_value_from_DND_ABILITY_SCORE_TYPES( m_ability_dependant_on ) );
+	m_skill_value = DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_ability_value( m_ability_dependant_on ) );
 
 	if ( m_is_proficient )
 	{

@@ -53,7 +53,7 @@ void WEAPON::print_item() const
 	std::cout << "Damage: " << std::to_string( m_damage.m_number_of_dice ) << " " << get_string_from_DND_DICE( m_damage.m_dice ) << " " << ITEM_AND_COMBAT_UTILITIES::get_string_from_DAMAGE_TYPE( m_damage.m_damage_type ) << std::endl;
 }
 
-ARMOR::ARMOR( string name, u_int cost, u_int weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, u_int ac, u_int strength_needed )
+ARMOUR::ARMOUR( string name, u_int cost, u_int weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, u_int ac, u_int strength_needed )
 	: ITEM_BASE( name, cost, weight )
 {
 	m_armor_type = type;
@@ -64,7 +64,7 @@ ARMOR::ARMOR( string name, u_int cost, u_int weight, ARMOR_CATEGORY type, bool s
 	m_strength_needed = strength_needed;
 }
 
-void ARMOR::print_item() const
+void ARMOUR::print_item() const
 {
 	ITEM_BASE::print_item();
 	std::cout << m_item_name << std::endl;

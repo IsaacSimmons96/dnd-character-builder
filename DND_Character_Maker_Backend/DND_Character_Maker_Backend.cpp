@@ -10,23 +10,26 @@
 #include "headers/trait_spell_manager.h"
 #include <iostream>
 #include <cassert>
+#include <time.h>       /* time */
 
-//#define DEBUG
-#define SUPER_DEBUG
+#define DEBUG 0 
+#define SUPER_DEBUG 1
 
 int main()
 {
+	srand( (unsigned int)time( NULL ) );
+
 	DND_CHARACTER character;
 	TRAIT_MANAGER tsm;
 	RACIAL_TRAITS_MANAGER trait_manager( tsm );
 
-#if defined(DEBUG) || defined(SUPER_DEBUG)
-	character.set_player_name( "Testman" );
-	character.set_character_name( "Jonbar Ironhammer" );
-	character.set_character_class( DND_CLASS::PALADIN );
+	string temp;
+#if DEBUG || SUPER_DEBUG
+	character.set_player_name( "Isaac" );
+	character.set_character_name( "Denny Badger Den" );
+	character.set_character_class( DND_CLASS::BARD );
 	const string character_name_prefix = "Enter " + character.get_name();
 #else
-	string temp;
 	int temp_int;
 	ask_for_input_no_lowercasing( "Enter player name: ", temp );
 	character.set_player_name( temp );
@@ -37,8 +40,8 @@ int main()
 	character.set_character_class( DND_CHARACTER_UTILITIES::get_DND_CLASS_from_string( temp ) );
 #endif // DEBUG || SUPER_DEBUG
 
-#ifdef SUPER_DEBUG
-	character.set_race( DND_RACE::MOUNTAIN_DWARF, trait_manager );
+#if SUPER_DEBUG
+	character.set_race( DND_RACE::LIGHTFOOT, trait_manager );
 	character.set_level( 1 );
 #else
 	ask_for_input( character_name_prefix + "'s Race: ", temp );
@@ -48,20 +51,27 @@ int main()
 	character.set_level( temp_int );
 #endif //SUPER_DEBUG
 
-#if defined(DEBUG) || defined(SUPER_DEBUG)
-	character.set_alignment( DND_ALIGNMENT::CHAOTIC_NEUTRAL );
+#if DEBUG || SUPER_DEBUG
+	character.set_alignment( DND_ALIGNMENT::NEUTRAL_GOOD );
 #else
 	ask_for_input( character_name_prefix + "'s Alignment:", temp );
 	character.set_alignment( DND_CHARACTER_UTILITIES::get_DND_ALIGNMENT_from_string( temp ) );
 #endif// DEBUG || SUPER_DEBUG
 
-#if defined(DEBUG) || defined(SUPER_DEBUG)
-	character.set_strength( roll_dice( DND_DICE::D20 ) );
+#if DEBUG ||SUPER_DEBUG
+	/*character.set_strength( roll_dice( DND_DICE::D20 ) );
 	character.set_dexterity( roll_dice( DND_DICE::D20 ) );
 	character.set_constitution( roll_dice( DND_DICE::D20 ) );
 	character.set_intelligence( roll_dice( DND_DICE::D20 ) );
 	character.set_wisdom( roll_dice( DND_DICE::D20 ) );
-	character.set_charisma( roll_dice( DND_DICE::D20 ) );
+	character.set_charisma( roll_dice( DND_DICE::D20 ) );*/
+
+	character.set_strength( 10 );
+	character.set_dexterity( 13 );
+	character.set_constitution( 16 );
+	character.set_intelligence( 11 );
+	character.set_wisdom( 11 );
+	character.set_charisma( 16 );
 #else
 	ask_for_input( character_name_prefix + "'s Strength: ", temp_int );
 	character.set_strength( temp_int );
@@ -76,12 +86,13 @@ int main()
 	ask_for_input( character_name_prefix + "'s Charisma: ", temp_int );
 	character.set_charisma( temp_int );
 #endif // DEBUG || SUPER_DEBUG
-
-#ifdef SUPER_DEBUG
-	character.add_skill_proficiency( DND_SKILL::ACROBATICS );
-	character.add_skill_proficiency( DND_SKILL::ARCANA );
+#if SUPER_DEBUG
 	character.add_skill_proficiency( DND_SKILL::NATURE );
-	character.add_skill_proficiency( DND_SKILL::INTIMIDATION );
+	character.add_skill_proficiency( DND_SKILL::INSIGHT );
+	character.add_skill_proficiency( DND_SKILL::PERCEPTION );
+	character.add_skill_proficiency( DND_SKILL::SURVIVAL );
+	character.add_skill_proficiency( DND_SKILL::DECEPTION );
+	character.add_skill_proficiency( DND_SKILL::PERFORMANCE );
 	character.update_skills();
 #else
 	bool entered_all_skill_profs = false;
@@ -119,10 +130,10 @@ int main()
 
 #endif // SUPER_DEBUG
 
-#if defined(DEBUG) || defined(SUPER_DEBUG)
+#if DEBUG || SUPER_DEBUG
 	const auto char_class = character.get_character_class();
 	character.set_hit_points( get_max_roll_for_dice( get_hit_dice_from_DND_CLASS( char_class ) ) + DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_constitution() ) );
-	character.set_armour_class( 16 );
+	character.set_armour_class( 13 );
 	character.set_saving_throws();
 	character.update_hit_dice( get_hit_dice_from_DND_CLASS( char_class ), character.get_level() );
 #else
@@ -131,7 +142,7 @@ int main()
 	character.set_hit_points( get_max_roll_for_dice( get_hit_dice_from_DND_CLASS( char_class ) ) + DND_CHARACTER_UTILITIES::get_ability_score_modifier( character.get_constitution() ) );
 	std::cout << "Hit point maximum is: " + std::to_string( character.get_hit_points() ) + "\n";
 
-	ask_for_input( character_name_prefix + "'s Armor Class: ", temp_int );
+	ask_for_input( character_name_prefix + "'s Armour Class: ", temp_int );
 	character.set_armour_class( temp_int );
 
 	std::cout << "Setting Saving Throws.";

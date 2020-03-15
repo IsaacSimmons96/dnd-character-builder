@@ -100,7 +100,7 @@ public:
 	u_int get_intelligence()							{ return m_intelligence; };
 	u_int get_wisdom()									{ return m_wisdom; };
 	u_int get_charisma()								{ return m_charisma; };
-	u_int get_ability_value_from_DND_ABILITY_SCORE_TYPES( ABILITY_SCORE_TYPES ability_type );
+	u_int get_ability_value( ABILITY_SCORE_TYPES ability_type );
 	std::vector< DND_SKILL > get_skill_proficiencys();
 
 	//prints

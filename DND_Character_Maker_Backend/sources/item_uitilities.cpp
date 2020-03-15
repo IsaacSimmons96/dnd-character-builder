@@ -346,13 +346,13 @@ string ITEM_AND_COMBAT_UTILITIES::get_string_from_ARMOR_CATEGORY( ARMOR_CATEGORY
 	switch ( type_in )
 	{
 	case ARMOR_CATEGORY::LIGHT:
-		return_string = "Light Armor";
+		return_string = "Light Armour";
 		break;
 	case ARMOR_CATEGORY::MEDIUM:
-		return_string = "Medium Armor";
+		return_string = "Medium Armour";
 		break;
 	case ARMOR_CATEGORY::HEAVY:
-		return_string = "Heavy Armor";
+		return_string = "Heavy Armour";
 		break;
 	case ARMOR_CATEGORY::SHIELD:
 		return_string = "Shields";
