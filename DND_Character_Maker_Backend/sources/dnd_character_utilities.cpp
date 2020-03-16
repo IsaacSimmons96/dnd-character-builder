@@ -844,9 +844,9 @@ ABILITY_SCORE_TYPES DND_CHARACTER_UTILITIES::get_ABILITY_SORE_TYPE_from_DND_SKIL
 	return ability;
 }
 
-short int DND_CHARACTER_UTILITIES::get_ability_score_modifier( u_int ability_score )
+short int DND_CHARACTER_UTILITIES::get_ability_score_modifier( uint16_t ability_score )
 {
-	u_int modifier_value = -100;
+	uint16_t modifier_value = -100;
 	if ( ability_score == 1 )
 	{
 		modifier_value = -5;

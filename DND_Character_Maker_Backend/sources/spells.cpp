@@ -2,9 +2,9 @@
 #include <iostream>
 #include "..\headers\spell_utilities.h"
 
-MAGIC_SPELL::MAGIC_SPELL( string name, SCHOOL_OF_MAGIC school, string desc, string higher_desc, SPELL_CASTING_TIME casting_t, u_int range,
+MAGIC_SPELL::MAGIC_SPELL( string name, SCHOOL_OF_MAGIC school, string desc, string higher_desc, SPELL_CASTING_TIME casting_t, uint16_t range,
 						  SPELL_COMPONENT components, string material_description, SPELL_DURATION duration, SPELL_DURATION_TIME spell_duration_time,
-						  u_int spell_level, std::vector<DND_CLASS> classes ) : SPELL( name, desc, higher_desc, spell_level, classes )
+						  uint16_t spell_level, std::vector<DND_CLASS> classes ) : SPELL( name, desc, higher_desc, spell_level, classes )
 {
 	m_school = school;
 	m_casting_time = casting_t;
@@ -28,7 +28,7 @@ void MAGIC_SPELL::print_spell() const
 	std::cout << "At Higher Levels. " << m_higher_level_description << std::endl;
 }
 
-SPELL::SPELL( string name, string desc, string higher_desc, u_int spell_level, std::vector<DND_CLASS> classes )
+SPELL::SPELL( string name, string desc, string higher_desc, uint16_t spell_level, std::vector<DND_CLASS> classes )
 {
 	m_spell_name = name;
 	m_spell_description = desc;

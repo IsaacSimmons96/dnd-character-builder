@@ -2,7 +2,7 @@
 #include "..\headers\racial_traits.h"
 #include <iostream>
 
-RACIAL_TRAITS::RACIAL_TRAITS( DND_RACE race, u_int age, u_int speed, string align_desc, DND_SIZE size, std::vector<DND_LANGUAGE> langs, std::vector<DND_TOOL> tool_profs,
+RACIAL_TRAITS::RACIAL_TRAITS( DND_RACE race, uint16_t age, uint16_t speed, string align_desc, DND_SIZE size, std::vector<DND_LANGUAGE> langs, std::vector<DND_TOOL> tool_profs,
 							  std::vector<TRAIT*> traits, std::vector<ABILITY_SCORE_BONUS*> ability_bonuses, bool need_to_pick_subrace, DND_RACE main_race /*= DND_RACE::INVALID*/ )
 {
 	m_race = race;
@@ -46,7 +46,7 @@ void RACIAL_TRAITS::print_racial_traits()
 	std::cout << "Race Speed = " << std::to_string( m_race_speed ) << std::endl;
 	std::cout << "Alignment Description = " << m_alignment_description << std::endl;
 	std::cout << "Size = " << DND_CHARACTER_UTILITIES::get_string_from_DND_SIZE( m_race_size ) << std::endl;
-	u_int8 counter = 1;
+	uint8_t counter = 1;
 	for ( auto lang : m_race_languages )
 	{
 		std::cout << "Language " << std::to_string( counter ) << " = " << DND_CHARACTER_UTILITIES::get_string_from_DND_LANGUAGE( lang ) << std::endl;

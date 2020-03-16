@@ -188,9 +188,9 @@ void DND_CHARACTER::set_passive_perception()
 	m_passive_perception = 10 + DND_CHARACTER_UTILITIES::get_ability_score_modifier( m_wisdom );
 }
 
-void DND_CHARACTER::set_proficiency_bonus_from_level( u_int level )
+void DND_CHARACTER::set_proficiency_bonus_from_level( uint16_t level )
 {
-	u_int prof_bonus;
+	uint16_t prof_bonus;
 	if ( level <= 4 )
 	{
 		prof_bonus = 2;
@@ -331,11 +331,11 @@ void DND_CHARACTER::add_trait( TRAIT * trait )
 	}
 }
 
-void DND_CHARACTER::update_hit_dice( DND_DICE die, u_int number )
+void DND_CHARACTER::update_hit_dice( DND_DICE die, uint16_t number )
 {
 	if ( die != DND_DICE::PERCENTILE )
 	{
-		std::pair<std::map<DND_DICE, u_int>::iterator, bool> not_in_use;
+		std::pair<std::map<DND_DICE, uint16_t>::iterator, bool> not_in_use;
 		not_in_use = m_hit_dice.insert( std::make_pair( die, number ) );
 
 		if ( !not_in_use.second )
@@ -348,7 +348,7 @@ void DND_CHARACTER::update_hit_dice( DND_DICE die, u_int number )
 void DND_CHARACTER::update_skills()
 {
 	m_skills.clear();
-	for ( u_int8 skill_index = 0; skill_index != INVALID; ++skill_index )
+	for ( uint8_t skill_index = 0; skill_index != INVALID; ++skill_index )
 	{
 		bool is_proficient = false;
 		for ( auto skill : m_skills_proficient_in )
@@ -437,9 +437,9 @@ void DND_CHARACTER::print_character_info()
 	print( border );
 }
 
-u_int DND_CHARACTER::get_ability_value( ABILITY_SCORE_TYPES ability_type )
+uint16_t DND_CHARACTER::get_ability_value( ABILITY_SCORE_TYPES ability_type )
 {
-	u_int value;
+	uint16_t value;
 	switch ( ability_type )
 	{
 	case ABILITY_SCORE_TYPES::STRENGTH:

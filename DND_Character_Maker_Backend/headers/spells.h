@@ -8,7 +8,7 @@
 class SPELL : public SPELL_BASE
 {
 public:
-	SPELL( string name, string desc, string higher_desc, u_int spell_level, std::vector<DND_CLASS> classes );
+	SPELL( string name, string desc, string higher_desc, uint16_t spell_level, std::vector<DND_CLASS> classes );
 
 	void set_spell_description( string spell_description )	{ m_spell_description = spell_description; };
 
@@ -22,20 +22,20 @@ public:
 
 protected:
 	string m_higher_level_description;
-	u_int m_spell_level;
+	uint16_t m_spell_level;
 	std::vector<DND_CLASS> m_available_to_classes;
 };
 
 class MAGIC_SPELL : public SPELL
 {
 public:
-	MAGIC_SPELL( string name, SCHOOL_OF_MAGIC school, string desc, string higher_desc, SPELL_CASTING_TIME casting_t, u_int range,
+	MAGIC_SPELL( string name, SCHOOL_OF_MAGIC school, string desc, string higher_desc, SPELL_CASTING_TIME casting_t, uint16_t range,
 				 SPELL_COMPONENT components, string material_description, SPELL_DURATION duration, SPELL_DURATION_TIME spell_duration_time,
-				 u_int spell_level, std::vector<DND_CLASS> classes );
+				 uint16_t spell_level, std::vector<DND_CLASS> classes );
 	void print_spell() const override;
 
 private:
-	u_int m_spell_range;
+	uint16_t m_spell_range;
 	string m_material_description;
 	SPELL_DURATION m_spell_duration;
 	SPELL_DURATION_TIME m_spell_duration_time;

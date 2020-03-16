@@ -14,7 +14,7 @@ enum class DND_DICE : char
 	INVALID
 };
 
-u_int roll_dice( DND_DICE dice, u_int add_bonus_to_roll = 0, u_int number_of_rolls = 1 );
+uint16_t roll_dice( DND_DICE dice, uint16_t add_bonus_to_roll = 0, uint16_t number_of_rolls = 1 );
 
 string get_string_from_DND_DICE( DND_DICE dice );
 DND_DICE get_hit_dice_from_DND_CLASS( DND_CLASS dnd_class );

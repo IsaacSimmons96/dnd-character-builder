@@ -79,7 +79,7 @@ void ITEM_MANAGER::read_in_items()
 	std::ifstream file( m_file_items );
 	string value, temp;
 	std::stringstream ss;
-	u_int uint_temp;
+	uint16_t uint_temp;
 
 	auto convert_string_to_int = [&]()
 	{
@@ -96,11 +96,11 @@ void ITEM_MANAGER::read_in_items()
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int cost = uint_temp;
+		const uint16_t cost = uint_temp;
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int weight = uint_temp;
+		const uint16_t weight = uint_temp;
 
 		const auto new_item = new ITEM( item_name, cost, weight );
 
@@ -115,8 +115,8 @@ void ITEM_MANAGER::read_in_weapons()
 	std::ifstream file( m_file_weapons );
 	string value, temp;
 	std::stringstream ss;
-	u_int uint_temp;
-	u_int8 uint8_temp;
+	uint16_t uint_temp;
+	uint8_t uint8_temp;
 
 	auto convert_string_to_int = [&]()
 	{
@@ -142,7 +142,7 @@ void ITEM_MANAGER::read_in_weapons()
 
 			getline( ss, temp, ';' );
 			convert_string_to_u_int8();
-			const u_int8 ammount = uint8_temp;
+			const uint8_t ammount = uint8_temp;
 
 			dmg::DAMAGE weapon_damage;
 			weapon_damage.m_damage_type = dmg_type;
@@ -159,11 +159,11 @@ void ITEM_MANAGER::read_in_weapons()
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int cost = uint_temp;
+		const uint16_t cost = uint_temp;
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int weight = uint_temp;
+		const uint16_t weight = uint_temp;
 
 		auto damage_type_main = create_damage();
 		auto damage_type_vers = create_damage();
@@ -174,8 +174,8 @@ void ITEM_MANAGER::read_in_weapons()
 		getline( ss, temp, ';' );
 		const WEAPON_PROFICIENCY weapon_prof = ITEM_AND_COMBAT_UTILITIES::get_WEAPON_PROFICIENCY_from_string( temp );
 
-		u_int min_range(0);
-		u_int max_range(0);
+		uint16_t min_range(0);
+		uint16_t max_range(0);
 		if ( weapon_type == WEAPON_TYPE::RANGED )
 		{
 			getline( ss, temp, ';' );
@@ -208,7 +208,7 @@ void ITEM_MANAGER::read_in_armour()
 	std::ifstream file( m_file_armour );
 	string value, temp;
 	std::stringstream ss;
-	u_int uint_temp;
+	uint16_t uint_temp;
 
 	auto convert_string_to_int = [&]()
 	{
@@ -225,11 +225,11 @@ void ITEM_MANAGER::read_in_armour()
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int cost = uint_temp;
+		const uint16_t cost = uint_temp;
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int weight = uint_temp;
+		const uint16_t weight = uint_temp;
 
 		getline( ss, temp, ';' );
 		const ARMOR_CATEGORY category = ITEM_AND_COMBAT_UTILITIES::get_ARMOR_CATEGORY_from_string( temp );
@@ -245,11 +245,11 @@ void ITEM_MANAGER::read_in_armour()
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int base_AC = uint_temp;
+		const uint16_t base_AC = uint_temp;
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int str_needed = uint_temp;
+		const uint16_t str_needed = uint_temp;
 		
 
 		const auto new_armour = new ARMOUR( item_name, cost, weight, category, stealth_dis, dex_mod_bonus, dex_cap, base_AC, str_needed );

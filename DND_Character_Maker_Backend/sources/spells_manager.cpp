@@ -12,7 +12,7 @@ void SPELLS_MANAGER::read_in_spells()
 	std::ifstream file( m_filename );
 	string value, temp;
 	std::stringstream ss;
-	u_int uint_temp;
+	uint16_t uint_temp;
 
 	auto convert_string_to_int = [&]()
 	{
@@ -35,7 +35,7 @@ void SPELLS_MANAGER::read_in_spells()
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int spell_range = uint_temp;
+		const uint16_t spell_range = uint_temp;
 
 		getline( ss, temp, ';' );
 		const SPELL_COMPONENT spell_components = SPELL_UTILITIES::get_spell_component_from_string( temp );
@@ -68,7 +68,7 @@ void SPELLS_MANAGER::read_in_spells()
 		getline( ss, temp, ';' );
 		temp.erase( 0, 4 );
 		convert_string_to_int();
-		const u_int spell_level = uint_temp;
+		const uint16_t spell_level = uint_temp;
 
 		std::vector<DND_CLASS> classes;
 		while ( getline( ss, temp, ';' ) )

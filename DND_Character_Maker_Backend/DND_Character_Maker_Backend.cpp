@@ -2,6 +2,7 @@
 //
 
 #include "headers/dice_functions.h"
+#include "headers/cash.h"
 #include "headers/dnd_character.h"
 #include "headers/dnd_character_utilities.h"
 #include "headers/generic_utilities.h"
@@ -152,5 +153,8 @@ int main()
 	character.update_hit_dice( get_hit_dice_from_DND_CLASS( char_class ), character.get_level() );
 #endif // DEBUG || SUPER_DEBUG
 
-	character.print_character_info();
+	//character.print_character_info();
+
+	CASH cash_test( 11,11,11 );
+	cash_test.print();
 }

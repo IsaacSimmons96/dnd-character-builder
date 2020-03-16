@@ -26,5 +26,5 @@ public:
 
 	static ABILITY_SCORE_TYPES get_ABILITY_SORE_TYPE_from_DND_SKILL( DND_SKILL skill );
 
-	static short int get_ability_score_modifier( u_int ability_score );
+	static short int get_ability_score_modifier( uint16_t ability_score );
 };

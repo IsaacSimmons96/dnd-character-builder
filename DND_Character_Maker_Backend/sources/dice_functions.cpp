@@ -6,11 +6,11 @@
 #include "..\headers\typedefs.h"
 #include <signal.h>
 
-u_int roll_dice( DND_DICE dice, u_int add_bonus_to_roll /*= 0*/, u_int number_of_rolls /*= 1*/ )
+uint16_t roll_dice( DND_DICE dice, uint16_t add_bonus_to_roll /*= 0*/, uint16_t number_of_rolls /*= 1*/ )
 {
-	u_int8 minimum_roll = 1;
-	u_int8 maximum_roll = 2;
-	u_int total_roll_result = 0;
+	uint8_t minimum_roll = 1;
+	uint8_t maximum_roll = 2;
+	uint16_t total_roll_result = 0;
 
 	switch ( dice )
 	{
@@ -49,7 +49,7 @@ u_int roll_dice( DND_DICE dice, u_int add_bonus_to_roll /*= 0*/, u_int number_of
 
 	for ( int i = 0; i != number_of_rolls; ++i )
 	{
-		u_int8 temp = rand() % maximum_roll + minimum_roll;
+		uint8_t temp = rand() % maximum_roll + minimum_roll;
 		if ( dice == DND_DICE::PERCENTILE )
 		{
 			temp = temp * 10;

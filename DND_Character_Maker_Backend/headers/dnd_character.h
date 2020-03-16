@@ -48,28 +48,28 @@ public:
 	void set_background( DND_BACKGROUND background_in ) { m_background = background_in; };
 	void set_race( DND_RACE race_in, RACIAL_TRAITS_MANAGER& rtm );
 	void set_alignment( DND_ALIGNMENT alignment_in )	{ m_alignment = alignment_in; };
-	void set_level( u_int number_in )					{ m_level = number_in; set_proficiency_bonus_from_level( m_level ); };
-	void set_exp( u_int number_in )						{ m_exp = number_in; };
+	void set_level( uint16_t number_in )					{ m_level = number_in; set_proficiency_bonus_from_level( m_level ); };
+	void set_exp( uint16_t number_in )						{ m_exp = number_in; };
 	void set_initiative_modifier();
 
 	// other stats setters
-	void set_hit_points( u_int number_in )				{ m_hit_points = number_in; };
-	void set_proficiency_bonus( u_int number_in )		{ m_proficiency_bonus = number_in; };
-	void set_armour_class( u_int number_in )			{ m_armour_class = number_in; };
+	void set_hit_points( uint16_t number_in )				{ m_hit_points = number_in; };
+	void set_proficiency_bonus( uint16_t number_in )		{ m_proficiency_bonus = number_in; };
+	void set_armour_class( uint16_t number_in )			{ m_armour_class = number_in; };
 	void set_passive_perception();
-	void set_proficiency_bonus_from_level( u_int level );
+	void set_proficiency_bonus_from_level( uint16_t level );
 
 	void set_saving_throws(){ m_saving_throws.set_saving_throws( *this ); };
 
 	void update_skills();
 
 	// character stats setters
-	void set_strength( u_int number_in )				{ m_strength += number_in; };
-	void set_dexterity( u_int number_in )				{ m_dexterity += number_in; set_initiative_modifier(); };
-	void set_constitution( u_int number_in )			{ m_constitution += number_in; };
-	void set_intelligence( u_int number_in )			{ m_intelligence += number_in; };
-	void set_wisdom( u_int number_in )					{ m_wisdom += number_in; set_passive_perception(); };
-	void set_charisma( u_int number_in )				{ m_charisma += number_in; };
+	void set_strength( uint16_t number_in )				{ m_strength += number_in; };
+	void set_dexterity( uint16_t number_in )				{ m_dexterity += number_in; set_initiative_modifier(); };
+	void set_constitution( uint16_t number_in )			{ m_constitution += number_in; };
+	void set_intelligence( uint16_t number_in )			{ m_intelligence += number_in; };
+	void set_wisdom( uint16_t number_in )					{ m_wisdom += number_in; set_passive_perception(); };
+	void set_charisma( uint16_t number_in )				{ m_charisma += number_in; };
 
 	void add_skill_proficiency( DND_SKILL skill );
 	void add_general_weapon_proficiency( WEAPON_PROFICIENCY weapon );
@@ -78,7 +78,7 @@ public:
 	void add_language( DND_LANGUAGE lang );
 	void add_tool_proficiency( DND_TOOL tool );
 	void add_trait( TRAIT* trait );
-	void update_hit_dice( DND_DICE die, u_int number );
+	void update_hit_dice( DND_DICE die, uint16_t number );
 
 	// main information getters
 	std::string		get_name()							{ return m_character_name; };
@@ -87,20 +87,20 @@ public:
 	DND_BACKGROUND	get_background()					{ return m_background; };
 	DND_RACE		get_race()							{ return m_race; };
 	DND_ALIGNMENT	get_alignment()						{ return m_alignment; };
-	u_int			get_proficiency_bonus()				{ return m_proficiency_bonus; };
-	u_int			get_level()							{ return m_level; };
-	u_int			get_exp()							{ return m_exp; };
-	u_int			get_initiative_modifier()			{ return m_initiative_modifier; };
-	u_int			get_hit_points()					{ return m_hit_points; };
+	uint16_t			get_proficiency_bonus()				{ return m_proficiency_bonus; };
+	uint16_t			get_level()							{ return m_level; };
+	uint16_t			get_exp()							{ return m_exp; };
+	uint16_t			get_initiative_modifier()			{ return m_initiative_modifier; };
+	uint16_t			get_hit_points()					{ return m_hit_points; };
 
 	// character stats getters
-	u_int get_strength()								{ return m_strength; };
-	u_int get_dexterity()								{ return m_dexterity; };
-	u_int get_constitution()							{ return m_constitution; };
-	u_int get_intelligence()							{ return m_intelligence; };
-	u_int get_wisdom()									{ return m_wisdom; };
-	u_int get_charisma()								{ return m_charisma; };
-	u_int get_ability_value( ABILITY_SCORE_TYPES ability_type );
+	uint16_t get_strength()								{ return m_strength; };
+	uint16_t get_dexterity()								{ return m_dexterity; };
+	uint16_t get_constitution()							{ return m_constitution; };
+	uint16_t get_intelligence()							{ return m_intelligence; };
+	uint16_t get_wisdom()									{ return m_wisdom; };
+	uint16_t get_charisma()								{ return m_charisma; };
+	uint16_t get_ability_value( ABILITY_SCORE_TYPES ability_type );
 	std::vector< DND_SKILL > get_skill_proficiencys();
 
 	//prints
@@ -125,21 +125,21 @@ private:
 	DND_BACKGROUND	m_background{ DND_BACKGROUND::INVALID };
 	DND_RACE		m_race{ DND_RACE::INVALID };
 	DND_ALIGNMENT	m_alignment{ DND_ALIGNMENT::INVALID };
-	u_int			m_level{ 1 };
-	u_int			m_exp{ 0 };
+	uint16_t			m_level{ 1 };
+	uint16_t			m_exp{ 0 };
 
 	// other stats
-	u_int			m_hit_points{ 0 };
-	u_int			m_proficiency_bonus{ 0 };
-	u_int			m_initiative_modifier{ 0 };
-	u_int			m_armour_class{ 0 };
-	u_int			m_passive_perception{ 0 };
-	u_int			m_speed{ 0 };
+	uint16_t			m_hit_points{ 0 };
+	uint16_t			m_proficiency_bonus{ 0 };
+	uint16_t			m_initiative_modifier{ 0 };
+	uint16_t			m_armour_class{ 0 };
+	uint16_t			m_passive_perception{ 0 };
+	uint16_t			m_speed{ 0 };
 	DND_SIZE		m_size{ DND_SIZE::INVALID };
 
 	SAVING_THROWS	m_saving_throws;
 	std::map< DND_SKILL, CHARACTER_SKILL* > m_skills;
-	std::map< DND_DICE, u_int > m_hit_dice;
+	std::map< DND_DICE, uint16_t > m_hit_dice;
 	std::vector< DND_SKILL > m_skills_proficient_in;
 	std::vector<DND_LANGUAGE> m_languages;
 	std::vector<TRAIT*> m_traits;
@@ -149,10 +149,10 @@ private:
 	std::vector<WEAPON_PROFICIENCY> m_general_weapon_profs;
 
 	// character stats
-	u_int			m_strength{ 0 };
-	u_int			m_dexterity{ 0 };
-	u_int			m_constitution{ 0 };
-	u_int			m_intelligence{ 0 };
-	u_int			m_wisdom{ 0 };
-	u_int			m_charisma{ 0 };
+	uint16_t			m_strength{ 0 };
+	uint16_t			m_dexterity{ 0 };
+	uint16_t			m_constitution{ 0 };
+	uint16_t			m_intelligence{ 0 };
+	uint16_t			m_wisdom{ 0 };
+	uint16_t			m_charisma{ 0 };
 };

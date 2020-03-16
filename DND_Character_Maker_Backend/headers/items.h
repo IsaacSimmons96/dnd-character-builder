@@ -10,14 +10,14 @@ namespace dmg
 	{
 		DAMAGE_TYPE m_damage_type{ DAMAGE_TYPE::INVALID };
 		DND_DICE m_dice{ DND_DICE::D4 };
-		u_int8 m_number_of_dice{ 0 };
+		uint8_t m_number_of_dice{ 0 };
 	};
 }
 
 class ITEM_BASE
 {
 public:
-	ITEM_BASE( string name, u_int cost, u_int weight );
+	ITEM_BASE( string name, uint16_t cost, uint16_t weight );
 
 	virtual void print_item() const = 0;
 	string get_name() const { return m_item_name; };
@@ -26,25 +26,25 @@ protected:
 
 	string m_item_name;
 	// TODO make proper DND currency
-	u_int m_item_cost;
+	uint16_t m_item_cost;
 	// TODO add proper units of weight
-	u_int m_weight;
+	uint16_t m_weight;
 };
 
 class ITEM : public ITEM_BASE
 {
 public:
-	ITEM( string name, u_int cost, u_int weight );
+	ITEM( string name, uint16_t cost, uint16_t weight );
 	virtual void print_item() const override;
 };
 
 class WEAPON : public ITEM_BASE
 {
 public:
-	WEAPON( string name, u_int cost, u_int weight,
+	WEAPON( string name, uint16_t cost, uint16_t weight,
 			dmg::DAMAGE damage, dmg::DAMAGE vers_damage, WEAPON_TYPE type,
 			WEAPON_PROFICIENCY weap_prof, std::vector<WEAPON_PROPERTIES> properties,
-			u_int min_range, u_int max_range );
+			uint16_t min_range, uint16_t max_range );
 
 	void print_item() const override;
 
@@ -54,14 +54,14 @@ private:
 	WEAPON_TYPE m_type;
 	WEAPON_PROFICIENCY m_weapon_prof;
 	std::vector<WEAPON_PROPERTIES> m_properties;
-	u_int m_min_range;
-	u_int m_max_range;
+	uint16_t m_min_range;
+	uint16_t m_max_range;
 };
 
 class ARMOUR : public ITEM_BASE
 {
 public:
-	ARMOUR( string name, u_int cost, u_int weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, u_int ac, u_int strength_needed );
+	ARMOUR( string name, uint16_t cost, uint16_t weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, uint16_t ac, uint16_t strength_needed );
 
 	void print_item() const override;
 
@@ -70,6 +70,6 @@ private:
 	bool m_stealth_disadvantage{ false };
 	bool m_add_dexterity_modifier{ false };
 	bool m_dex_cap_at_2{ false };
-	u_int m_armor_class{ 0 };
-	u_int m_strength_needed{ 0 };
+	uint16_t m_armor_class{ 0 };
+	uint16_t m_strength_needed{ 0 };
 };

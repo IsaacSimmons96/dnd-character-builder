@@ -36,7 +36,7 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 	std::ifstream file( filename );
 	string value, temp;
 	std::stringstream ss;
-	u_int uint_temp;
+	uint16_t uint_temp;
 
 	auto convert_string_to_int = [&]()
 	{
@@ -60,10 +60,10 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 		}*/
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int age = uint_temp;
+		const uint16_t age = uint_temp;
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const u_int speed = uint_temp;
+		const uint16_t speed = uint_temp;
 		getline( ss, temp, ';' );
 		const string description = temp;
 		getline( ss, temp, ';' );
@@ -75,7 +75,7 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 		ABILITY_SCORE_TYPES ability = DND_CHARACTER_UTILITIES::get_ABILITY_SCORE_TYPE_from_string( temp );
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		u_int ability_score_value = uint_temp;
+		uint16_t ability_score_value = uint_temp;
 		if ( ability != ABILITY_SCORE_TYPES::INVALID )
 		{
 			ABILITY_SCORE_BONUS* bonus = new ABILITY_SCORE_BONUS( ability, ability_score_value );
