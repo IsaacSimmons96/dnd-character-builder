@@ -155,6 +155,7 @@ int main()
 
 	//character.print_character_info();
 
-	CASH cash_test( 11,11,11 );
+	CASH cash_test( 18,0,2 );
+	cash_test += CASH( 17,0,0 );
 	cash_test.print();
 }
