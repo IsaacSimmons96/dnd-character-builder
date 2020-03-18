@@ -2,6 +2,7 @@
 #include "typedefs.h"
 #include "combat_and_item_enums.h"
 #include "dice_functions.h"
+#include "cash.h"
 #include <vector>
 
 namespace dmg
@@ -17,7 +18,7 @@ namespace dmg
 class ITEM_BASE
 {
 public:
-	ITEM_BASE( string name, uint16_t cost, uint16_t weight );
+	ITEM_BASE( string name, CASH cost, double weight );
 
 	virtual void print_item() const = 0;
 	string get_name() const { return m_item_name; };
@@ -25,23 +26,21 @@ public:
 protected:
 
 	string m_item_name;
-	// TODO make proper DND currency
-	uint16_t m_item_cost;
-	// TODO add proper units of weight
-	uint16_t m_weight;
+	CASH m_item_cost;
+	double m_weight;
 };
 
 class ITEM : public ITEM_BASE
 {
 public:
-	ITEM( string name, uint16_t cost, uint16_t weight );
+	ITEM( string name, CASH cost, double weight );
 	virtual void print_item() const override;
 };
 
 class WEAPON : public ITEM_BASE
 {
 public:
-	WEAPON( string name, uint16_t cost, uint16_t weight,
+	WEAPON( string name, CASH cost, double weight,
 			dmg::DAMAGE damage, dmg::DAMAGE vers_damage, WEAPON_TYPE type,
 			WEAPON_PROFICIENCY weap_prof, std::vector<WEAPON_PROPERTIES> properties,
 			uint16_t min_range, uint16_t max_range );
@@ -61,7 +60,7 @@ private:
 class ARMOUR : public ITEM_BASE
 {
 public:
-	ARMOUR( string name, uint16_t cost, uint16_t weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, uint16_t ac, uint16_t strength_needed );
+	ARMOUR( string name, CASH cost, double weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, uint16_t ac, uint16_t strength_needed );
 
 	void print_item() const override;
 

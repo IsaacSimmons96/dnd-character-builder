@@ -79,12 +79,12 @@ void ITEM_MANAGER::read_in_items()
 	std::ifstream file( m_file_items );
 	string value, temp;
 	std::stringstream ss;
-	uint16_t uint_temp;
+	int64_t int64_in;
 
 	auto convert_string_to_int = [&]()
 	{
 		std::stringstream num_stringstream( temp );
-		num_stringstream >> uint_temp;
+		num_stringstream >> int64_in;
 	};
 
 	while ( getline( file, value ) )
@@ -96,13 +96,22 @@ void ITEM_MANAGER::read_in_items()
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const uint16_t cost = uint_temp;
+		const money gold( CASH_TYPE::GOLD, int64_in );
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
-		const uint16_t weight = uint_temp;
+		const money silver( CASH_TYPE::SILVER, int64_in );
 
-		const auto new_item = new ITEM( item_name, cost, weight );
+		getline( ss, temp, ';' );
+		convert_string_to_int();
+		const money copper( CASH_TYPE::COPPER, int64_in );
+
+		getline( ss, temp, ';' );
+		uint16_t weight;
+		std::stringstream num_stringstream( temp );
+		num_stringstream >> weight;
+
+		const auto new_item = new ITEM( item_name, CASH( gold, silver, copper ), weight );
 
 		m_items.insert( std::make_pair( item_name, new_item ) );
 
@@ -128,6 +137,15 @@ void ITEM_MANAGER::read_in_weapons()
 	{
 		std::stringstream num_stringstream( temp );
 		num_stringstream >> uint_temp;
+	};
+
+	auto create_money = [&]( CASH_TYPE type )
+	{
+		int64_t int64_in;
+		std::stringstream num_stringstream( temp );
+		num_stringstream >> int64_in;
+
+		return money( type, int64_in );
 	};
 
 	while ( getline( file, value ) )
@@ -158,8 +176,13 @@ void ITEM_MANAGER::read_in_weapons()
 		const string item_name = temp;
 
 		getline( ss, temp, ';' );
-		convert_string_to_int();
-		const uint16_t cost = uint_temp;
+		const money gold = create_money( CASH_TYPE::GOLD );
+
+		getline( ss, temp, ';' );
+		const money silver = create_money( CASH_TYPE::SILVER );
+
+		getline( ss, temp, ';' );
+		const money copper = create_money( CASH_TYPE::COPPER );
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
@@ -174,8 +197,8 @@ void ITEM_MANAGER::read_in_weapons()
 		getline( ss, temp, ';' );
 		const WEAPON_PROFICIENCY weapon_prof = ITEM_AND_COMBAT_UTILITIES::get_WEAPON_PROFICIENCY_from_string( temp );
 
-		uint16_t min_range(0);
-		uint16_t max_range(0);
+		uint16_t min_range( 0 );
+		uint16_t max_range( 0 );
 		if ( weapon_type == WEAPON_TYPE::RANGED )
 		{
 			getline( ss, temp, ';' );
@@ -194,7 +217,7 @@ void ITEM_MANAGER::read_in_weapons()
 			props.push_back( prop );
 		}
 
-		const auto new_weapon = new WEAPON( item_name, cost, weight, damage_type_main, damage_type_vers, weapon_type, weapon_prof, props, min_range, max_range );
+		const auto new_weapon = new WEAPON( item_name, CASH( gold, silver, copper ), weight, damage_type_main, damage_type_vers, weapon_type, weapon_prof, props, min_range, max_range );
 		const auto new_weapon_item = dynamic_cast<ITEM*>(new_weapon);
 
 		m_weapons.insert( std::make_pair( item_name, new_weapon ) );
@@ -216,6 +239,15 @@ void ITEM_MANAGER::read_in_armour()
 		num_stringstream >> uint_temp;
 	};
 
+	auto create_money = [&]( CASH_TYPE type )
+	{
+		int64_t int64_in;
+		std::stringstream num_stringstream( temp );
+		num_stringstream >> int64_in;
+
+		return money( type, int64_in );
+	};
+
 	while ( getline( file, value ) )
 	{
 		ss << value;
@@ -224,8 +256,13 @@ void ITEM_MANAGER::read_in_armour()
 		const string item_name = temp;
 
 		getline( ss, temp, ';' );
-		convert_string_to_int();
-		const uint16_t cost = uint_temp;
+		const money gold = create_money( CASH_TYPE::GOLD );
+
+		getline( ss, temp, ';' );
+		const money silver = create_money( CASH_TYPE::SILVER );
+
+		getline( ss, temp, ';' );
+		const money copper = create_money( CASH_TYPE::COPPER );
 
 		getline( ss, temp, ';' );
 		convert_string_to_int();
@@ -250,9 +287,9 @@ void ITEM_MANAGER::read_in_armour()
 		getline( ss, temp, ';' );
 		convert_string_to_int();
 		const uint16_t str_needed = uint_temp;
-		
 
-		const auto new_armour = new ARMOUR( item_name, cost, weight, category, stealth_dis, dex_mod_bonus, dex_cap, base_AC, str_needed );
+
+		const auto new_armour = new ARMOUR( item_name, CASH( gold, silver, copper ), weight, category, stealth_dis, dex_mod_bonus, dex_cap, base_AC, str_needed );
 		const auto new_armour_item = dynamic_cast<ITEM*>(new_armour);
 
 		m_armour.insert( std::make_pair( item_name, new_armour ) );

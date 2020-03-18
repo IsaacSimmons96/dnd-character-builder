@@ -5,7 +5,7 @@
 #include "..\headers\item_utilities.h"
 #include "..\headers\dice_functions.h"
 
-ITEM_BASE::ITEM_BASE( string name, uint16_t cost, uint16_t weight )
+ITEM_BASE::ITEM_BASE( string name,CASH cost, double weight )
 {
 	m_item_name = name;
 	m_item_cost = cost;
@@ -19,7 +19,7 @@ void ITEM_BASE::print_item() const
 	std::cout << "Weight: " << std::to_string( m_weight ) << std::endl;
 }
 
-ITEM::ITEM( string name, uint16_t cost, uint16_t weight ) : ITEM_BASE( name, cost, weight )
+ITEM::ITEM( string name,CASH cost, double weight ) : ITEM_BASE( name, cost, weight )
 {}
 
 void ITEM::print_item() const
@@ -27,7 +27,7 @@ void ITEM::print_item() const
 	ITEM_BASE::print_item();
 }
 
-WEAPON::WEAPON( string name, uint16_t cost, uint16_t weight, dmg::DAMAGE damage, dmg::DAMAGE vers_damage, WEAPON_TYPE type, WEAPON_PROFICIENCY weap_prof,
+WEAPON::WEAPON( string name,CASH cost, double weight, dmg::DAMAGE damage, dmg::DAMAGE vers_damage, WEAPON_TYPE type, WEAPON_PROFICIENCY weap_prof,
 				std::vector<WEAPON_PROPERTIES> properties, uint16_t min_range, uint16_t max_range ) : ITEM_BASE( name, cost, weight )
 {
 	m_damage = damage;
@@ -47,13 +47,10 @@ WEAPON::WEAPON( string name, uint16_t cost, uint16_t weight, dmg::DAMAGE damage,
 void WEAPON::print_item() const
 {
 	ITEM_BASE::print_item();
-	std::cout << m_item_name << std::endl;
-	std::cout << "Cost: " << std::to_string( m_item_cost ) << std::endl;
-	std::cout << "Weight: " << std::to_string( m_weight ) << std::endl;
 	std::cout << "Damage: " << std::to_string( m_damage.m_number_of_dice ) << " " << get_string_from_DND_DICE( m_damage.m_dice ) << " " << ITEM_AND_COMBAT_UTILITIES::get_string_from_DAMAGE_TYPE( m_damage.m_damage_type ) << std::endl;
 }
 
-ARMOUR::ARMOUR( string name, uint16_t cost, uint16_t weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, uint16_t ac, uint16_t strength_needed )
+ARMOUR::ARMOUR( string name,CASH cost, double weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, uint16_t ac, uint16_t strength_needed )
 	: ITEM_BASE( name, cost, weight )
 {
 	m_armor_type = type;

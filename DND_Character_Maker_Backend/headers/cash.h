@@ -22,6 +22,7 @@ public:
 	CASH operator - ( const CASH &cash_in );
 	CASH& operator -= ( const CASH &cash_in );
 	CASH operator + ( const CASH &cash_in );
+	CASH& operator = ( const CASH &cash_in );
 	CASH& operator += ( const CASH &cash_in );
 	bool operator == ( const CASH &cash_in );
 	bool operator > ( const CASH &cash_in );

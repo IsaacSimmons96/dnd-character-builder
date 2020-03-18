@@ -87,6 +87,14 @@ CASH CASH::operator	+ ( const CASH & cash_in )
 	return CASH( new_gold, new_silver, new_copper );
 }
 
+CASH& CASH::operator=( const CASH & cash_in )
+{
+	m_gold.second = cash_in.m_gold.second;
+	m_silver.second = cash_in.m_silver.second;
+	m_copper.second = cash_in.m_copper.second;
+	return *this;
+}
+
 CASH& CASH::operator+=( const CASH & cash_in )
 {
 	return *this = *this + cash_in;
