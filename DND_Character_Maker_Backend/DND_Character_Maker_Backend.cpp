@@ -153,9 +153,17 @@ int main()
 	character.update_hit_dice( get_hit_dice_from_DND_CLASS( char_class ), character.get_level() );
 #endif // DEBUG || SUPER_DEBUG
 
-	//character.print_character_info();
+	//character.print_character();
 
-	CASH cash_test( 18,0,2 );
-	cash_test += CASH( 17,0,0 );
+	CASH cash_test( 18, 0, 2 );
+	cash_test += CASH( 17, 0, 0 );
 	cash_test.print();
+
+	auto inv = character.get_inventory();
+	inv->add_cash( cash_test );
+	inv->print_cash();
+
+	const auto it = new ITEM( "test", cash_test, 0 );
+	inv->add_item( it );
+	inv->print();
 }

@@ -88,10 +88,10 @@ void SPELLS_MANAGER::read_in_spells()
 	}
 }
 
-void SPELLS_MANAGER::print_all_spells()
+void SPELLS_MANAGER::print()
 {
 	for ( auto it = m_spells.begin(); it != m_spells.end(); ++it )
 	{
-		it->second->print_spell();
+		it->second->print();
 	}
 }

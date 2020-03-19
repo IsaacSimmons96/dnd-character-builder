@@ -39,7 +39,7 @@ RACIAL_TRAITS::~RACIAL_TRAITS()
 {
 }
 
-void RACIAL_TRAITS::print_racial_traits()
+void RACIAL_TRAITS::print()
 {
 	std::cout << "Race = " << DND_CHARACTER_UTILITIES::get_string_from_DND_RACE( m_race ) << std::endl;
 	std::cout << "Typical Max Age = " << std::to_string( m_typical_age ) << std::endl;

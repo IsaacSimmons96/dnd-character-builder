@@ -12,7 +12,7 @@ public:
 
 	void set_spell_description( string spell_description );
 	string get_spell_description();
-	void print_spell() const override;
+	void print() const override;
 	bool is_read_only() const { return m_read_only; };
 
 private:

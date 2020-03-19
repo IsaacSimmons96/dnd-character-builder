@@ -5,7 +5,7 @@
 class TRAIT_MANAGER
 {
 public:
-	void print_all_traits();
+	void print();
 	TRAIT* get_trait_spell( string name );
 	~TRAIT_MANAGER();
 

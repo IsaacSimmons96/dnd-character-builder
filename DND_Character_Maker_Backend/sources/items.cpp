@@ -5,26 +5,33 @@
 #include "..\headers\item_utilities.h"
 #include "..\headers\dice_functions.h"
 
-ITEM_BASE::ITEM_BASE( string name,CASH cost, double weight )
+ITEM_BASE::ITEM_BASE( string name, const CASH& cost, double weight )
 {
 	m_item_name = name;
 	m_item_cost = cost;
 	m_weight = weight;
 }
 
-void ITEM_BASE::print_item() const
+void ITEM_BASE::print() const
 {
 	std::cout << m_item_name << std::endl;
-	std::cout << "Cost: " << std::to_string( m_item_cost ) << std::endl;
+	std::cout << "Cost: ";
+	m_item_cost.print();
+	std::cout << std::endl;
 	std::cout << "Weight: " << std::to_string( m_weight ) << std::endl;
 }
 
 ITEM::ITEM( string name,CASH cost, double weight ) : ITEM_BASE( name, cost, weight )
 {}
 
-void ITEM::print_item() const
+bool ITEM::operator==( const ITEM & item_in )
 {
-	ITEM_BASE::print_item();
+	return m_item_name == item_in.get_name() && m_item_cost == item_in.m_item_cost && m_weight == item_in.m_weight;
+}
+
+void ITEM::print() const
+{
+	ITEM_BASE::print();
 }
 
 WEAPON::WEAPON( string name,CASH cost, double weight, dmg::DAMAGE damage, dmg::DAMAGE vers_damage, WEAPON_TYPE type, WEAPON_PROFICIENCY weap_prof,
@@ -44,9 +51,9 @@ WEAPON::WEAPON( string name,CASH cost, double weight, dmg::DAMAGE damage, dmg::D
 	m_max_range = max_range;
 }
 
-void WEAPON::print_item() const
+void WEAPON::print() const
 {
-	ITEM_BASE::print_item();
+	ITEM_BASE::print();
 	std::cout << "Damage: " << std::to_string( m_damage.m_number_of_dice ) << " " << get_string_from_DND_DICE( m_damage.m_dice ) << " " << ITEM_AND_COMBAT_UTILITIES::get_string_from_DAMAGE_TYPE( m_damage.m_damage_type ) << std::endl;
 }
 
@@ -61,8 +68,29 @@ ARMOUR::ARMOUR( string name,CASH cost, double weight, ARMOR_CATEGORY type, bool 
 	m_strength_needed = strength_needed;
 }
 
-void ARMOUR::print_item() const
+void ARMOUR::print() const
 {
-	ITEM_BASE::print_item();
-	std::cout << m_item_name << std::endl;
+	ITEM_BASE::print();
+}
+
+PACK::PACK( string name, CASH cost, double weight, std::vector<ITEM*> items )
+	: ITEM_BASE( name, cost, weight )
+{
+	m_items = items;
+}
+
+void PACK::print() const
+{
+	ITEM_BASE::print();
+	std::cout << "Items In Pack:" << std::endl;
+	std::cout << "***************************************************" << std::endl;
+	std::cout << std::endl;
+
+	for ( auto item : m_items )
+	{
+		item->print();
+		std::cout << std::endl;
+	}
+
+	std::cout << "***************************************************" << std::endl;
 }

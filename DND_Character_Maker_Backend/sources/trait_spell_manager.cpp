@@ -36,7 +36,7 @@ void TRAIT_MANAGER::read_in_traits()
 	}
 }
 
-void TRAIT_MANAGER::print_all_traits()
+void TRAIT_MANAGER::print()
 {
 	if ( m_traits.size() <= 0 )
 	{

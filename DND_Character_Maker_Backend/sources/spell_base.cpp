@@ -8,6 +8,6 @@ SPELL_BASE::~SPELL_BASE()
 {
 }
 
-void SPELL_BASE::print_spell() const
+void SPELL_BASE::print() const
 {
 }

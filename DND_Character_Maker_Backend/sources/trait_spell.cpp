@@ -22,7 +22,7 @@ string TRAIT::get_spell_description()
 	return m_spell_description;
 }
 
-void TRAIT::print_spell() const
+void TRAIT::print() const
 {
 	std::cout << m_spell_name << std::endl;
 	std::cout << m_spell_description << std::endl;

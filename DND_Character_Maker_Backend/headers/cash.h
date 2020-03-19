@@ -15,20 +15,31 @@ typedef std::pair< CASH_TYPE, int64_t > money;
 class CASH
 {
 public:
+	CASH();
 	CASH( const CASH& cash_in );
 	CASH( int64_t gold, int64_t silver, int64_t copper );
 	CASH( money gold, money silver, money copper );
 
-	CASH operator - ( const CASH &cash_in );
-	CASH& operator -= ( const CASH &cash_in );
-	CASH operator + ( const CASH &cash_in );
-	CASH& operator = ( const CASH &cash_in );
-	CASH& operator += ( const CASH &cash_in );
-	bool operator == ( const CASH &cash_in );
-	bool operator > ( const CASH &cash_in );
-	bool operator < ( const CASH &cash_in );
+	money	get_copper() const { return m_copper; };
+	money	get_silver() const { return m_silver; };
+	money	get_gold()   const { return m_gold; };
 
-	void print();
+	CASH  operator -  ( const CASH &cash_in );
+	CASH  operator -  ( const CASH *cash_in );
+	CASH  operator +  ( const CASH &cash_in );
+	CASH  operator +  ( const CASH *cash_in );
+	CASH& operator -= ( const CASH &cash_in );
+	CASH& operator -= ( const CASH *cash_in );
+	CASH& operator += ( const CASH &cash_in );
+	CASH& operator += ( const CASH *cash_in );
+
+	friend bool operator == ( const CASH &cash_in, const CASH & cash_comparison );
+	friend bool operator >  ( const CASH &cash_in, const CASH & cash_comparison );
+	friend bool operator >= ( const CASH &cash_in, const CASH & cash_comparison );
+	friend bool operator <  ( const CASH &cash_in, const CASH & cash_comparison );
+	friend bool operator <= ( const CASH &cash_in, const CASH & cash_comparison );
+
+	void print() const;
 
 private:
 	int8_t round_down_nearest_ten( int8_t in );
@@ -37,13 +48,4 @@ private:
 	money m_copper	{ CASH_TYPE::COPPER, 0};
 	money m_silver	{ CASH_TYPE::SILVER, 0};
 	money m_gold	{ CASH_TYPE::GOLD, 0};
-	//uint64_t m_copper.second	{ 0 };
-	//uint64_t m_silver.second	{ 0 };
-	//uint64_t m_gold.second	{ 0 };
-	//double m_electrum	{ 0 };
-	//double m_platinum	{ 0 };
 };
-
-
-// 1111 = 11 gold, 10 silver, 1 copper
-

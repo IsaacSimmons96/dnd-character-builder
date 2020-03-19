@@ -8,7 +8,7 @@ class SPELLS_MANAGER
 public:
 
 	void read_in_spells();
-	void print_all_spells();
+	void print();
 
 private:
 	std::map<const string, const SPELL*> m_spells;

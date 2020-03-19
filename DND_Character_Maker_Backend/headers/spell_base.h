@@ -14,7 +14,7 @@ public:
 	void set_spell_name( string spell_name )	{ m_spell_name = spell_name; };
 	virtual void set_spell_description( string spell_description ) = 0;
 
-	virtual void print_spell() const = 0;
+	virtual void print() const = 0;
 
 protected:
 	string m_spell_description{ "not set" };

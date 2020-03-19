@@ -4,6 +4,13 @@
 #include <cmath>
 
 
+CASH::CASH()
+{
+	m_gold.second = 0;
+	m_silver.second = 0;
+	m_copper.second = 0;
+}
+
 CASH::CASH( const CASH & cash_in )
 {
 	m_gold.second = cash_in.m_gold.second;
@@ -53,11 +60,25 @@ CASH CASH::operator	- ( const CASH & cash_in )
 	return CASH( new_gold, new_silver, new_copper );
 }
 
+CASH CASH::operator-( const CASH * cash_in )
+{
+	return CASH( *this - *cash_in );
+}
+
+CASH CASH::operator+( const CASH * cash_in )
+{
+	return CASH( *this + *cash_in );
+}
+
 CASH& CASH::operator-=( const CASH & cash_in )
 {
 	return *this = *this - cash_in;
 }
 
+CASH & CASH::operator-=( const CASH * cash_in )
+{
+	return *this = *this - *cash_in;
+}
 
 CASH CASH::operator	+ ( const CASH & cash_in )
 {
@@ -87,37 +108,44 @@ CASH CASH::operator	+ ( const CASH & cash_in )
 	return CASH( new_gold, new_silver, new_copper );
 }
 
-CASH& CASH::operator=( const CASH & cash_in )
-{
-	m_gold.second = cash_in.m_gold.second;
-	m_silver.second = cash_in.m_silver.second;
-	m_copper.second = cash_in.m_copper.second;
-	return *this;
-}
-
 CASH& CASH::operator+=( const CASH & cash_in )
 {
 	return *this = *this + cash_in;
 }
 
-bool CASH::operator	== ( const CASH & cash_in )
+CASH & CASH::operator+=( const CASH * cash_in )
 {
-	return m_gold.second == cash_in.m_gold.second && m_silver.second == cash_in.m_silver.second && m_copper.second == cash_in.m_copper.second;
+	return *this = *this + *cash_in;
 }
 
-bool CASH::operator > ( const CASH & cash_in )
+bool operator == ( const CASH & cash_in, const CASH & cash_comparison )
 {
-	return m_gold.second + m_silver.second + m_copper.second > cash_in.m_gold.second + cash_in.m_silver.second + cash_in.m_copper.second;
+	return cash_in.get_copper().second + cash_in.get_silver().second + cash_in.get_gold().second == cash_comparison.m_gold.second + cash_in.m_silver.second + cash_in.m_copper.second;
 }
 
-bool CASH::operator < ( const CASH & cash_in )
+bool operator > ( const CASH & cash_in, const CASH & cash_comparison )
 {
-	return m_gold.second + m_silver.second + m_copper.second < cash_in.m_gold.second + cash_in.m_silver.second + cash_in.m_copper.second;
+	return cash_in.get_copper().second + cash_in.get_silver().second + cash_in.get_gold().second > cash_comparison.m_gold.second + cash_in.m_silver.second + cash_in.m_copper.second;
 }
 
-void CASH::print()
+bool operator < ( const CASH & cash_in, const CASH & cash_comparison )
 {
-	std::cout << "CASH PRINT - Gold: " << std::to_string( m_gold.second ) << " - Silver: " << std::to_string( m_silver.second ) << " - Copper: " << std::to_string( m_copper.second ) << std::endl;
+	return cash_in.get_copper().second + cash_in.get_silver().second + cash_in.get_gold().second < cash_comparison.m_gold.second + cash_comparison.m_silver.second + cash_comparison.m_copper.second;
+}
+
+bool operator <=( const CASH & cash_in, const CASH & cash_comparison )
+{
+	return cash_in.get_copper().second + cash_in.get_silver().second + cash_in.get_gold().second <= cash_comparison.get_copper().second + cash_comparison.get_silver().second + cash_comparison.get_gold().second;
+}
+
+bool operator >=( const CASH & cash_in, const CASH & cash_comparison )
+{
+	return cash_in.get_copper().second + cash_in.get_silver().second + cash_in.get_gold().second >= cash_comparison.get_copper().second + cash_comparison.get_silver().second + cash_comparison.get_gold().second;
+}
+
+void CASH::print() const
+{
+	std::cout << " Gold: " << std::to_string( m_gold.second ) << " - Silver: " << std::to_string( m_silver.second ) << " - Copper: " << std::to_string( m_copper.second );
 }
 
 int8_t CASH::round_down_nearest_ten( int8_t in )
@@ -193,5 +221,3 @@ money CASH::convert_to_cash_type( const money& input, CASH_TYPE type ) const
 	}
 	return return_money;
 }
-
-

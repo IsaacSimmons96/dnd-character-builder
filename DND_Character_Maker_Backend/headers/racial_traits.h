@@ -28,7 +28,7 @@ public:
 	bool								is_subrace() { return m_main_race != DND_RACE::INVALID ? true : false; }
 	bool								must_pick_subrace() { return m_must_pick_subrace; }
 
-	void								print_racial_traits();
+	void								print();
 
 private:
 

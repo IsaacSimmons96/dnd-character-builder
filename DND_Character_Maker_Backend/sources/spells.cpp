@@ -15,7 +15,7 @@ MAGIC_SPELL::MAGIC_SPELL( string name, SCHOOL_OF_MAGIC school, string desc, stri
 	m_spell_duration_time = spell_duration_time;
 }
 
-void MAGIC_SPELL::print_spell() const
+void MAGIC_SPELL::print() const
 {
 	std::cout << m_spell_name << std::endl;
 	std::cout << "Level " << std::to_string( m_spell_level ) << " " << SPELL_UTILITIES::get_string_from_SCHOOL_OF_MAGIC( m_school ) << std::endl;
@@ -40,7 +40,7 @@ SPELL::SPELL( string name, string desc, string higher_desc, uint16_t spell_level
 	}
 }
 
-void SPELL::print_spell() const
+void SPELL::print() const
 {
 	std::cout << m_spell_name << std::endl;
 	std::cout << "Level " << std::to_string( m_spell_level );

@@ -11,6 +11,7 @@ ITEM_MANAGER::~ITEM_MANAGER()
 	m_items.clear();
 	m_armour.clear();
 	m_weapons.clear();
+	m_packs.clear();
 }
 
 void ITEM_MANAGER::read_in_all()
@@ -18,6 +19,7 @@ void ITEM_MANAGER::read_in_all()
 	read_in_items();
 	read_in_weapons();
 	read_in_armour();
+	read_in_packs();
 }
 
 void ITEM_MANAGER::refresh_items()
@@ -25,6 +27,7 @@ void ITEM_MANAGER::refresh_items()
 	m_items.clear();
 	m_armour.clear();
 	m_weapons.clear();
+	m_packs.clear();
 	read_in_all();
 }
 
@@ -61,7 +64,18 @@ WEAPON* ITEM_MANAGER::get_weapon( string item_name )
 	return found_item;
 }
 
-void ITEM_MANAGER::print_all_items()
+PACK* ITEM_MANAGER::get_pack( string item_name )
+{
+	if ( m_items.size() <= 0 )
+	{
+		read_in_all();
+	}
+
+	PACK* found_item = m_packs.find( item_name )->second;
+	return found_item;
+}
+
+void ITEM_MANAGER::print()
 {
 	if ( m_items.size() <= 0 )
 	{
@@ -70,7 +84,7 @@ void ITEM_MANAGER::print_all_items()
 
 	for ( auto it = m_items.begin(); it != m_items.end(); ++it )
 	{
-		it->second->print_item();
+		it->second->print();
 	}
 }
 
@@ -298,3 +312,52 @@ void ITEM_MANAGER::read_in_armour()
 		ss.clear();
 	}
 }
+
+void ITEM_MANAGER::read_in_packs()
+{
+	std::ifstream file( m_file_packs );
+	string value, temp;
+	std::stringstream ss;
+	int64_t int64_in;
+
+	auto convert_string_to_int = [&]()
+	{
+		std::stringstream num_stringstream( temp );
+		num_stringstream >> int64_in;
+	};
+
+	while ( getline( file, value ) )
+	{
+		ss << value;
+
+		getline( ss, temp, ';' );
+		const string item_name = temp;
+
+		getline( ss, temp, ';' );
+		convert_string_to_int();
+		const money gold( CASH_TYPE::GOLD, int64_in );
+
+		getline( ss, temp, ';' );
+		convert_string_to_int();
+		const money silver( CASH_TYPE::SILVER, int64_in );
+
+		getline( ss, temp, ';' );
+		convert_string_to_int();
+		const money copper( CASH_TYPE::COPPER, int64_in );
+
+		std::vector<ITEM*> items;
+		while ( getline( ss, temp, ';' ) )
+		{
+			items.push_back( get_item( temp ) );
+		}
+
+		const auto new_pack = new PACK( item_name, CASH( gold, silver, copper ), 0, items );
+		const auto new_item = dynamic_cast<ITEM*>(new_pack);
+
+		m_packs.insert( std::make_pair( item_name, new_pack ) );
+		m_items.insert( std::make_pair( item_name, new_item ) );
+
+		ss.clear();
+	}
+}
+

@@ -110,7 +110,7 @@ void RACIAL_TRAITS_MANAGER::read_in_race_traits()
 	}
 }
 
-void RACIAL_TRAITS_MANAGER::print_all_races()
+void RACIAL_TRAITS_MANAGER::print()
 {
 	if ( m_race_traits.size() <= 0 )
 	{
@@ -119,7 +119,7 @@ void RACIAL_TRAITS_MANAGER::print_all_races()
 
 	for ( auto it = m_race_traits.begin(); it != m_race_traits.end(); ++it )
 	{
-		it->second->print_racial_traits();
+		it->second->print();
 	}
 }
 

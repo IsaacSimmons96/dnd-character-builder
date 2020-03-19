@@ -4,6 +4,7 @@
 #include "dice_functions.h"
 #include "racial_traits_manager.h"
 #include "typedefs.h"
+#include "inventory.h"
 #include <map>
 #include <vector>
 
@@ -87,25 +88,27 @@ public:
 	DND_BACKGROUND	get_background()					{ return m_background; };
 	DND_RACE		get_race()							{ return m_race; };
 	DND_ALIGNMENT	get_alignment()						{ return m_alignment; };
-	uint16_t			get_proficiency_bonus()				{ return m_proficiency_bonus; };
-	uint16_t			get_level()							{ return m_level; };
-	uint16_t			get_exp()							{ return m_exp; };
-	uint16_t			get_initiative_modifier()			{ return m_initiative_modifier; };
-	uint16_t			get_hit_points()					{ return m_hit_points; };
+	uint16_t		get_proficiency_bonus()				{ return m_proficiency_bonus; };
+	uint16_t		get_level()							{ return m_level; };
+	uint16_t		get_exp()							{ return m_exp; };
+	uint16_t		get_initiative_modifier()			{ return m_initiative_modifier; };
+	uint16_t		get_hit_points()					{ return m_hit_points; };
+	INVENTORY*		get_inventory()						{ return m_inventory; };
 
 	// character stats getters
 	uint16_t get_strength()								{ return m_strength; };
-	uint16_t get_dexterity()								{ return m_dexterity; };
+	uint16_t get_dexterity()							{ return m_dexterity; };
 	uint16_t get_constitution()							{ return m_constitution; };
 	uint16_t get_intelligence()							{ return m_intelligence; };
-	uint16_t get_wisdom()									{ return m_wisdom; };
+	uint16_t get_wisdom()								{ return m_wisdom; };
 	uint16_t get_charisma()								{ return m_charisma; };
+
 	uint16_t get_ability_value( ABILITY_SCORE_TYPES ability_type );
 	std::vector< DND_SKILL > get_skill_proficiencys();
 
 	//prints
 	void print_saving_throws() { m_saving_throws.print_saving_throws(); };
-	void print_character_info();
+	void print_character();
 	void print_skills();
 	void print_hit_dice();
 	void print_languages();
@@ -121,10 +124,10 @@ private:
 	std::string		m_player_name{ "INVALID" };
 
 	// main information
-	DND_CLASS		m_class{ DND_CLASS::INVALID };
-	DND_BACKGROUND	m_background{ DND_BACKGROUND::INVALID };
-	DND_RACE		m_race{ DND_RACE::INVALID };
-	DND_ALIGNMENT	m_alignment{ DND_ALIGNMENT::INVALID };
+	DND_CLASS			m_class{ DND_CLASS::INVALID };
+	DND_BACKGROUND		m_background{ DND_BACKGROUND::INVALID };
+	DND_RACE			m_race{ DND_RACE::INVALID };
+	DND_ALIGNMENT		m_alignment{ DND_ALIGNMENT::INVALID };
 	uint16_t			m_level{ 1 };
 	uint16_t			m_exp{ 0 };
 
@@ -135,7 +138,7 @@ private:
 	uint16_t			m_armour_class{ 0 };
 	uint16_t			m_passive_perception{ 0 };
 	uint16_t			m_speed{ 0 };
-	DND_SIZE		m_size{ DND_SIZE::INVALID };
+	DND_SIZE			m_size{ DND_SIZE::INVALID };
 
 	SAVING_THROWS	m_saving_throws;
 	std::map< DND_SKILL, CHARACTER_SKILL* > m_skills;
@@ -147,6 +150,8 @@ private:
 	std::vector<WEAPON*> m_weapon_profs;
 	std::vector<ARMOR_CATEGORY> m_armor_profs;
 	std::vector<WEAPON_PROFICIENCY> m_general_weapon_profs;
+	INVENTORY* m_inventory;
+	
 
 	// character stats
 	uint16_t			m_strength{ 0 };

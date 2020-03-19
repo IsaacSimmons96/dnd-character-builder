@@ -18,10 +18,11 @@ namespace dmg
 class ITEM_BASE
 {
 public:
-	ITEM_BASE( string name, CASH cost, double weight );
+	ITEM_BASE( string name, const CASH& cost, double weight );
 
-	virtual void print_item() const = 0;
+	virtual void print() const = 0;
 	string get_name() const { return m_item_name; };
+	CASH get_cost() const { return m_item_cost; };
 
 protected:
 
@@ -34,7 +35,8 @@ class ITEM : public ITEM_BASE
 {
 public:
 	ITEM( string name, CASH cost, double weight );
-	virtual void print_item() const override;
+	bool operator == ( const ITEM &item_in );
+	virtual void print() const override;
 };
 
 class WEAPON : public ITEM_BASE
@@ -45,7 +47,7 @@ public:
 			WEAPON_PROFICIENCY weap_prof, std::vector<WEAPON_PROPERTIES> properties,
 			uint16_t min_range, uint16_t max_range );
 
-	void print_item() const override;
+	void print() const override;
 
 private:
 	dmg::DAMAGE m_damage;
@@ -62,7 +64,7 @@ class ARMOUR : public ITEM_BASE
 public:
 	ARMOUR( string name, CASH cost, double weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, uint16_t ac, uint16_t strength_needed );
 
-	void print_item() const override;
+	void print() const override;
 
 private:
 	ARMOR_CATEGORY m_armor_type{ ARMOR_CATEGORY::INVALID };
@@ -71,4 +73,14 @@ private:
 	bool m_dex_cap_at_2{ false };
 	uint16_t m_armor_class{ 0 };
 	uint16_t m_strength_needed{ 0 };
+};
+
+class PACK : public ITEM_BASE
+{
+public:
+	PACK( string name, CASH cost, double weight, std::vector<ITEM*> items );
+	void print() const override;
+
+private:
+	std::vector<ITEM*> m_items;
 };

@@ -10,10 +10,12 @@
 
 DND_CHARACTER::~DND_CHARACTER()
 {
+	delete m_inventory;
 }
 
 DND_CHARACTER::DND_CHARACTER()
 {
+	m_inventory = new INVENTORY();
 }
 
 DND_CHARACTER::DND_CHARACTER( DND_CHARACTER const &character_in )
@@ -23,6 +25,7 @@ DND_CHARACTER::DND_CHARACTER( DND_CHARACTER const &character_in )
 	m_background = character_in.m_background;
 	m_race = character_in.m_race;
 	m_alignment = character_in.m_alignment;
+	m_inventory = new INVENTORY();
 }
 
 void DND_CHARACTER::apply_racial_traits( DND_RACE race, RACIAL_TRAITS_MANAGER& rtm, bool has_applied_race )
@@ -392,7 +395,7 @@ void DND_CHARACTER::print_hit_dice()
 	}
 }
 
-void DND_CHARACTER::print_character_info()
+void DND_CHARACTER::print_character()
 {
 	const std::string border = "************************************************************************************";
 	print( border );

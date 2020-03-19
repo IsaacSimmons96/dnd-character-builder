@@ -13,7 +13,7 @@ public:
 	RACIAL_TRAITS_MANAGER( TRAIT_MANAGER& tsm );
 	~RACIAL_TRAITS_MANAGER();
 
-	void print_all_races();
+	void print();
 	void refresh_races();
 	RACIAL_TRAITS* get_race_traits( DND_RACE race );
 	std::vector< DND_RACE > get_subraces( DND_RACE race );

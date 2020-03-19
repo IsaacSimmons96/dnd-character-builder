@@ -16,7 +16,7 @@ public:
 	string get_higher_spell_description()	{ return m_higher_level_description; };
 	string get_full_spell_description()		{ return get_spell_description() + "\n\n" + get_higher_spell_description(); };
 
-	void print_spell() const override;
+	void print() const override;
 
 	bool is_available_to_class( DND_CLASS class_in );
 
@@ -32,7 +32,7 @@ public:
 	MAGIC_SPELL( string name, SCHOOL_OF_MAGIC school, string desc, string higher_desc, SPELL_CASTING_TIME casting_t, uint16_t range,
 				 SPELL_COMPONENT components, string material_description, SPELL_DURATION duration, SPELL_DURATION_TIME spell_duration_time,
 				 uint16_t spell_level, std::vector<DND_CLASS> classes );
-	void print_spell() const override;
+	void print() const override;
 
 private:
 	uint16_t m_spell_range;
