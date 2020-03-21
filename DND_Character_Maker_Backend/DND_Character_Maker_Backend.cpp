@@ -8,6 +8,7 @@
 #include "headers/generic_utilities.h"
 #include "headers/racial_traits_manager.h"
 #include "headers/spells_manager.h"
+#include "headers/item_manager.h"
 #include "headers/trait_spell_manager.h"
 #include <iostream>
 #include <cassert>
@@ -22,6 +23,7 @@ int main()
 
 	DND_CHARACTER character;
 	TRAIT_MANAGER tsm;
+	ITEM_MANAGER i_manager;
 	RACIAL_TRAITS_MANAGER trait_manager( tsm );
 
 	string temp;
@@ -155,7 +157,7 @@ int main()
 
 	//character.print_character();
 
-	CASH cash_test( 18, 0, 2 );
+	/*CASH cash_test( 18, 0, 2 );
 	cash_test += CASH( 17, 0, 0 );
 	cash_test.print();
 
@@ -165,5 +167,8 @@ int main()
 
 	const auto it = new ITEM( "test", cash_test, 0 );
 	inv->add_item( it );
-	inv->print();
+	inv->print();*/
+
+	
+	i_manager.print();
 }

@@ -5,8 +5,8 @@
 #include <fstream>
 #include <iosfwd>
 #include <sstream>
-
-#include <cstring>
+#include <iostream>
+#include <cctype>
 
 ITEM_MANAGER::~ITEM_MANAGER()
 {
@@ -21,7 +21,7 @@ void ITEM_MANAGER::read_in_all()
 	read_in_items();
 	read_in_weapons();
 	read_in_armour();
-	read_in_packs();
+	//read_in_packs();
 }
 
 void ITEM_MANAGER::refresh_items()
@@ -86,7 +86,9 @@ void ITEM_MANAGER::print()
 
 	for ( auto it = m_items.begin(); it != m_items.end(); ++it )
 	{
+		std::cout << std::endl;
 		it->second->print();
+		std::cout << std::endl;
 	}
 }
 
@@ -144,15 +146,8 @@ void ITEM_MANAGER::read_in_weapons()
 	string value, temp;
 	std::stringstream ss;
 	uint16_t uint_temp;
-	uint8_t uint8_temp;
 
 	auto convert_string_to_int = [&]()
-	{
-		std::stringstream num_stringstream( temp );
-		num_stringstream >> uint_temp;
-	};
-
-	auto convert_string_to_u_int8 = [&]()
 	{
 		std::stringstream num_stringstream( temp );
 		num_stringstream >> uint_temp;
@@ -178,8 +173,8 @@ void ITEM_MANAGER::read_in_weapons()
 			const DND_DICE dice_type = get_DND_DICE_from_string( temp );
 
 			getline( ss, temp, ';' );
-			convert_string_to_u_int8();
-			const uint8_t ammount = uint8_temp;
+			convert_string_to_int();
+			const uint16_t ammount = uint_temp;
 
 			dmg::DAMAGE weapon_damage;
 			weapon_damage.m_damage_type = dmg_type;
@@ -210,10 +205,12 @@ void ITEM_MANAGER::read_in_weapons()
 		getline( ss, temp, ';' );
 		const bool in_shop = temp == "TRUE";
 
+		// bludgeoning, piercing, slashing -  D4... - number of die
 		auto damage_type_main = create_damage();
 
 		getline( ss, temp, ';' );
 		const bool is_versatile = temp == "TRUE";
+
 
 		dmg::DAMAGE damage_type_vers;
 		if ( is_versatile )
@@ -221,15 +218,17 @@ void ITEM_MANAGER::read_in_weapons()
 			damage_type_vers = create_damage();
 		}
 
-		getline( ss, temp, ';' );
-		const WEAPON_TYPE weapon_type = ITEM_AND_COMBAT_UTILITIES::get_WEAPON_TYPE_from_string( temp );
-
+		// simple, martial
 		getline( ss, temp, ';' );
 		const WEAPON_PROFICIENCY weapon_prof = ITEM_AND_COMBAT_UTILITIES::get_WEAPON_PROFICIENCY_from_string( temp );
 
+		// melee, ranged, both
+		getline( ss, temp, ';' );
+		const WEAPON_TYPE weapon_type = ITEM_AND_COMBAT_UTILITIES::get_WEAPON_TYPE_from_string( temp );
+
 		uint16_t min_range( 0 );
 		uint16_t max_range( 0 );
-		if ( weapon_type == WEAPON_TYPE::RANGED )
+		if ( weapon_type == WEAPON_TYPE::RANGED || weapon_type == WEAPON_TYPE::BOTH )
 		{
 			getline( ss, temp, ';' );
 			convert_string_to_int();
@@ -243,15 +242,15 @@ void ITEM_MANAGER::read_in_weapons()
 		std::vector<WEAPON_PROPERTIES> props;
 		while ( getline( ss, temp, ';' ) )
 		{
+			// ammunition, finesse, heavy, improvised, light, loading, range, reach, special, thrown, two handed, versatile
 			const WEAPON_PROPERTIES prop = ITEM_AND_COMBAT_UTILITIES::get_WEAPON_PROPERTIES_from_string( temp );
 			props.push_back( prop );
 		}
 
 		const auto new_weapon = new WEAPON( item_name, CASH( gold, silver, copper ), weight, in_shop, damage_type_main, is_versatile, damage_type_vers, weapon_type, weapon_prof, props, min_range, max_range );
-		const auto new_weapon_item = dynamic_cast<ITEM*>(new_weapon);
 
 		m_weapons.insert( std::make_pair( item_name, new_weapon ) );
-		m_items.insert( std::make_pair( item_name, new_weapon_item ) );
+		m_items.insert( std::make_pair( item_name, new_weapon ) );
 		ss.clear();
 	}
 }
@@ -323,10 +322,9 @@ void ITEM_MANAGER::read_in_armour()
 
 
 		const auto new_armour = new ARMOUR( item_name, CASH( gold, silver, copper ), weight, in_shop, category, stealth_dis, dex_mod_bonus, dex_cap, base_AC, str_needed );
-		const auto new_armour_item = dynamic_cast<ITEM*>(new_armour);
 
 		m_armour.insert( std::make_pair( item_name, new_armour ) );
-		m_items.insert( std::make_pair( item_name, new_armour_item ) );
+		m_items.insert( std::make_pair( item_name, new_armour ) );
 
 		ss.clear();
 	}
@@ -400,10 +398,9 @@ void ITEM_MANAGER::read_in_packs()
 		}
 
 		const auto new_pack = new PACK( item_name, CASH( gold, silver, copper ), 0, items );
-		const auto new_item = dynamic_cast<ITEM*>(new_pack);
 
 		m_packs.insert( std::make_pair( item_name, new_pack ) );
-		m_items.insert( std::make_pair( item_name, new_item ) );
+		m_items.insert( std::make_pair( item_name, new_pack ) );
 
 		ss.clear();
 	}

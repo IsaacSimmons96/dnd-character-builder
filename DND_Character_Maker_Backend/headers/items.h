@@ -11,7 +11,7 @@ namespace dmg
 	{
 		DAMAGE_TYPE m_damage_type{ DAMAGE_TYPE::INVALID };
 		DND_DICE m_dice{ DND_DICE::INVALID };
-		uint8_t m_number_of_dice{ 0 };
+		uint16_t m_number_of_dice{ 0 };
 	};
 }
 
@@ -41,7 +41,7 @@ public:
 	virtual void print() const override;
 };
 
-class WEAPON : public ITEM_BASE
+class WEAPON : public ITEM
 {
 public:
 	WEAPON( string name, CASH cost, double weight, bool include_in_shop,
@@ -59,9 +59,10 @@ private:
 	std::vector<WEAPON_PROPERTIES> m_properties;
 	uint16_t m_min_range;
 	uint16_t m_max_range;
+	bool m_versatile;
 };
 
-class ARMOUR : public ITEM_BASE
+class ARMOUR : public ITEM
 {
 public:
 	ARMOUR( string name, CASH cost, double weight, bool include_in_shop, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, uint16_t ac, uint16_t strength_needed );
@@ -77,10 +78,11 @@ private:
 	uint16_t m_strength_needed{ 0 };
 };
 
-class PACK : public ITEM_BASE
+class PACK : public ITEM
 {
 public:
 	PACK( string name, CASH cost, double weight, std::vector<ITEM*> items, bool include_in_shop = true );
+	void print_items() const;
 	void print() const override;
 
 private:

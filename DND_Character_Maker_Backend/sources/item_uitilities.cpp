@@ -393,6 +393,7 @@ string ITEM_AND_COMBAT_UTILITIES::get_string_from_WEAPON_TYPE( WEAPON_TYPE type_
 	switch ( type_in )
 	{
 	case WEAPON_TYPE::MELEE:
+	case WEAPON_TYPE::BOTH:
 		return_string = "Melee";
 		break;
 	case WEAPON_TYPE::RANGED:

@@ -11,6 +11,8 @@ enum class DND_DICE : char
 	D12,
 	D20,
 	PERCENTILE,
+	FLAT_1,
+	NONE,
 	INVALID
 };
 

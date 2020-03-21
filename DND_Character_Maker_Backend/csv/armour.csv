@@ -1,18 +1,13 @@
-Padded;5;0;0;8;TRUE;light;TRUE;TRUE;FALSE;11;0
-Leather;10;0;0;10;TRUE;light;FALSE;TRUE;FALSE;11;0
-Studded leather;45;0;0;13;TRUE;light;FALSE;TRUE;FALSE;12;0
-Hide;10;0;0;12;TRUE;medium;FALSE;TRUE;TRUE;12;0
-Chain shirt;50;0;0;20;TRUE;medium;FALSE;TRUE;TRUE;13;0
-Scale mail;50;0;0;45;TRUE;medium;TRUE;TRUE;TRUE;14;0
-Breastplate;400;0;0;20;TRUE;medium;FALSE;TRUE;TRUE;14;0
-Half plate;750;0;0;20;TRUE;medium;TRUE;TRUE;TRUE;15;0
-Ring mail;30;0;0;40;TRUE;heavy;TRUE;FALSE;FALSE;14;0
-Chain mail;75;0;0;55;TRUE;heavy;TRUE;FALSE;FALSE;16;13
-Splint;200;0;0;60;TRUE;heavy;TRUE;FALSE;FALSE;17;15
-Plate;1500;0;0;65;TRUE;heavy;TRUE;FALSE;FALSE;18;15
-Shield;10;0;0;6;TRUE;shield;FALSE;FALSE;FALSE;2;0
-;;;;;;;;;;;
-;;;;;;;;;;;
-;;;;;;;;;;;
-;;;;;;;;;;;
-;;;;;;;;;;;
+Padded;5;0;0;8;TRUE;light;TRUE;TRUE;FALSE;11;0;
+Leather;10;0;0;10;TRUE;light;FALSE;TRUE;FALSE;11;0;
+Studded leather;45;0;0;13;TRUE;light;FALSE;TRUE;FALSE;12;0;
+Hide;10;0;0;12;TRUE;medium;FALSE;TRUE;TRUE;12;0;
+Chain shirt;50;0;0;20;TRUE;medium;FALSE;TRUE;TRUE;13;0;
+Scale mail;50;0;0;45;TRUE;medium;TRUE;TRUE;TRUE;14;0;
+Breastplate;400;0;0;20;TRUE;medium;FALSE;TRUE;TRUE;14;0;
+Half plate;750;0;0;20;TRUE;medium;TRUE;TRUE;TRUE;15;0;
+Ring mail;30;0;0;40;TRUE;heavy;TRUE;FALSE;FALSE;14;0;
+Chain mail;75;0;0;55;TRUE;heavy;TRUE;FALSE;FALSE;16;13;
+Splint;200;0;0;60;TRUE;heavy;TRUE;FALSE;FALSE;17;15;
+Plate;1500;0;0;65;TRUE;heavy;TRUE;FALSE;FALSE;18;15;
+Shield;10;0;0;6;TRUE;shield;FALSE;FALSE;FALSE;2;0;

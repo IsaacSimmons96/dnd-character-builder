@@ -1,143 +1,143 @@
-Abacus;2;0;0;2;TRUE
-Acid (vial);25;0;0;1;TRUE
-Alchemist's fire (flask);50;0;0;1;TRUE
-Arrows (20);1;0;0;1;TRUE
-Blowgun needles (50);1;0;0;1;TRUE
-Crossbow bolts (20);1;0;0;1.5;TRUE
-Sling bullets (20);0;0;4;1.5;TRUE
-Antitoxin (vial);50;0;0;0;TRUE
-Arcane Focus Crystal;10;0;0;1;TRUE
-Arcane Focus Orb;20;0;0;3;TRUE
-Arcane Focus Rod;10;0;0;2;TRUE
-Arcane Focus Staff;5;0;0;4;TRUE
-Arcane Focus Wand;10;0;0;1;TRUE
-Backpack;2;0;0;5;TRUE
-Ball bearings (bag of 1000);1;0;0;2;TRUE
-Barrel;2;0;0;70;TRUE
-Basket;0;4;0;2;TRUE
-Bedroll;1;0;0;7;TRUE
-Bell;1;0;0;0;TRUE
-Blanket;0;5;0;3;TRUE
-Block and tackle;1;0;0;5;TRUE
-Book;25;0;0;5;TRUE
-Bottle (glass);2;0;0;2;TRUE
-Bucket;0;0;5;2;TRUE
-Caltrops (bag of 20);1;0;0;2;TRUE
-Candle;0;0;1;0;TRUE
-Case, crossbow bolt;1;0;0;1;TRUE
-Case, map or scroll;1;0;0;1;TRUE
-Chain (10 ft);5;0;0;10;TRUE
-Chalk (1 piece);0;0;1;0;TRUE
-Chest;5;0;0;25;TRUE
-Climber's kit;25;0;0;12;TRUE
-Clothes, common;0;5;0;3;TRUE
-Clothes, costume;5;0;0;4;TRUE
-Clothes, fine;15;0;0;6;TRUE
-Clothes, traveler's;2;0;0;4;TRUE
-Component pouch;25;0;0;2;TRUE
-Crowbar;2;0;0;5;TRUE
-Druidic Focu Sprig of mistletoe;1;0;0;0;TRUE
-Druidic Focus Totem;1;0;0;0;TRUE
-Druidic Focus Wooden staff;5;0;0;4;TRUE
-Druidic Focus Yew wand;10;0;0;1;TRUE
-Fishing tackle;1;0;0;4;TRUE
-Flask or tankard;;0;2;1;TRUE
-Grappling hook;2;0;0;4;TRUE
-Hammer;1;0;0;3;TRUE
-Hammer, sledge;2;0;0;10;TRUE
-Healer's kit;5;0;0;3;TRUE
-Holy Symbol Amulet;5;0;0;1;TRUE
-Holy Symbol Emblem;5;0;0;0;TRUE
-Holy Symbol Reliquary;5;0;0;2;TRUE
-Holy water (flask);25;0;0;1;TRUE
-Hourglass;25;0;0;1;TRUE
-Hunting trap;5;0;0;25;TRUE
-Ink (1 ounce bottle);10;0;0;0;TRUE
-Ink pen;0;0;2;0;TRUE
-Jug or pitcher;0;0;2;4;TRUE
-Ladder (10 ft);0;1;0;25;TRUE
-Lamp;0;5;0;1;TRUE
-Lantern, bullseye;10;0;0;2;TRUE
-Lantern, hooded;5;0;0;2;TRUE
-Lock;10;0;0;1;TRUE
-Magnifying glass;100;0;0;0;TRUE
-Manacles;2;0;0;6;TRUE
-Mess kit;0;2;0;1;TRUE
-Mirror, steel;5;0;0;0.5;TRUE
-Oil (flask);0;1;0;1;TRUE
-Paper sheet;0;2;0;0;TRUE
-Parchment sheet;0;1;0;0;TRUE
-Perfume (vial);5;0;0;0;TRUE
-Pick, miner's;2;0;0;10;TRUE
-Piton;0;0;5;0.25;TRUE
-Poison, basic (vial);100;0;0;0;TRUE
-Pole (10 ft);0;0;5;7;TRUE
-Pot, iron;2;0;0;10;TRUE
-Potion of healing;50;0;0;0.5;TRUE
-Pouch;0;5;0;1;TRUE
-Quiver;1;0;0;1;TRUE
-Ram, portable;4;0;0;35;TRUE
-Rations;0;5;0;2;TRUE
-Robes;1;0;0;4;TRUE
-Rope, hempen (50 ft);1;0;0;10;TRUE
-Rope, silk (50 ft);10;0;0;5;TRUE
-Sack;0;0;1;0.5;TRUE
-Scale, merchant's;5;0;0;3;TRUE
-Sealing wax;0;5;0;0;TRUE
-Shovel;2;0;0;5;TRUE
-Signal whistle;0;0;5;0;TRUE
-Signet ring;5;0;0;0;TRUE
-Soap;0;0;2;0;TRUE
-Spellbook;50;0;0;3;TRUE
-Spikes, iron (10);1;0;0;5;TRUE
-Spyglass;1000;0;0;1;TRUE
-Tent, two person;2;0;0;20;TRUE
-Tinderbox;0;5;0;1;TRUE
-Torch;0;0;1;1;TRUE
-Vial;1;0;0;0;TRUE
-Waterskin;0;2;0;5;TRUE
-Whetstone;0;0;1;1;TRUE
-10 feet of string;0;0;0;0;FALSE
-Alchemist’s supplies;50;0;0;8;TRUE
-Brewer’s supplies;20;0;0;9;TRUE
-Calligrapher's Supplies;10;0;0;5;TRUE
-Carpenter’s tools;8;0;0;6;TRUE
-Cartographer’s tools;15;0;0;6;TRUE
-Cobbler’s tools;5;0;0;5;TRUE
-Cook’s utensils;1;0;0;8;TRUE
-Glassblower’s tools;30;0;0;5;TRUE
-Jeweler’s tools;25;0;0;2;TRUE
-Leatherworker’s tools;5;0;0;5;TRUE
-Mason’s tools;10;0;0;8;TRUE
-Painter’s supplies;10;0;0;5;TRUE
-Potter’s tools;10;0;0;3;TRUE
-Smith’s tools;20;0;0;8;TRUE
-Tinker’s tools;59;0;0;10;TRUE
-Weaver’s tools;1;0;0;5;TRUE
-Woodcarver’s tools;1;0;0;5;TRUE
-Disguise kit;25;0;0;3;TRUE
-Forgery kit;15;0;0;5;TRUE
-Dice set;0;1;0;0;TRUE
-Playing card set;0;5;0;0;TRUE
-Dragonchess set;1;0;0;0.5;TRUE
-Three-Dragon Ante set;1;0;0;0;TRUE
-Herbalism kit;5;0;0;3;TRUE
-Bagpipes;30;0;0;6;TRUE
-Drum;6;0;0;3;TRUE
-Dulcimer;25;0;0;10;TRUE
-Flute;2;0;0;1;TRUE
-Lute;35;0;0;2;TRUE
-Lyre;30;0;0;2;TRUE
-Horn;3;0;0;2;TRUE
-Pan flute;12;0;0;2;TRUE
-Shawm;2;0;0;1;TRUE
-Viol;30;0;0;1;TRUE
-Navigator’s tools;25;0;0;2;TRUE
-Thieves’ tools;25;0;0;1;TRUE
-Alms box;0;0;0;0;FALSE
-Block of incense;0;0;0;0;FALSE
-Censer;0;0;0;0;FALSE
-Vestments;0;0;0;0;FALSE
-Book of lore;0;0;0;5;FALSE
-A little bag of sand;0;0;0;0;FALSE
-Small knife;0;0;0;0;FALSE
+Abacus;2;0;0;2;TRUE;
+Acid (vial);25;0;0;1;TRUE;
+Alchemist's fire (flask);50;0;0;1;TRUE;
+Arrows (20);1;0;0;1;TRUE;
+Blowgun needles (50);1;0;0;1;TRUE;
+Crossbow bolts (20);1;0;0;1.5;TRUE;
+Sling bullets (20);0;0;4;1.5;TRUE;
+Antitoxin (vial);50;0;0;0;TRUE;
+Arcane Focus Crystal;10;0;0;1;TRUE;
+Arcane Focus Orb;20;0;0;3;TRUE;
+Arcane Focus Rod;10;0;0;2;TRUE;
+Arcane Focus Staff;5;0;0;4;TRUE;
+Arcane Focus Wand;10;0;0;1;TRUE;
+Backpack;2;0;0;5;TRUE;
+Ball bearings (bag of 1000);1;0;0;2;TRUE;
+Barrel;2;0;0;70;TRUE;
+Basket;0;4;0;2;TRUE;
+Bedroll;1;0;0;7;TRUE;
+Bell;1;0;0;0;TRUE;
+Blanket;0;5;0;3;TRUE;
+Block and tackle;1;0;0;5;TRUE;
+Book;25;0;0;5;TRUE;
+Bottle (glass);2;0;0;2;TRUE;
+Bucket;0;0;5;2;TRUE;
+Caltrops (bag of 20);1;0;0;2;TRUE;
+Candle;0;0;1;0;TRUE;
+Case, crossbow bolt;1;0;0;1;TRUE;
+Case, map or scroll;1;0;0;1;TRUE;
+Chain (10 ft);5;0;0;10;TRUE;
+Chalk (1 piece);0;0;1;0;TRUE;
+Chest;5;0;0;25;TRUE;
+Climber's kit;25;0;0;12;TRUE;
+Clothes, common;0;5;0;3;TRUE;
+Clothes, costume;5;0;0;4;TRUE;
+Clothes, fine;15;0;0;6;TRUE;
+Clothes, traveler's;2;0;0;4;TRUE;
+Component pouch;25;0;0;2;TRUE;
+Crowbar;2;0;0;5;TRUE;
+Druidic Focu Sprig of mistletoe;1;0;0;0;TRUE;
+Druidic Focus Totem;1;0;0;0;TRUE;
+Druidic Focus Wooden staff;5;0;0;4;TRUE;
+Druidic Focus Yew wand;10;0;0;1;TRUE;
+Fishing tackle;1;0;0;4;TRUE;
+Flask or tankard;;0;2;1;TRUE;
+Grappling hook;2;0;0;4;TRUE;
+Hammer;1;0;0;3;TRUE;
+Hammer, sledge;2;0;0;10;TRUE;
+Healer's kit;5;0;0;3;TRUE;
+Holy Symbol Amulet;5;0;0;1;TRUE;
+Holy Symbol Emblem;5;0;0;0;TRUE;
+Holy Symbol Reliquary;5;0;0;2;TRUE;
+Holy water (flask);25;0;0;1;TRUE;
+Hourglass;25;0;0;1;TRUE;
+Hunting trap;5;0;0;25;TRUE;
+Ink (1 ounce bottle);10;0;0;0;TRUE;
+Ink pen;0;0;2;0;TRUE;
+Jug or pitcher;0;0;2;4;TRUE;
+Ladder (10 ft);0;1;0;25;TRUE;
+Lamp;0;5;0;1;TRUE;
+Lantern, bullseye;10;0;0;2;TRUE;
+Lantern, hooded;5;0;0;2;TRUE;
+Lock;10;0;0;1;TRUE;
+Magnifying glass;100;0;0;0;TRUE;
+Manacles;2;0;0;6;TRUE;
+Mess kit;0;2;0;1;TRUE;
+Mirror, steel;5;0;0;0.5;TRUE;
+Oil (flask);0;1;0;1;TRUE;
+Paper sheet;0;2;0;0;TRUE;
+Parchment sheet;0;1;0;0;TRUE;
+Perfume (vial);5;0;0;0;TRUE;
+Pick, miner's;2;0;0;10;TRUE;
+Piton;0;0;5;0.25;TRUE;
+Poison, basic (vial);100;0;0;0;TRUE;
+Pole (10 ft);0;0;5;7;TRUE;
+Pot, iron;2;0;0;10;TRUE;
+Potion of healing;50;0;0;0.5;TRUE;
+Pouch;0;5;0;1;TRUE;
+Quiver;1;0;0;1;TRUE;
+Ram, portable;4;0;0;35;TRUE;
+Rations;0;5;0;2;TRUE;
+Robes;1;0;0;4;TRUE;
+Rope, hempen (50 ft);1;0;0;10;TRUE;
+Rope, silk (50 ft);10;0;0;5;TRUE;
+Sack;0;0;1;0.5;TRUE;
+Scale, merchant's;5;0;0;3;TRUE;
+Sealing wax;0;5;0;0;TRUE;
+Shovel;2;0;0;5;TRUE;
+Signal whistle;0;0;5;0;TRUE;
+Signet ring;5;0;0;0;TRUE;
+Soap;0;0;2;0;TRUE;
+Spellbook;50;0;0;3;TRUE;
+Spikes, iron (10);1;0;0;5;TRUE;
+Spyglass;1000;0;0;1;TRUE;
+Tent, two person;2;0;0;20;TRUE;
+Tinderbox;0;5;0;1;TRUE;
+Torch;0;0;1;1;TRUE;
+Vial;1;0;0;0;TRUE;
+Waterskin;0;2;0;5;TRUE;
+Whetstone;0;0;1;1;TRUE;
+10 feet of string;0;0;0;0;FALSE;
+Alchemist’s supplies;50;0;0;8;TRUE;
+Brewer’s supplies;20;0;0;9;TRUE;
+Calligrapher's Supplies;10;0;0;5;TRUE;
+Carpenter’s tools;8;0;0;6;TRUE;
+Cartographer’s tools;15;0;0;6;TRUE;
+Cobbler’s tools;5;0;0;5;TRUE;
+Cook’s utensils;1;0;0;8;TRUE;
+Glassblower’s tools;30;0;0;5;TRUE;
+Jeweler’s tools;25;0;0;2;TRUE;
+Leatherworker’s tools;5;0;0;5;TRUE;
+Mason’s tools;10;0;0;8;TRUE;
+Painter’s supplies;10;0;0;5;TRUE;
+Potter’s tools;10;0;0;3;TRUE;
+Smith’s tools;20;0;0;8;TRUE;
+Tinker’s tools;59;0;0;10;TRUE;
+Weaver’s tools;1;0;0;5;TRUE;
+Woodcarver’s tools;1;0;0;5;TRUE;
+Disguise kit;25;0;0;3;TRUE;
+Forgery kit;15;0;0;5;TRUE;
+Dice set;0;1;0;0;TRUE;
+Playing card set;0;5;0;0;TRUE;
+Dragonchess set;1;0;0;0.5;TRUE;
+Three-Dragon Ante set;1;0;0;0;TRUE;
+Herbalism kit;5;0;0;3;TRUE;
+Bagpipes;30;0;0;6;TRUE;
+Drum;6;0;0;3;TRUE;
+Dulcimer;25;0;0;10;TRUE;
+Flute;2;0;0;1;TRUE;
+Lute;35;0;0;2;TRUE;
+Lyre;30;0;0;2;TRUE;
+Horn;3;0;0;2;TRUE;
+Pan flute;12;0;0;2;TRUE;
+Shawm;2;0;0;1;TRUE;
+Viol;30;0;0;1;TRUE;
+Navigator’s tools;25;0;0;2;TRUE;
+Thieves’ tools;25;0;0;1;TRUE;
+Alms box;0;0;0;0;FALSE;
+Block of incense;0;0;0;0;FALSE;
+Censer;0;0;0;0;FALSE;
+Vestments;0;0;0;0;FALSE;
+Book of lore;0;0;0;5;FALSE;
+A little bag of sand;0;0;0;0;FALSE;
+Small knife;0;0;0;0;FALSE;

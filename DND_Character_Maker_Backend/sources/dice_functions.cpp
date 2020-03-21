@@ -8,45 +8,20 @@
 
 uint16_t roll_dice( DND_DICE dice, uint16_t add_bonus_to_roll /*= 0*/, uint16_t number_of_rolls /*= 1*/ )
 {
+	if ( dice == DND_DICE::FLAT_1 )
+	{
+		return 1;
+	}
+	else if ( dice == DND_DICE::NONE, dice == DND_DICE::INVALID )
+	{
+		return 0;
+	}
+
 	uint8_t minimum_roll = 1;
 	uint8_t maximum_roll = 2;
 	uint16_t total_roll_result = 0;
 
-	switch ( dice )
-	{
-	case DND_DICE::D4:
-		{
-			maximum_roll = 4;
-			break;
-		}
-	case DND_DICE::D6:
-		{
-			maximum_roll = 6;
-			break;
-		}
-	case DND_DICE::D8:
-		{
-			maximum_roll = 8;
-			break;
-		}
-	case DND_DICE::D10:
-	case DND_DICE::PERCENTILE:
-		{
-			maximum_roll = 10;
-			break;
-		}
-	case DND_DICE::D12:
-		{
-			maximum_roll = 12;
-			break;
-		}
-	case DND_DICE::D20:
-		{
-			maximum_roll = 20;
-			break;
-		}
-	}
-
+	maximum_roll = dice == DND_DICE::PERCENTILE ? 10 : get_max_roll_for_dice( dice );
 	for ( int i = 0; i != number_of_rolls; ++i )
 	{
 		uint8_t temp = rand() % maximum_roll + minimum_roll;
@@ -57,12 +32,7 @@ uint16_t roll_dice( DND_DICE dice, uint16_t add_bonus_to_roll /*= 0*/, uint16_t 
 		total_roll_result += temp;
 	}
 
-	if ( add_bonus_to_roll != 0 )
-	{
-		return total_roll_result + add_bonus_to_roll;
-	}
-
-	return total_roll_result;
+	return total_roll_result + add_bonus_to_roll;
 }
 
 string get_string_from_DND_DICE( DND_DICE dice )
@@ -90,6 +60,12 @@ string get_string_from_DND_DICE( DND_DICE dice )
 		break;
 	case DND_DICE::PERCENTILE:
 		string_out = "PERCENTILE";
+		break;
+	case DND_DICE::FLAT_1:
+		string_out = "1";
+		break;
+	case DND_DICE::NONE:
+		string_out = "None";
 		break;
 	default:
 		break;
@@ -126,6 +102,14 @@ DND_DICE get_DND_DICE_from_string( string dice_string )
 	else if ( dice_string == "PERCENTILE" )
 	{
 		return DND_DICE::PERCENTILE;
+	}
+	else if ( dice_string == "1" )
+	{
+		return DND_DICE::FLAT_1;
+	}
+	else if ( dice_string == "none" )
+	{
+		return DND_DICE::NONE;
 	}
 	return DND_DICE::INVALID;
 }
@@ -189,6 +173,12 @@ uint8_t get_max_roll_for_dice( DND_DICE dice )
 		break;
 	case DND_DICE::PERCENTILE:
 		return 100;
+		break;
+	case DND_DICE::FLAT_1:
+		return 1;
+		break;
+	case DND_DICE::NONE:
+		return 0;
 		break;
 	}
 	return 0;
