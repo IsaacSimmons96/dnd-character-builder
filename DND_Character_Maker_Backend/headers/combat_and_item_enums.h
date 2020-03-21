@@ -46,6 +46,7 @@ enum class WEAPON_TYPE : char
 {
 	MELEE,
 	RANGED,
+	BOTH,
 	INVALID
 };
 

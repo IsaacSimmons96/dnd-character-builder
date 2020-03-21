@@ -10,7 +10,7 @@ namespace dmg
 	struct DAMAGE
 	{
 		DAMAGE_TYPE m_damage_type{ DAMAGE_TYPE::INVALID };
-		DND_DICE m_dice{ DND_DICE::D4 };
+		DND_DICE m_dice{ DND_DICE::INVALID };
 		uint8_t m_number_of_dice{ 0 };
 	};
 }
@@ -18,23 +18,25 @@ namespace dmg
 class ITEM_BASE
 {
 public:
-	ITEM_BASE( string name, const CASH& cost, double weight );
+	ITEM_BASE( string name, const CASH& cost, double weight, bool include_in_shop );
 
 	virtual void print() const = 0;
 	string get_name() const { return m_item_name; };
 	CASH get_cost() const { return m_item_cost; };
+	bool is_in_shop() const { return m_in_shop; };
 
 protected:
 
 	string m_item_name;
 	CASH m_item_cost;
 	double m_weight;
+	bool m_in_shop;
 };
 
 class ITEM : public ITEM_BASE
 {
 public:
-	ITEM( string name, CASH cost, double weight );
+	ITEM( string name, CASH cost, double weight, bool include_in_shop = true );
 	bool operator == ( const ITEM &item_in );
 	virtual void print() const override;
 };
@@ -42,8 +44,8 @@ public:
 class WEAPON : public ITEM_BASE
 {
 public:
-	WEAPON( string name, CASH cost, double weight,
-			dmg::DAMAGE damage, dmg::DAMAGE vers_damage, WEAPON_TYPE type,
+	WEAPON( string name, CASH cost, double weight, bool include_in_shop,
+			dmg::DAMAGE damage, bool is_versatile, dmg::DAMAGE vers_damage, WEAPON_TYPE type,
 			WEAPON_PROFICIENCY weap_prof, std::vector<WEAPON_PROPERTIES> properties,
 			uint16_t min_range, uint16_t max_range );
 
@@ -62,7 +64,7 @@ private:
 class ARMOUR : public ITEM_BASE
 {
 public:
-	ARMOUR( string name, CASH cost, double weight, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, uint16_t ac, uint16_t strength_needed );
+	ARMOUR( string name, CASH cost, double weight, bool include_in_shop, ARMOR_CATEGORY type, bool stealth_dis, bool dex_mod_bonus, bool dex_cap, uint16_t ac, uint16_t strength_needed );
 
 	void print() const override;
 
@@ -78,7 +80,7 @@ private:
 class PACK : public ITEM_BASE
 {
 public:
-	PACK( string name, CASH cost, double weight, std::vector<ITEM*> items );
+	PACK( string name, CASH cost, double weight, std::vector<ITEM*> items, bool include_in_shop = true );
 	void print() const override;
 
 private:

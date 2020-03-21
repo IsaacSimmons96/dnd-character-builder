@@ -6,6 +6,8 @@
 #include <iosfwd>
 #include <sstream>
 
+#include <cstring>
+
 ITEM_MANAGER::~ITEM_MANAGER()
 {
 	m_items.clear();
@@ -125,7 +127,10 @@ void ITEM_MANAGER::read_in_items()
 		std::stringstream num_stringstream( temp );
 		num_stringstream >> weight;
 
-		const auto new_item = new ITEM( item_name, CASH( gold, silver, copper ), weight );
+		getline( ss, temp, ';' );
+		const bool in_shop = temp == "TRUE";
+
+		const auto new_item = new ITEM( item_name, CASH( gold, silver, copper ), weight, in_shop );
 
 		m_items.insert( std::make_pair( item_name, new_item ) );
 
@@ -202,8 +207,19 @@ void ITEM_MANAGER::read_in_weapons()
 		convert_string_to_int();
 		const uint16_t weight = uint_temp;
 
+		getline( ss, temp, ';' );
+		const bool in_shop = temp == "TRUE";
+
 		auto damage_type_main = create_damage();
-		auto damage_type_vers = create_damage();
+
+		getline( ss, temp, ';' );
+		const bool is_versatile = temp == "TRUE";
+
+		dmg::DAMAGE damage_type_vers;
+		if ( is_versatile )
+		{
+			damage_type_vers = create_damage();
+		}
 
 		getline( ss, temp, ';' );
 		const WEAPON_TYPE weapon_type = ITEM_AND_COMBAT_UTILITIES::get_WEAPON_TYPE_from_string( temp );
@@ -231,7 +247,7 @@ void ITEM_MANAGER::read_in_weapons()
 			props.push_back( prop );
 		}
 
-		const auto new_weapon = new WEAPON( item_name, CASH( gold, silver, copper ), weight, damage_type_main, damage_type_vers, weapon_type, weapon_prof, props, min_range, max_range );
+		const auto new_weapon = new WEAPON( item_name, CASH( gold, silver, copper ), weight, in_shop, damage_type_main, is_versatile, damage_type_vers, weapon_type, weapon_prof, props, min_range, max_range );
 		const auto new_weapon_item = dynamic_cast<ITEM*>(new_weapon);
 
 		m_weapons.insert( std::make_pair( item_name, new_weapon ) );
@@ -283,6 +299,9 @@ void ITEM_MANAGER::read_in_armour()
 		const uint16_t weight = uint_temp;
 
 		getline( ss, temp, ';' );
+		const bool in_shop = temp == "TRUE";
+
+		getline( ss, temp, ';' );
 		const ARMOR_CATEGORY category = ITEM_AND_COMBAT_UTILITIES::get_ARMOR_CATEGORY_from_string( temp );
 
 		getline( ss, temp, ';' );
@@ -303,7 +322,7 @@ void ITEM_MANAGER::read_in_armour()
 		const uint16_t str_needed = uint_temp;
 
 
-		const auto new_armour = new ARMOUR( item_name, CASH( gold, silver, copper ), weight, category, stealth_dis, dex_mod_bonus, dex_cap, base_AC, str_needed );
+		const auto new_armour = new ARMOUR( item_name, CASH( gold, silver, copper ), weight, in_shop, category, stealth_dis, dex_mod_bonus, dex_cap, base_AC, str_needed );
 		const auto new_armour_item = dynamic_cast<ITEM*>(new_armour);
 
 		m_armour.insert( std::make_pair( item_name, new_armour ) );
@@ -326,6 +345,13 @@ void ITEM_MANAGER::read_in_packs()
 		num_stringstream >> int64_in;
 	};
 
+	auto is_number = [&]( const string& s )
+	{
+		std::string::const_iterator it = s.begin();
+		while ( it != s.end() && std::isdigit( *it ) ) ++it;
+		return !s.empty() && it == s.end();
+	};
+
 	while ( getline( file, value ) )
 	{
 		ss << value;
@@ -346,9 +372,31 @@ void ITEM_MANAGER::read_in_packs()
 		const money copper( CASH_TYPE::COPPER, int64_in );
 
 		std::vector<ITEM*> items;
+		int64_t number_of_item = 1;
+		bool has_just_added_item = false;
+
 		while ( getline( ss, temp, ';' ) )
 		{
-			items.push_back( get_item( temp ) );
+			if ( has_just_added_item )
+			{
+				number_of_item = 1;
+			}
+
+			if ( is_number( temp ) )
+			{
+				convert_string_to_int();
+				number_of_item = int64_in;
+				has_just_added_item = false;
+				break;
+			}
+
+			auto item = get_item( temp );
+			for ( int64_t i = 0; i < number_of_item; i++ )
+			{
+				items.push_back( item );
+			}
+
+			has_just_added_item = true;
 		}
 
 		const auto new_pack = new PACK( item_name, CASH( gold, silver, copper ), 0, items );

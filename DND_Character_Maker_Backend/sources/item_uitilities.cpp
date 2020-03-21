@@ -375,6 +375,10 @@ WEAPON_TYPE ITEM_AND_COMBAT_UTILITIES::get_WEAPON_TYPE_from_string( string strin
 	{
 		weapon_type = WEAPON_TYPE::RANGED;
 	}
+	else if ( string_in == "both" )
+	{
+		weapon_type = WEAPON_TYPE::BOTH;
+	}
 	else
 	{
 		weapon_type = WEAPON_TYPE::INVALID;
